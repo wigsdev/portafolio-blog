@@ -5,15 +5,15 @@ Portafolio + Blog — Script de Automatización de GitHub Issues y Milestones.
 Basado en el Product Backlog oficial:
   - docs/backlog.md
 
-Publica o actualiza el catálogo completo de 17 tareas atómicas organizadas en 5 Sprints:
+Publica o actualiza el catálogo completo de 18 tareas atómicas organizadas en 5 Sprints:
   - Sprint 1 (26 Oct - 01 Nov 2026): T-01 a T-04 (Fundamentos, Sistema de Diseño & Layouts Base)
   - Sprint 2 (02 Nov - 08 Nov 2026): T-05 a T-08 (Portafolio Personal & Optimización de Imágenes)
   - Sprint 3 (09 Nov - 15 Nov 2026): T-09 a T-12 (Blog Técnico, Content Collections & Rutas Dinámicas)
-  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-15 (Isla Interactiva, Funciones de Servidor & SEO 90+)
-  - Sprint 5 (23 Nov - 29 Nov 2026): T-16 a T-17 (Despliegue Público, Diapositivas & Sustentación)
+  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-16 (Isla Interactiva, Funciones de Servidor, Tailwind CSS & SEO 90+)
+  - Sprint 5 (23 Nov - 29 Nov 2026): T-17 a T-18 (Despliegue Público, Diapositivas & Sustentación)
 
 Uso:
-  python3 scripts/create_github_issues.py [--dry-run] [--repo OWNER/REPO] [--sprint SPRINT_NUM] [--update]
+  python3 scripts/create_github_issues.py [--dry-run] [--repo OWNER/REPO] [--sprint SPRINT_NUM] [--update] [--no-project] [--assignee USUARIO] [--move-status "En progreso"]
 """
 
 import argparse
@@ -22,7 +22,7 @@ import os
 import subprocess
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 
 # ── Configuración de Milestones (5 Semanas Oficiales) ─────────────────────────
@@ -75,7 +75,7 @@ LABELS = [
     {"name": "status: in-review", "color": "D8F8C8", "description": "PR abierto o validación de criterios cumplidos"},
 ]
 
-# ── Catálogo de las 17 Tareas Atómicas del Backlog Oficial ─────────────────────
+# ── Catálogo de las 18 Tareas Atómicas del Backlog Oficial ─────────────────────
 ISSUES: List[Dict[str, Any]] = [
     # ══════════════════════════════════════════════════════════════════════════
     # SPRINT 1 (26 Oct - 01 Nov 2026): Fundamentos, Sistema de Diseño & Layouts Base
@@ -473,7 +473,35 @@ Desarrollar la página `/contacto` integrando un formulario funcional que envíe
     {
         "id": "T-15",
         "sprint_num": 4,
-        "title": "[T-15] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
+        "title": "[T-15] Migración Progresiva del Sistema de Diseño a Tailwind CSS",
+        "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
+        "labels": ["sprint:4", "priority: medium", "type: style", "status: backlog"],
+        "body": """## Descripción
+Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar progresivamente los componentes centrales (Header, ProjectCard, BlogCard) y utilidades de espaciado a clases de Tailwind, manteniendo la compatibilidad con las variables semánticas de color dark/light y la fuente local *Atkinson*, evaluando el impacto en el bundle generado (Requisito R2).
+
+## Metadata
+| Campo | Valor |
+|---|---|
+| **ID Tarea** | `T-15` |
+| **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: style` |
+| **Requisito Oficial** | R2 (Estilos con Tailwind CSS y Font API) |
+| **Asignado a** | Wilmer (@wigsdev) |
+| **Archivos afectados** | `astro.config.mjs`, `package.json`, `tailwind.config.mjs`, componentes clave |
+| **Commit Sugerido** | `refactor(style): integrar tailwind css y migrar componentes manteniendo tokens y fuentes` |
+
+## Criterios de Aceptación (DoD)
+- [ ] Integración de Tailwind instalada y configurada en `astro.config.mjs`.
+- [ ] Variables CSS de `docs/diseno.md` mapeadas en la configuración de tema de Tailwind.
+- [ ] Componentes clave refactorizados a utilidades de Tailwind conservando fidelidad visual y responsive.
+- [ ] `pnpm build` compila con purga JIT limpia y sin errores de estilos.
+""",
+    },
+    {
+        "id": "T-16",
+        "sprint_num": 4,
+        "title": "[T-16] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
         "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
         "labels": ["sprint:4", "priority: high", "type: structure", "status: backlog"],
         "body": """## Descripción
@@ -482,7 +510,7 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-15` |
+| **ID Tarea** | `T-16` |
 | **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: structure` |
@@ -502,9 +530,9 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
     # SPRINT 5 (23 Nov - 29 Nov 2026): Despliegue Público, Diapositivas & Sustentación
     # ══════════════════════════════════════════════════════════════════════════
     {
-        "id": "T-16",
+        "id": "T-17",
         "sprint_num": 5,
-        "title": "[T-16] Compilación Limpia y Despliegue en Producción con URL Pública",
+        "title": "[T-17] Compilación Limpia y Despliegue en Producción con URL Pública",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: critical", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -513,7 +541,7 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-16` |
+| **ID Tarea** | `T-17` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
@@ -529,9 +557,9 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 """,
     },
     {
-        "id": "T-17",
+        "id": "T-18",
         "sprint_num": 5,
-        "title": "[T-17] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
+        "title": "[T-18] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: high", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -540,7 +568,7 @@ Elaborar la presentación ejecutiva del proyecto final para la sesión de susten
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-17` |
+| **ID Tarea** | `T-18` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: presentation` |
@@ -550,7 +578,7 @@ Elaborar la presentación ejecutiva del proyecto final para la sesión de susten
 
 ## Criterios de Aceptación (DoD)
 - [ ] `docs/diapositivas-presentacion.html` interactiva y lista para proyectar.
-- [ ] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones y servidor.
+- [ ] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones, servidor y migración a Tailwind.
 - [ ] Guía paso a paso de demostración para la sustentación final.
 """,
     },
@@ -599,16 +627,16 @@ def detect_git_repo() -> Optional[str]:
 
 
 def ensure_milestones(repo: str, dry_run: bool = False) -> None:
-    """Crea los milestones en el repositorio de GitHub si no existen."""
+    """Crea los milestones en el repositorio de GitHub si no existen usando la API REST de GitHub."""
     print(f"\n📌 Verificando Milestones (Sprints) en {repo}...")
     existing_titles = set()
     if not dry_run:
         try:
-            res = run_command(["gh", "milestone", "list", "--repo", repo, "--json", "title", "--state", "all"])
-            milestones_data = json.loads(res.stdout)
-            existing_titles = {m["title"] for m in milestones_data}
+            res = run_command(["gh", "api", f"repos/{repo}/milestones", "--paginate", "--jq", ".[].title"])
+            existing_titles = set(res.stdout.strip().splitlines())
         except subprocess.CalledProcessError as e:
-            print(f"⚠️ Error al listar milestones: {e.stderr.strip()}")
+            err = e.stderr.strip() if e.stderr else str(e)
+            print(f"⚠️ Error al listar milestones: {err}")
 
     for m in MILESTONES:
         if m["title"] in existing_titles:
@@ -618,13 +646,27 @@ def ensure_milestones(repo: str, dry_run: bool = False) -> None:
                 print(f"  [DRY-RUN] Se crearía milestone: {m['title']}")
             else:
                 try:
-                    cmd = ["gh", "milestone", "create", "--repo", repo, "--title", m["title"], "--description", m["description"]]
+                    payload = {
+                        "title": m["title"],
+                        "description": m["description"],
+                    }
                     if "due_date" in m:
-                        cmd.extend(["--due-date", m["due_date"]])
+                        payload["due_on"] = m["due_date"]
+
+                    cmd = [
+                        "gh", "api", f"repos/{repo}/milestones",
+                        "-X", "POST",
+                        "-f", f"title={payload['title']}",
+                        "-f", f"description={payload['description']}",
+                    ]
+                    if "due_on" in payload:
+                        cmd.extend(["-f", f"due_on={payload['due_on']}"])
+
                     run_command(cmd)
                     print(f"  ✓ Creado milestone: {m['title']}")
                 except subprocess.CalledProcessError as e:
-                    print(f"  ⚠️ Error creando milestone '{m['title']}': {e.stderr.strip()}")
+                    err = e.stderr.strip() if e.stderr else str(e)
+                    print(f"  ⚠️ Error creando milestone '{m['title']}': {err}")
 
 
 def ensure_labels(repo: str, dry_run: bool = False) -> None:
@@ -659,6 +701,127 @@ def ensure_labels(repo: str, dry_run: bool = False) -> None:
                     print(f"  ⚠️ Error creando label '{lbl['name']}': {e.stderr.strip()}")
 
 
+def ensure_project(owner: str, title: str, dry_run: bool = False) -> Optional[int]:
+    """Crea o localiza un GitHub Project (Project v2) en la cuenta del usuario."""
+    print(f"\n📊 Verificando GitHub Project '{title}' para el propietario '{owner}'...")
+    if dry_run:
+        print(f"  [DRY-RUN] Se crearía o vincularía el GitHub Project: '{title}' (owner: {owner})")
+        return 1
+
+    try:
+        res = run_command(["gh", "project", "list", "--owner", owner, "--format", "json"])
+        data = json.loads(res.stdout)
+        projects = data.get("projects", [])
+        for p in projects:
+            if p.get("title") == title:
+                print(f"  ✓ Proyecto existente encontrado: #{p['number']} - '{title}'")
+                return p["number"]
+
+        # Si no existe, crearlo
+        create_res = run_command(["gh", "project", "create", "--owner", owner, "--title", title, "--format", "json"])
+        created = json.loads(create_res.stdout)
+        p_num = created.get("number")
+        print(f"  ✓ Nuevo GitHub Project creado: #{p_num} - '{title}'")
+        return p_num
+    except subprocess.CalledProcessError as e:
+        err = e.stderr.strip() if e.stderr else str(e)
+        print(f"  ⚠️ No se pudo gestionar el GitHub Project automáticamente: {err}")
+        print("     Consejo: Si el error es de permisos, ejecuta: 'gh auth refresh -s project'")
+        return None
+    except Exception as e:
+        print(f"  ⚠️ Advertencia al verificar project: {e}")
+        return None
+
+
+def add_issue_to_project(owner: str, project_num: int, issue_url: str, dry_run: bool = False) -> None:
+    """Añade una issue creada a un GitHub Project."""
+    if dry_run:
+        print(f"    ↳ [DRY-RUN] Se añadiría al Project #{project_num}")
+        return
+
+    try:
+        run_command(["gh", "project", "item-add", str(project_num), "--owner", owner, "--url", issue_url])
+        print(f"    ↳ ✓ Añadida al Project #{project_num}")
+    except subprocess.CalledProcessError as e:
+        msg = e.stderr.strip() if e.stderr else str(e)
+        if "already" in msg.lower():
+            print(f"    ↳ ℹ️ Ya vinculada al Project #{project_num}")
+        else:
+            print(f"    ↳ ⚠️ Advertencia al vincular al Project #{project_num}: {msg}")
+
+
+def move_project_items_to_status(owner: str, project_num: int, target_status_name: str = "En progreso", dry_run: bool = False) -> None:
+    """Mueve todas las tarjetas del Project Board a la columna especificada (por defecto 'En progreso')."""
+    print(f"\n📋 Moviendo tarjetas del Project Board #{project_num} a la columna '{target_status_name}'...")
+    if dry_run:
+        print(f"  [DRY-RUN] Se consultarían los ítems del Project #{project_num} y se moverían a '{target_status_name}'")
+        return
+
+    try:
+        # 1. Obtener el ID de nodo global del proyecto (PVT_...)
+        view_raw = run_command(["gh", "project", "view", str(project_num), "--owner", owner, "--format", "json"])
+        view_data = json.loads(view_raw.stdout)
+        project_id = view_data.get("id")
+
+        if not project_id:
+            print("  ⚠️ No se pudo obtener el ID global del proyecto.")
+            return
+
+        # 2. Obtenemos los campos del proyecto para localizar el campo Status
+        fields_raw = run_command(["gh", "project", "field-list", str(project_num), "--owner", owner, "--format", "json"])
+        fields_data = json.loads(fields_raw.stdout)
+
+        status_field = next((f for f in fields_data.get("fields", []) if f.get("name") in ["Status", "Estado"]), None)
+        if not status_field:
+            print("  ⚠️ No se encontró el campo 'Status' o 'Estado' en el Project Board.")
+            return
+
+        status_field_id = status_field.get("id")
+        options = status_field.get("options", [])
+
+        # Buscar la opción que coincida con target_status_name
+        target_opt = next((o for o in options if target_status_name.lower() in o.get("name", "").lower() or o.get("name", "").lower() in target_status_name.lower()), None)
+
+        if not target_opt:
+            available = [o.get("name") for o in options]
+            print(f"  ⚠️ No se encontró la columna '{target_status_name}'. Opciones disponibles: {available}")
+            return
+
+        target_opt_id = target_opt["id"]
+        col_name = target_opt.get("name")
+        print(f"  ✓ Columna detectada: '{col_name}' (ID de opción: {target_opt_id})")
+
+        # 3. Listar ítems del proyecto
+        items_raw = run_command(["gh", "project", "item-list", str(project_num), "--owner", owner, "--format", "json"])
+        items_data = json.loads(items_raw.stdout)
+        items = items_data.get("items", [])
+
+        print(f"  🚀 Moviendo {len(items)} tarjetas a '{col_name}'...")
+        updated_count = 0
+        for item in items:
+            item_id = item["id"]
+            content = item.get("content", {})
+            title = content.get("title") or item.get("title") or item_id
+            try:
+                run_command([
+                    "gh", "project", "item-edit",
+                    "--id", item_id,
+                    "--field-id", status_field_id,
+                    "--single-select-option-id", target_opt_id,
+                    "--project-id", project_id
+                ])
+                print(f"    ✓ {title} -> {col_name}")
+                updated_count += 1
+            except subprocess.CalledProcessError as e:
+                err = e.stderr.strip() if e.stderr else str(e)
+                print(f"    ⚠️ Error al mover '{title}': {err}")
+
+        print(f"  ✨ {updated_count}/{len(items)} tarjetas ahora están en la columna '{col_name}'.")
+
+    except Exception as e:
+        print(f"  ⚠️ Error al gestionar tarjetas en el Project Board: {e}")
+
+
 def get_existing_issues(repo: str) -> Dict[str, Dict[str, Any]]:
     """Obtiene issues existentes indexadas por su prefijo [ID]."""
     try:
@@ -686,15 +849,20 @@ def create_or_update_issues(
     repo: str,
     dry_run: bool = False,
     update: bool = False,
-    sprint_filter: Optional[int] = None
+    sprint_filter: Optional[int] = None,
+    assignee: Optional[str] = "@me",
+    project_num: Optional[int] = None,
+    owner: str = "wigsdev"
 ) -> None:
-    """Crea o actualiza las tareas en GitHub Issues."""
+    """Crea o actualiza las tareas en GitHub Issues y las asocia al Project Board."""
     target_issues = ISSUES
     if sprint_filter is not None:
         target_issues = [i for i in ISSUES if i.get("sprint_num") == sprint_filter]
         print(f"\n🎯 Filtrando únicamente tareas del Sprint {sprint_filter} ({len(target_issues)} tareas)")
 
     print(f"\n🚀 Procesando {len(target_issues)} tareas para {repo}...")
+    if assignee:
+        print(f"👤 Autoasignando tareas a: {assignee}")
     existing = get_existing_issues(repo) if not dry_run else {}
 
     processed = 0
@@ -705,7 +873,9 @@ def create_or_update_issues(
             state = existing[task_id]["state"]
             if update:
                 if dry_run:
-                    print(f"  [DRY-RUN] Se actualizaría {task_id} (#{num})")
+                    print(f"  [DRY-RUN] Se actualizaría {task_id} (#{num}) (asignada a: {assignee or 'sin cambios'})")
+                    if project_num:
+                        add_issue_to_project(owner, project_num, f"https://github.com/{repo}/issues/{num}", dry_run=True)
                 else:
                     with tempfile.NamedTemporaryFile("w", delete=False, suffix=".md", encoding="utf-8") as f:
                         f.write(issue["body"])
@@ -718,10 +888,14 @@ def create_or_update_issues(
                             "--body-file", temp_body,
                             "--milestone", issue["milestone"],
                         ]
+                        if assignee:
+                            cmd.extend(["--add-assignee", assignee])
                         for lbl in issue["labels"]:
                             cmd.extend(["--add-label", lbl])
                         run_command(cmd)
                         print(f"  ✓ {task_id} (#{num}) actualizada con éxito")
+                        if project_num:
+                            add_issue_to_project(owner, project_num, f"https://github.com/{repo}/issues/{num}", dry_run=False)
                     except subprocess.CalledProcessError as e:
                         print(f"  ⚠️ Error actualizando #{num}: {e.stderr.strip()}")
                     finally:
@@ -733,7 +907,9 @@ def create_or_update_issues(
             continue
 
         if dry_run:
-            print(f"  [DRY-RUN] Se crearía issue: {task_id} -> {issue['title']} (Milestone: {issue['milestone']})")
+            print(f"  [DRY-RUN] Se crearía issue: {task_id} -> {issue['title']} (Asignado: {assignee}, Milestone: {issue['milestone']})")
+            if project_num:
+                add_issue_to_project(owner, project_num, f"https://github.com/{repo}/issues/dry-run", dry_run=True)
             processed += 1
         else:
             with tempfile.NamedTemporaryFile("w", delete=False, suffix=".md", encoding="utf-8") as f:
@@ -747,11 +923,15 @@ def create_or_update_issues(
                     "--body-file", temp_body,
                     "--milestone", issue["milestone"],
                 ]
+                if assignee:
+                    cmd.extend(["--assignee", assignee])
                 for lbl in issue["labels"]:
                     cmd.extend(["--label", lbl])
                 res = run_command(cmd)
                 issue_url = res.stdout.strip()
                 print(f"  ✓ {task_id} creada: {issue_url}")
+                if project_num:
+                    add_issue_to_project(owner, project_num, issue_url, dry_run=False)
                 processed += 1
             except subprocess.CalledProcessError as e:
                 print(f"  ❌ Error creando {task_id}: {e.stderr.strip()}")
@@ -764,7 +944,7 @@ def create_or_update_issues(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Automatización de creación y sincronización de GitHub Issues y Milestones para Portafolio + Blog."
+        description="Automatización de creación y sincronización de GitHub Issues, Milestones y Project Board para Portafolio + Blog."
     )
     parser.add_argument(
         "--dry-run",
@@ -774,7 +954,7 @@ def main():
     parser.add_argument(
         "--update",
         action="store_true",
-        help="Actualiza título, cuerpo y metadatos de las issues existentes en GitHub.",
+        help="Actualiza título, cuerpo, asignación y metadatos de las issues existentes en GitHub.",
     )
     parser.add_argument(
         "--sprint",
@@ -788,9 +968,33 @@ def main():
         default=None,
         help="Repositorio destino OWNER/REPO (por defecto detecta git remote origin o usa 'wigsdev/portafolio-blog').",
     )
+    parser.add_argument(
+        "--assignee",
+        type=str,
+        default="@me",
+        help="Usuario de GitHub a quien asignar las tareas (por defecto '@me').",
+    )
+    parser.add_argument(
+        "--no-project",
+        action="store_true",
+        help="Omite la creación o vinculación con GitHub Project Board.",
+    )
+    parser.add_argument(
+        "--project-title",
+        type=str,
+        default="Portafolio + Blog — Sprint Board",
+        help="Título del GitHub Project Board a crear o vincular.",
+    )
+    parser.add_argument(
+        "--move-status",
+        type=str,
+        default="En progreso",
+        help="Mueve todas las tarjetas del Project Board a la columna especificada (por defecto 'En progreso'). Pasa '' o 'none' para omitir.",
+    )
     args = parser.parse_args()
 
     repo = args.repo or detect_git_repo() or "wigsdev/portafolio-blog"
+    owner = repo.split("/")[0] if "/" in repo else "wigsdev"
 
     print("════════════════════════════════════════════════════════════════")
     print("   🚀 Portafolio + Blog — Sincronización de Tareas en GitHub   ")
@@ -807,8 +1011,13 @@ def main():
         sys.exit(1)
 
     print(f"🎯 Repositorio destino: {repo}")
+    print(f"👤 Asignado por defecto: {args.assignee}")
     if args.dry_run:
         print("🔍 Modo: SIMULACIÓN (DRY-RUN) — No se enviarán cambios a GitHub.")
+
+    project_num = None
+    if not args.no_project:
+        project_num = ensure_project(owner=owner, title=args.project_title, dry_run=args.dry_run)
 
     ensure_milestones(repo=repo, dry_run=args.dry_run)
     ensure_labels(repo=repo, dry_run=args.dry_run)
@@ -816,10 +1025,21 @@ def main():
         repo=repo,
         dry_run=args.dry_run,
         update=args.update,
-        sprint_filter=args.sprint
+        sprint_filter=args.sprint,
+        assignee=args.assignee,
+        project_num=project_num,
+        owner=owner
     )
 
-    print("\n📋 Puedes vincular estos issues a tu GitHub Project Board.")
+    if project_num:
+        print(f"\n📋 Tablero Kanban configurado en GitHub Projects (#{project_num}).")
+        if args.move_status and args.move_status.lower() != "none":
+            move_project_items_to_status(
+                owner=owner,
+                project_num=project_num,
+                target_status_name=args.move_status,
+                dry_run=args.dry_run
+            )
 
 
 if __name__ == "__main__":
