@@ -65,7 +65,7 @@ Una tarea se considera **Done** cuando:
 | **Sprint 1 (Semana 1)** | 26 Oct – 01 Nov 2026 | Fundamentos, Sistema de Diseño & Layouts Base | R1, R2, R7 |
 | **Sprint 2 (Semana 2)** | 02 Nov – 08 Nov 2026 | Portafolio Personal & Optimización de Imágenes | R1, R5 |
 | **Sprint 3 (Semana 3)** | 09 Nov – 15 Nov 2026 | Blog Técnico, Content Collections & Rutas Dinámicas | R3, R4 |
-| **Sprint 4 (Semana 4)** | 16 Nov – 22 Nov 2026 | Isla Interactiva, Funciones de Servidor & SEO 90+ | R6, R8, R9 |
+| **Sprint 4 (Semana 4)** | 16 Nov – 22 Nov 2026 | Isla Interactiva, Servidor, Migración Tailwind & SEO 90+ | R2, R6, R8, R9 |
 | **Sprint 5 (Semana 5)** | 23 Nov – 29 Nov 2026 | Despliegue Público, Diapositivas & Sustentación | R10 |
 
 ---
@@ -351,12 +351,32 @@ Desarrollar la página `/contacto` integrando un formulario funcional que envíe
 
 ---
 
-#### T-15 — Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse ≥ 90
+#### T-15 — Migración Progresiva del Sistema de Diseño a Tailwind CSS
+| Campo | Valor |
+|---|---|
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: style` |
+| **Dependencias** | T-02, T-03, T-05 |
+| **Complejidad** | Media (1 a 2 días) |
+| **Archivos afectados** | `astro.config.mjs`, `package.json`, `tailwind.config.mjs` (o directivas CSS), componentes clave |
+
+**Descripción y Contexto Técnico:**  
+Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar progresivamente los componentes centrales (Header, ProjectCard, BlogCard) y utilidades de espaciado a clases de Tailwind, manteniendo la compatibilidad con las variables semánticas de color dark/light y la fuente local *Atkinson*, evaluando el impacto en el bundle generado (Requisito R2).
+
+**Criterios de Aceptación:**
+- [ ] Integración de Tailwind instalada y configurada en `astro.config.mjs`.
+- [ ] Variables CSS de `docs/diseno.md` mapeadas en la configuración de tema de Tailwind.
+- [ ] Componentes clave refactorizados a utilidades de Tailwind conservando fidelidad visual y responsive.
+- [ ] `pnpm build` compila con purga JIT limpia y sin errores de estilos.
+
+---
+
+#### T-16 — Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse ≥ 90
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: structure` |
-| **Dependencias** | T-13, T-14 |
+| **Dependencias** | T-13, T-14, T-15 |
 | **Complejidad** | Media (1 a 2 días) |
 | **Archivos afectados** | `src/pages/rss.xml.js`, `astro.config.mjs`, componentes de metadatos |
 
@@ -372,12 +392,12 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 
 ### SPRINT 5 — Despliegue Público, Diapositivas & Sustentación (23 Nov – 29 Nov 2026)
 
-#### T-16 — Compilación Limpia y Despliegue en Producción con URL Pública
+#### T-17 — Compilación Limpia y Despliegue en Producción con URL Pública
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
-| **Dependencias** | T-15 |
+| **Dependencias** | T-16 |
 | **Complejidad** | Baja (1 día) |
 | **Archivos afectados** | `astro.config.mjs`, `package.json`, configuraciones de hosting |
 
@@ -391,12 +411,12 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 
 ---
 
-#### T-17 — Diapositivas de Presentación y Guía de Sustentación del Proyecto
+#### T-18 — Diapositivas de Presentación y Guía de Sustentación del Proyecto
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: presentation` |
-| **Dependencias** | T-16 |
+| **Dependencias** | T-17 |
 | **Complejidad** | Media (2 a 3 días) |
 | **Archivos afectados** | `docs/diapositivas-presentacion.md`, `docs/diapositivas-presentacion.html`, `docs/guia-demostracion.md` |
 
@@ -405,5 +425,5 @@ Elaborar la presentación ejecutiva del proyecto final para la sesión de susten
 
 **Criterios de Aceptación:**
 - [ ] `docs/diapositivas-presentacion.html` interactiva y lista para proyectar.
-- [ ] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones y servidor.
+- [ ] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones, servidor y migración a Tailwind.
 - [ ] Guía paso a paso de demostración para la sustentación final.
