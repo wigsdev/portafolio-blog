@@ -10,10 +10,20 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 ## [Unreleased]
 
 ### Planificado
-- **Sprint 1:** Tokens CSS globales, modo oscuro/claro y conexión con la fuente *Atkinson* (`T-02`).
 - **Sprint 1:** Componentes de navegación y UI base: Header, Footer y ThemeToggle (`T-03`).
 - **Sprint 1:** BaseLayout unificado con View Transitions (`<ClientRouter />`) (`T-04`).
 - **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-15`).
+
+---
+
+## [0.1.1] - 2026-10-29
+
+### Añadido
+- **Tokens CSS Semánticos (`T-02`):** Implementación de la paleta carmín/carbón en `src/styles/global.css` con variables completas para `:root` (`--color-brand: #d0354f`, `#faf8f8`) y `html.dark` (`--color-brand: #ff526d`, `#141416`).
+- **Tipografía Local con Font API (`T-02`):** Aplicación de `--font-atkinson` en `body` vinculada a fuentes locales WOFF de Astro.
+- **Grillas Responsivas Fluidas (`T-02`):** Definición de `.proyectos-grid` y `.articulos-grid` con `clamp()` y `minmax()` para adaptación sin media queries forzadas.
+- **Infraestructura de Testing:** Configuración de Vitest (`vitest.config.ts`, script `pnpm test`) y pruebas unitarias de validación de tokens y constantes en `tests/unit/`.
+
 
 ---
 

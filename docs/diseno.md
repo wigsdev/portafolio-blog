@@ -89,7 +89,8 @@ Para garantizar proporciones perfectas entre dispositivos móviles y pantallas g
 
 ```text
 +-------------------------------------------------------------------------+
-| [Logo] Wilmer Gulcochía             [Inicio] [Proyectos] [Blog] [Sobre Mí] [Contacto] [☀️/🌙] |
+| [Logo] Wilmer Gulcochía        [Inicio] [Sobre Mí] [Blog] [Proyectos] [Contacto] |
+|        Full-stack web developer                                         |
 +-------------------------------------------------------------------------+
 ```
 
@@ -97,23 +98,29 @@ Para garantizar proporciones perfectas entre dispositivos móviles y pantallas g
 
 ```text
 +-------------------------------------------------------------------------+
-| [Hero Section]                                                          |
-|   Hola, soy Wilmer Gulcochía 👋                                         |
-|   Desarrollador Frontend & Web | Astro · TypeScript · IA Aplicada       |
-|   [Ver Proyectos] [Descargar CV] [Escríbeme]                            |
+| [SECCIÓN 1: HERO]                                                       |
+|   Hola, soy Wilmer Gulcochía, desarrollador web fullstack con IA.       |
+|   Creo aplicaciones web rápidas y modernas con Astro, TypeScript...    |
+|   [Ver proyectos]  [Escríbeme]                                          |
 +-------------------------------------------------------------------------+
-| [Badges de Stack Tecnológico]                                           |
-|   Astro · TypeScript · React · CSS Moderno · Node.js · APIs de IA       |
+| [SECCIÓN 2: PROYECTOS DESTACADOS]                                      |
+|   Proyectos                                  [Ver todos los proyectos →]|
+|   +-------------------+  +-------------------+  +-------------------+   |
+|   | [Img 16:9]        |  | [Img 16:9]        |  | [Img 16:9]        |   |
+|   | Pomodoro          |  | Markdown - Pdf    |  | OmniSpec IA       |   |
+|   | Chips: TS·JS·CSS  |  | Chips: JS·Py·CSS  |  | Chips: Py·Docker  |   |
+|   | [Demo] [GitHub]   |  | [GitHub]          |  | [Demo] [GitHub]   |   |
+|   +-------------------+  +-------------------+  +-------------------+   |
+|   (Desktop: 3 cols | Tablet: 2 cols + 1 abajo | Móvil: 1 col vertical)   |
 +-------------------------------------------------------------------------+
-| [Proyectos Destacados (Grid 2 cols)]                                    |
-|   +--------------------------+  +--------------------------+            |
-|   | [Img 16:9] Pomodoro      |  | [Img 16:9] OmniSpec IA   |            |
-|   | Chips: TS · JS · CSS     |  | Chips: Python · JS · AI   |            |
-|   | [Demo] [GitHub]          |  | [Demo] [GitHub]          |            |
-|   +--------------------------+  +--------------------------+            |
-+-------------------------------------------------------------------------+
-| [Últimas Publicaciones del Blog (3 posts)]                              |
-|   • Fecha · Título del Artículo · Tags                                  |
+| [SECCIÓN 3: ARTÍCULOS RECIENTES]                                        |
+|   Artículos                                      [Ver el blog completo →]|
+|   +-------------------+  +-------------------+  +-------------------+   |
+|   | [Img 16:9]        |  | [Img 16:9]        |  | [Img 16:9]        |   |
+|   | Título Post 1     |  | Título Post 2     |  | Título Post 3     |   |
+|   | Fecha · Resumen   |  | Fecha · Resumen   |  | Fecha · Resumen   |   |
+|   +-------------------+  +-------------------+  +-------------------+   |
+|   (Desktop: 3 cols | Tablet: 2 cols + 1 abajo | Móvil: 1 col vertical)   |
 +-------------------------------------------------------------------------+
 ```
 
@@ -133,6 +140,16 @@ Para garantizar proporciones perfectas entre dispositivos móviles y pantallas g
 |                                                             |
 |  [ Demo ]                             [ Repositorio GitHub ]|
 +-------------------------------------------------------------+
+```
+
+### 5.4 Pie de Página (`Footer.astro`)
+
+```text
++-------------------------------------------------------------------------+
+| SÍGUEME: [Facebook] [Instagram] [GitHub] [LinkedIn]                     |
++-------------------------------------------------------------------------+
+| Wilmer Gulcochía © 2026                                         [☀️/🌙] |
++-------------------------------------------------------------------------+
 ```
 
 ---
