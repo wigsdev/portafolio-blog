@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local reference repos & guides
+.reference/
+
+# python cache
+__pycache__/
+*.pyc
+*.pyo
+
