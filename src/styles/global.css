@@ -1,4 +1,4 @@
-/* Sistema de tokens CSS y estilos base (T-02) */
+/* Sistema de diseño y estilos globales */
 
 /* Tokens de color: modo claro */
 :root {
@@ -106,4 +106,296 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* Encabezado y navegación */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-block: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand-link {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.25rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.brand-logo {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.brand-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.25;
+}
+
+.brand-name {
+    color: var(--color-brand);
+    font-size: 1.125rem; /* 18px (txt-lg) */
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.brand-role {
+    color: var(--color-text-muted);
+    font-size: 0.75rem; /* 12px (text-xs) */
+    line-height: 1.25;
+}
+
+.brand-link:focus-visible {
+    outline: 2px solid var(--color-brand-hover);
+    outline-offset: 4px;
+}
+
+.primary-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.primary-navigation a {
+    color: var(--color-nav-link);
+    font-size: 0.8125rem; /* 13px */
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition:
+        color 160ms ease,
+        background-color 160ms ease;
+}
+
+.primary-navigation a:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-muted);
+}
+
+.primary-navigation a[aria-current="page"] {
+    color: var(--color-brand);
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.primary-navigation a[aria-current="page"]:hover {
+    color: var(--color-text-inverse);
+    background-color: var(--color-surface-muted);
+}
+
+html.dark .primary-navigation a[aria-current="page"]:hover {
+    color: var(--color-text-inverse);
+    background-color: var(--color-surface-muted);
+}
+
+.primary-navigation a:focus-visible, .menu-toggle:focus-visible {
+    outline: 2px solid var(--color-brand-hover);
+    outline-offset: 3px;
+}
+
+.menu-toggle {
+    position: relative;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    cursor: pointer;
+}
+
+.menu-toggle:hover {
+    background-color: var(--color-brand-soft);
+}
+
+.menu-toggle[hidden],
+.primary-navigation[hidden] {
+    display: none;
+}
+
+.menu-toggle-line {
+    position: absolute;
+    left: 50%;
+    width: 1.25rem;
+    height: 2px;
+    border-radius: 1px;
+    background-color: currentColor;
+    transform: translateX(-50%);
+    transition:
+        top 180ms ease,
+        transform 180ms ease,
+        opacity 180ms ease;
+}
+
+.menu-toggle-line:nth-child(1) {
+    top: calc(50% - 0.375rem);
+}
+
+.menu-toggle-line:nth-child(2) {
+    top: 50%;
+}
+
+.menu-toggle-line:nth-child(3) {
+    top: calc(50% + 0.375rem);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-line:nth-child(1) {
+    top: 50%;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-line:nth-child(3) {
+    top: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+@media (max-width: 48rem) {
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .primary-navigation {
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.5rem 0 0;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .js .primary-navigation {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        flex-basis: auto;
+        padding: 0.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0 0 0.75rem 0.75rem;
+        background-color: var(--color-surface);
+        box-shadow: 0 0.5rem 1.25rem var(--color-shadow-brand);
+    }
+
+    .primary-navigation a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-toggle-line,
+    .primary-navigation a {
+        transition: none;
+    }
+}
+
+/* Selector de tema (ThemeToggle) */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.375rem;
+    border: none;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 160ms ease;
+}
+
+.theme-toggle:hover,
+html.dark .theme-toggle:hover {
+    color: var(--color-brand);
+    background: transparent;
+}
+
+.theme-toggle:hover svg,
+html.dark .theme-toggle:hover svg {
+    stroke: var(--color-brand);
+}
+
+.theme-toggle:hover .theme-toggle-label,
+html.dark .theme-toggle:hover .theme-toggle-label {
+    color: var(--color-brand);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+}
+
+.theme-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+.theme-toggle-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+.theme-toggle .icon-moon {
+    display: block;
+}
+
+html.dark .theme-toggle .icon-sun {
+    display: block;
+}
+
+html.dark .theme-toggle .icon-moon {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+        transition: none;
+    }
+}
+
+/* Redes sociales: modo oscuro */
+html.dark .social-link img {
+    filter: brightness(0) invert(0.85);
+}
+
+html.dark .social-link:hover img,
+html.dark .social-link:focus-visible img {
+    filter: brightness(0) invert(1);
 }
