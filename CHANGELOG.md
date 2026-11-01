@@ -10,9 +10,18 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 ## [Unreleased]
 
 ### Planificado
-- **Sprint 1:** Componentes de navegación y UI base: Header, Footer y ThemeToggle (`T-03`).
 - **Sprint 1:** BaseLayout unificado con View Transitions (`<ClientRouter />`) (`T-04`).
 - **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-15`).
+
+---
+
+## [0.2.0] - 2026-11-01
+
+### Añadido
+- **Componentes de Encabezado y Navegación (`T-03`):** Creación de `Header.astro`, `Navigation.astro` y `Logo.astro` con soporte para menú móvil responsive, accesibilidad por teclado y enlaces ordenados (Inicio, Sobre mí, Blog, Proyectos, Contacto).
+- **Componentes del Pie de Página (`T-03`):** Creación de `Footer.astro`, `Social.astro` y `ThemeToggle.astro` con selector de tema Dark/Light persistente en `localStorage`, enlaces a redes con tooltips accesibles y año dinámico.
+- **Estilos de UI Base en CSS (`T-03`):** Estilos para el sticky header, menú hamburguesa con transición cruzada, botones de redes sociales e iconos del selector de tema en `src/styles/global.css`.
+- **Assets de Identidad y Redes:** Incorporación de `logo.png` y catálogo de iconos vectoriales SVG en `public/icons/social/`.
 
 ---
 

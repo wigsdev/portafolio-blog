@@ -1,0 +1,37 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<nav
+  class="primary-navigation"
+  id="primary-navigation"
+  aria-label="Navegación principal"
+>
+  <a href="/" aria-current={currentPath === "/" ? "page" : undefined}>
+    Inicio
+  </a>
+  <a
+    href="/sobre-mi/"
+    aria-current={currentPath === "/sobre-mi/" ? "page" : undefined}
+  >
+    Sobre mí
+  </a>
+  <a
+    href="/blog/"
+    aria-current={currentPath.startsWith("/blog") ? "page" : undefined}
+  >
+    Blog
+  </a>
+  <a
+    href="/proyectos/"
+    aria-current={currentPath.startsWith("/proyectos") ? "page" : undefined}
+  >
+    Proyectos
+  </a>
+  <a
+    href="/contacto/"
+    aria-current={currentPath === "/contacto/" ? "page" : undefined}
+  >
+    Contacto
+  </a>
+</nav>

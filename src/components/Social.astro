@@ -1,0 +1,86 @@
+---
+interface Props {
+  platform: string;
+  url: string;
+  iconSrc: string;
+}
+
+const { platform, url, iconSrc } = Astro.props;
+---
+
+<a
+  class="social-link"
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={platform}
+>
+  <img src={iconSrc} alt="" width="22" height="22" />
+</a>
+
+<style>
+  .social-link {
+    position: relative;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--color-text);
+    background-color: var(--color-surface-muted);
+    text-decoration: none;
+  }
+
+  .social-link img {
+    width: 1.375rem;
+    height: 1.375rem;
+    transition: filter 160ms ease;
+  }
+
+  .social-link:hover,
+  .social-link:focus-visible {
+    background-color: var(--color-brand);
+  }
+
+  .social-link:hover img,
+  .social-link:focus-visible img {
+    filter: brightness(0) invert(1);
+  }
+  .social-link:focus-visible {
+    outline: 2px solid var(--color-brand-dark);
+    outline-offset: 3px;
+  }
+  .social-link::after {
+    position: absolute;
+    z-index: 1;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    color: var(--color-text-inverse);
+    background-color: var(--color-brand-dark);
+    content: attr(aria-label);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 0.25rem);
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease,
+      visibility 160ms ease;
+  }
+  .social-link:hover::after,
+  .social-link:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .social-link img,
+    .social-link::after {
+      transition: none;
+    }
+  }
+</style>
