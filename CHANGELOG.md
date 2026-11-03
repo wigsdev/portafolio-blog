@@ -14,6 +14,15 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.4.0] - 2026-11-03
+
+### Añadido
+- **Componente Reutilizable ProjectCard (`T-05`):** Creación de `src/components/ProjectCard.astro` con tipado estricto (`ImageMetadata`), renderizado de `<Image />` de `astro:assets` (`640x360`) con `alt` descriptivo y soporte para `<slot />` condicional (`Astro.slots.has("default")`).
+- **Componente Atómico Badge (`T-05`):** Creación de `src/components/Badge.astro` para los chips de tecnologías con soporte para modo claro y oscuro.
+- **Assets de Proyectos (`T-05`):** Incorporación de catálogo de ilustraciones vectoriales en `src/assets/projects/` (Pomodoro, Markdown-PDF, OmniSpec, Gestor de Biblioteca, Salesforce Admin y Dashboard de Clima).
+
+---
+
 ## [0.3.0] - 2026-11-03
 
 ### Añadido
