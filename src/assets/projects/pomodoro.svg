@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#251D22"/>
+      <stop offset="1" stop-color="#59303A"/>
+    </linearGradient>
+    <linearGradient id="tomato" x1="255" y1="105" x2="386" y2="253" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F16A70"/>
+      <stop offset="1" stop-color="#B62139"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="24" fill="url(#bg)"/>
+  <circle cx="320" cy="180" r="135" fill="#FFFFFF" fill-opacity=".04"/>
+  <circle cx="320" cy="190" r="106" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="2"/>
+  <circle cx="320" cy="190" r="91" stroke="#E6C4C8" stroke-opacity=".34" stroke-width="7"/>
+  <path d="M320 99a91 91 0 0 1 89 72" stroke="#E34C5C" stroke-width="7" stroke-linecap="round"/>
+  <path d="M320 117c-32-27-67-12-69 19-2 28 26 40 69 72 43-32 71-44 69-72-2-31-37-46-69-19Z" fill="url(#tomato)"/>
+  <path d="M320 119c-7-15-21-20-35-17 9 9 19 13 35 15Zm3-1c8-15 22-19 36-14-10 8-20 11-36 12Zm-3-2c-1-17 8-27 22-32-2 13-9 23-22 32Z" fill="#8AC29A"/>
+  <path d="m320 167 13 29-13 12-13-12 13-29Z" fill="#FFF3E9"/>
+  <text x="320" y="291" fill="#FFF3E9" font-family="system-ui,sans-serif" font-size="24" font-weight="700" text-anchor="middle">25:00</text>
+  <text x="320" y="324" fill="#E6C4C8" font-family="system-ui,sans-serif" font-size="12" letter-spacing="3" text-anchor="middle">FOCUS SESSION</text>
+  <rect x="42" y="35" width="116" height="34" rx="17" fill="#FFFFFF" fill-opacity=".1"/>
+  <circle cx="62" cy="52" r="5" fill="#E34C5C"/>
+  <text x="77" y="57" fill="#F8EDEF" font-family="system-ui,sans-serif" font-size="13" font-weight="600">POMODORO</text>
+</svg>

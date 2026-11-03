@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none">
+  <rect width="640" height="360" rx="24" fill="#F3EEE9"/>
+  <rect x="30" y="26" width="580" height="308" rx="16" fill="#FFF" stroke="#E5DDD7"/>
+  <path d="M30 42a16 16 0 0 1 16-16h548a16 16 0 0 1 16 16v49H30V42Z" fill="#FBF8F5"/>
+  <path d="M56 50h20v28H56z" rx="4" fill="#D0354F"/>
+  <path d="M61 57h10M61 63h10M61 69h7" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+  <text x="87" y="69" fill="#362B28" font-family="system-ui,sans-serif" font-size="14" font-weight="700">BookManager</text>
+  <rect x="462" y="47" width="122" height="34" rx="17" fill="#F3ECEE"/>
+  <circle cx="480" cy="64" r="5" fill="#D0354F"/>
+  <text x="492" y="68" fill="#5A5050" font-family="system-ui,sans-serif" font-size="10">Catalog online</text>
+  <text x="54" y="119" fill="#302826" font-family="system-ui,sans-serif" font-size="19" font-weight="700">Your library</text>
+  <text x="54" y="140" fill="#887C77" font-family="system-ui,sans-serif" font-size="11">Browse and manage your collection</text>
+  <rect x="54" y="158" width="532" height="36" rx="8" fill="#F8F5F2" stroke="#E8E0DA"/>
+  <circle cx="72" cy="176" r="6" stroke="#9B8D86" stroke-width="1.5"/>
+  <path d="m76 180 4 4" stroke="#9B8D86" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="90" y="180" fill="#A29791" font-family="system-ui,sans-serif" font-size="10">Search books or authors</text>
+  <g>
+    <rect x="54" y="211" width="119" height="95" rx="8" fill="#F7F0E9"/>
+    <rect x="70" y="226" width="34" height="49" rx="3" fill="#B75D50"/>
+    <rect x="108" y="219" width="28" height="56" rx="3" fill="#55766A"/>
+    <rect x="140" y="230" width="20" height="45" rx="3" fill="#D3A45D"/>
+    <rect x="70" y="282" width="88" height="5" rx="2.5" fill="#D8CFC8"/>
+    <rect x="70" y="292" width="58" height="4" rx="2" fill="#E1D9D2"/>
+  </g>
+  <g>
+    <rect x="190" y="211" width="119" height="95" rx="8" fill="#EEF2F0"/>
+    <rect x="207" y="222" width="31" height="53" rx="3" fill="#526C82"/>
+    <rect x="242" y="229" width="23" height="46" rx="3" fill="#D28B63"/>
+    <rect x="269" y="217" width="22" height="58" rx="3" fill="#82966D"/>
+    <rect x="207" y="282" width="85" height="5" rx="2.5" fill="#D4DCD8"/>
+    <rect x="207" y="292" width="55" height="4" rx="2" fill="#DDE3E0"/>
+  </g>
+  <g>
+    <rect x="326" y="211" width="119" height="95" rx="8" fill="#F4EFF5"/>
+    <rect x="343" y="224" width="27" height="51" rx="3" fill="#7E627E"/>
+    <rect x="373" y="217" width="31" height="58" rx="3" fill="#C2A66E"/>
+    <rect x="408" y="230" width="21" height="45" rx="3" fill="#B66A61"/>
+    <rect x="343" y="282" width="85" height="5" rx="2.5" fill="#DED7E0"/>
+    <rect x="343" y="292" width="59" height="4" rx="2" fill="#E7E1E8"/>
+  </g>
+  <g>
+    <rect x="462" y="211" width="124" height="95" rx="8" fill="#F2F0E9"/>
+    <rect x="478" y="220" width="29" height="55" rx="3" fill="#D0A14F"/>
+    <rect x="511" y="228" width="25" height="47" rx="3" fill="#6C8079"/>
+    <rect x="540" y="216" width="29" height="59" rx="3" fill="#A6584D"/>
+    <rect x="478" y="282" width="91" height="5" rx="2.5" fill="#DDD9CC"/>
+    <rect x="478" y="292" width="61" height="4" rx="2" fill="#E5E2D9"/>
+  </g>
+</svg>

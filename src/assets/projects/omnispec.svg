@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none">
+  <rect width="640" height="360" rx="24" fill="#EDF0F6"/>
+  <rect x="30" y="26" width="580" height="308" rx="16" fill="#FFF" stroke="#DCE1EA"/>
+  <rect x="30" y="26" width="132" height="308" rx="16" fill="#202630"/>
+  <path d="M146 26h16v308h-16" fill="#202630"/>
+  <rect x="48" y="47" width="28" height="28" rx="8" fill="#D0354F"/>
+  <path d="M56 61h12m-6-6v12" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+  <text x="84" y="66" fill="#FFF" font-family="system-ui,sans-serif" font-size="13" font-weight="700">OmniSpec</text>
+  <rect x="48" y="100" width="96" height="30" rx="7" fill="#FFFFFF" fill-opacity=".12"/>
+  <circle cx="62" cy="115" r="4" fill="#E56876"/>
+  <text x="74" y="119" fill="#FFF" font-family="system-ui,sans-serif" font-size="10">Overview</text>
+  <text x="74" y="157" fill="#B6BEC9" font-family="system-ui,sans-serif" font-size="10">Specifications</text>
+  <text x="74" y="190" fill="#B6BEC9" font-family="system-ui,sans-serif" font-size="10">Repository audit</text>
+  <text x="74" y="223" fill="#B6BEC9" font-family="system-ui,sans-serif" font-size="10">Pull requests</text>
+  <text x="184" y="63" fill="#252A35" font-family="system-ui,sans-serif" font-size="17" font-weight="700">Engineering overview</text>
+  <text x="184" y="83" fill="#77808E" font-family="system-ui,sans-serif" font-size="10">Specification-driven development</text>
+  <rect x="184" y="103" width="124" height="65" rx="9" fill="#F7F8FA" stroke="#E6E8ED"/>
+  <text x="198" y="125" fill="#77808E" font-family="system-ui,sans-serif" font-size="9">SPECIFICATIONS</text>
+  <text x="198" y="151" fill="#292D37" font-family="system-ui,sans-serif" font-size="22" font-weight="700">24</text>
+  <rect x="320" y="103" width="124" height="65" rx="9" fill="#F7F8FA" stroke="#E6E8ED"/>
+  <text x="334" y="125" fill="#77808E" font-family="system-ui,sans-serif" font-size="9">AUDIT STATUS</text>
+  <circle cx="339" cy="148" r="5" fill="#4DA77B"/>
+  <text x="350" y="152" fill="#292D37" font-family="system-ui,sans-serif" font-size="11" font-weight="600">Passed</text>
+  <rect x="456" y="103" width="134" height="65" rx="9" fill="#F7F8FA" stroke="#E6E8ED"/>
+  <text x="470" y="125" fill="#77808E" font-family="system-ui,sans-serif" font-size="9">OPEN REVIEWS</text>
+  <text x="470" y="151" fill="#292D37" font-family="system-ui,sans-serif" font-size="22" font-weight="700">03</text>
+  <rect x="184" y="184" width="406" height="126" rx="9" fill="#FBFBFC" stroke="#E6E8ED"/>
+  <text x="202" y="207" fill="#343A46" font-family="system-ui,sans-serif" font-size="11" font-weight="700">Recent repository checks</text>
+  <rect x="202" y="222" width="370" height="1" fill="#E7E9EE"/>
+  <circle cx="211" cy="242" r="4" fill="#4DA77B"/>
+  <text x="225" y="246" fill="#555D69" font-family="system-ui,sans-serif" font-size="10">Requirements audit</text>
+  <text x="536" y="246" fill="#78818E" font-family="system-ui,sans-serif" font-size="9">Passed</text>
+  <circle cx="211" cy="267" r="4" fill="#4DA77B"/>
+  <text x="225" y="271" fill="#555D69" font-family="system-ui,sans-serif" font-size="10">Security review</text>
+  <text x="536" y="271" fill="#78818E" font-family="system-ui,sans-serif" font-size="9">Passed</text>
+  <circle cx="211" cy="292" r="4" fill="#E0A542"/>
+  <text x="225" y="296" fill="#555D69" font-family="system-ui,sans-serif" font-size="10">Pull request review</text>
+  <text x="536" y="296" fill="#78818E" font-family="system-ui,sans-serif" font-size="9">In review</text>
+</svg>
