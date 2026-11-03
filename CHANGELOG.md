@@ -10,8 +10,18 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 ## [Unreleased]
 
 ### Planificado
-- **Sprint 1:** BaseLayout unificado con View Transitions (`<ClientRouter />`) (`T-04`).
 - **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-15`).
+
+---
+
+## [0.3.0] - 2026-11-03
+
+### Añadido
+- **Layout Base Unificado (`T-04`):** Creación de `src/layouts/BaseLayout.astro` con integración de `<BaseHead />`, `<Header />`, `<Footer />` y gestión de slots.
+- **Navegación Fluida con View Transitions (`T-04`):** Integración de `<ClientRouter />` de `astro:transitions` y script en línea preventivo de FOUC para persistencia y sincronización de tema con `astro:after-swap`.
+- **Metadatos y SEO por Defecto (`T-04`):** Soporte de props opcionales (`pageTitle`, `description`, `mainClass`, `eyebrow`) con fallbacks a `SITE_TITLE` y `SITE_DESCRIPTION`.
+- **Estilos de Estructura de Contenido (`T-04`):** Reglas para `main` (sticky footer con `flex: 1`) y tipografía `.page-eyebrow` en `src/styles/global.css`.
+- **Adopción en Inicio (`T-04`):** Actualización de `src/pages/index.astro` para consumir `BaseLayout` con metadatos descriptivos.
 
 ---
 

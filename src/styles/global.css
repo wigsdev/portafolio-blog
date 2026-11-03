@@ -399,3 +399,24 @@ html.dark .social-link:hover img,
 html.dark .social-link:focus-visible img {
     filter: brightness(0) invert(1);
 }
+
+/* Estructura del contenido principal y subtítulos de página */
+main {
+    flex: 1;
+    padding-top: 2rem;
+}
+
+.page-eyebrow {
+    display: inline-block;
+    color: var(--color-brand);
+    font-size: 0.75rem; /* 12px (text-xs) */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+    margin-block-end: 0.25rem;
+}
+
+.page-eyebrow + h1 {
+    margin-block-start: 0;
+}

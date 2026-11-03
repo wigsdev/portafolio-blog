@@ -1,0 +1,56 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseHead from "../components/BaseHead.astro";
+import { ClientRouter } from "astro:transitions";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import "../styles/global.css";
+
+interface Props {
+  pageTitle?: string;
+  description?: string;
+  mainClass?: string;
+  eyebrow?: string;
+}
+
+const {
+  pageTitle = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  mainClass,
+  eyebrow,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <BaseHead title={pageTitle} description={description} />
+    <script is:inline>
+      const applyTheme = () => {
+        const storedTheme =
+          typeof localStorage !== "undefined" && localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const isDark = storedTheme === "dark" || (!storedTheme && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      };
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <Header />
+    <main class={mainClass}>
+      {eyebrow && <span class="page-eyebrow">{eyebrow}</span>}
+      {pageTitle && <h1>{pageTitle}</h1>}
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
