@@ -14,6 +14,16 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.5.0] - 2026-11-06
+
+### Añadido
+- **Página de Inicio (`T-06`):** Maquetación de `src/pages/index.astro` con Hero profesional, propuesta de valor técnica y botones principales de llamada a la acción (`/proyectos/` y `/contacto/`).
+- **Sección de Proyectos Destacados (`T-06`):** Integración de cabecera flex (`.seccion-header`) con enlace al catálogo completo y grilla de 3 proyectos representativos utilizando `ProjectCard.astro`.
+- **Estilos de Portada y Botones (`T-06`):** Implementación del sistema de botones reutilizables (`.btn`, `.btn--primary`, `.btn--secondary`), espaciado fluido del hero y grilla adaptable `.proyectos-grid` en `src/styles/global.css`.
+- **Documentación de Especificaciones Técnicas:** Formalización de specs en `.reference/specs/` (`T-03`, `T-04`, `T-05` y `T-06`).
+
+---
+
 ## [0.4.0] - 2026-11-03
 
 ### Añadido
