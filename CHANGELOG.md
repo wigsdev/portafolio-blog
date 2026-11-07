@@ -14,6 +14,17 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.6.0] - 2026-11-07
+
+### Añadido
+- **Módulo de Datos Centralizado (`T-07`):** Creación de `src/data/projects.ts` como Fuente Única de Verdad (SSOT) tipada con `ImageMetadata`, eliminando duplicación de datos entre vistas.
+- **Página de Catálogo de Proyectos (`T-07`):** Creación de `src/pages/proyectos.astro` con renderizado de los 6 proyectos reales usando `ProjectCard.astro`, metadatos SEO y eyebrow `"PROYECTOS PERSONALES"`.
+- **Estrategia LCP de Imágenes (`T-07`):** Carga `eager` para las 3 primeras tarjetas del catálogo y `lazy` para el resto.
+- **Sección de Contacto GitHub (`T-07`):** Sección `.proyectos-github` con llamada a la acción hacia el perfil de GitHub.
+- **Optimización DRY en Portada (`T-07`):** Refactorización de `src/pages/index.astro` para consumir directamente los proyectos destacados desde `src/data/projects.ts`.
+
+---
+
 ## [0.5.0] - 2026-11-06
 
 ### Añadido

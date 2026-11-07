@@ -1,44 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import { proyectos } from "../data/projects";
 
-import pomodoroImage from "../assets/projects/pomodoro.svg";
-import markdownPdfImage from "../assets/projects/markdown-pdf.svg";
-import omnispecImage from "../assets/projects/omnispec.svg";
-
-const proyectosDestacados = [
-  {
-    nombre: "Pomodoro",
-    imagen: pomodoroImage,
-    imagenAlt:
-      "Ilustración de un temporizador Pomodoro con un tomate y una sesión de 25 minutos.",
-    descripcion:
-      "Aplicación web para organizar sesiones de concentración y descansos mediante la técnica Pomodoro.",
-    tecnologias: ["TypeScript", "JavaScript", "CSS"],
-    githubUrl: "https://github.com/wigsdev/POMODORO-APP",
-  },
-  {
-    nombre: "Markdown - Pdf",
-    imagen: markdownPdfImage,
-    imagenAlt:
-      "Ilustración de un editor Markdown junto a una vista previa de un documento PDF.",
-    descripcion:
-      "Herramienta web para convertir documentos Markdown a PDF con tablas, resaltado de sintaxis y diagramas Mermaid.",
-    tecnologias: ["JavaScript", "Python", "CSS"],
-    githubUrl: "https://github.com/wigsdev/markdown-pdf",
-  },
-  {
-    nombre: "OmniSpec IA",
-    imagen: omnispecImage,
-    imagenAlt:
-      "Ilustración de un panel de ingeniería con revisiones de especificaciones y auditorías de repositorios.",
-    descripcion:
-      "Plataforma web para generar especificaciones, auditar repositorios y crear pull requests con supervisión humana.",
-    tecnologias: ["Python", "JavaScript", "Dockerfile"],
-    demoUrl: "https://d140eqoid6qg8h.cloudfront.net/",
-    githubUrl: "https://github.com/wigsdev/omnispec-ai",
-  },
-];
+const proyectosDestacados = proyectos.filter((p) => p.destacado);
 ---
 
 <BaseLayout
