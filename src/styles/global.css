@@ -420,3 +420,123 @@ main {
 .page-eyebrow + h1 {
     margin-block-start: 0;
 }
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.125rem;
+    border: 1px solid var(--color-brand);
+    border-radius: 0.5rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition:
+        color 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-brand-hover);
+    outline-offset: 3px;
+}
+
+.btn--primary {
+    border-color: var(--color-brand);
+    color: var(--color-text-inverse);
+    background-color: var(--color-brand);
+}
+
+.btn--primary:hover {
+    border-color: var(--color-brand-hover);
+    background-color: var(--color-brand-hover);
+}
+
+.btn--secondary {
+    border-color: var(--color-brand);
+    color: var(--color-brand-hover);
+    background-color: transparent;
+}
+
+.btn--secondary:hover {
+    background-color: var(--color-brand-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+}
+
+/* Hero */
+.hero {
+    padding-block: clamp(1.5rem, 5vh, 3rem);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 1.75rem;
+}
+
+/* Secciones y cabeceras */
+.seccion-proyectos {
+    margin-block-start: 3.5rem;
+    padding-block-start: 2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.seccion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.seccion-header h2 {
+    margin: 0;
+}
+
+.seccion-link {
+    color: var(--color-brand);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.seccion-link:hover {
+    color: var(--color-brand-hover);
+    text-decoration: underline;
+}
+
+/* Grilla de proyectos */
+.proyectos-grid {
+    margin-block-start: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.625rem), 1fr));
+    gap: 1.5rem;
+}
+
+.proyectos-grid article {
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-surface);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .proyectos-grid article {
+        transition:
+            transform 180ms ease,
+            box-shadow 180ms ease;
+    }
+
+    .proyectos-grid article:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px var(--color-shadow-brand);
+    }
+}

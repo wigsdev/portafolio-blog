@@ -1,9 +1,81 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+import pomodoroImage from "../assets/projects/pomodoro.svg";
+import markdownPdfImage from "../assets/projects/markdown-pdf.svg";
+import omnispecImage from "../assets/projects/omnispec.svg";
+
+const proyectosDestacados = [
+  {
+    nombre: "Pomodoro",
+    imagen: pomodoroImage,
+    imagenAlt:
+      "Ilustración de un temporizador Pomodoro con un tomate y una sesión de 25 minutos.",
+    descripcion:
+      "Aplicación web para organizar sesiones de concentración y descansos mediante la técnica Pomodoro.",
+    tecnologias: ["TypeScript", "JavaScript", "CSS"],
+    githubUrl: "https://github.com/wigsdev/POMODORO-APP",
+  },
+  {
+    nombre: "Markdown - Pdf",
+    imagen: markdownPdfImage,
+    imagenAlt:
+      "Ilustración de un editor Markdown junto a una vista previa de un documento PDF.",
+    descripcion:
+      "Herramienta web para convertir documentos Markdown a PDF con tablas, resaltado de sintaxis y diagramas Mermaid.",
+    tecnologias: ["JavaScript", "Python", "CSS"],
+    githubUrl: "https://github.com/wigsdev/markdown-pdf",
+  },
+  {
+    nombre: "OmniSpec IA",
+    imagen: omnispecImage,
+    imagenAlt:
+      "Ilustración de un panel de ingeniería con revisiones de especificaciones y auditorías de repositorios.",
+    descripcion:
+      "Plataforma web para generar especificaciones, auditar repositorios y crear pull requests con supervisión humana.",
+    tecnologias: ["Python", "JavaScript", "Dockerfile"],
+    demoUrl: "https://d140eqoid6qg8h.cloudfront.net/",
+    githubUrl: "https://github.com/wigsdev/omnispec-ai",
+  },
+];
 ---
 
 <BaseLayout
   pageTitle="Construyendo aplicaciones web rápidas, modernas e inteligentes"
   description="Hola, soy Wilmer Gulcochia, desarrollador web fullstack con IA. Explora mis proyectos y escríbeme."
   mainClass="hero"
-/>
+>
+  <p>Hola, soy Wilmer Gulcochia, desarrollador web fullstack con IA.</p>
+
+  <p>
+    Creo aplicaciones web rápidas y modernas con Astro, TypeScript e integración
+    de IA.
+  </p>
+
+  <p>
+    Enfocado en Core Web Vitals, arquitectura de islas, código limpio y
+    experiencias de usuario inteligentes.
+  </p>
+
+  <div class="hero-actions">
+    <a href="/proyectos/" class="btn btn--primary"> Ver proyectos </a>
+    <a href="/contacto/" class="btn btn--secondary"> Escríbeme </a>
+  </div>
+
+  <section class="seccion-proyectos">
+    <div class="seccion-header">
+      <h2>Proyectos</h2>
+      <a href="/proyectos/" class="seccion-link"
+        >Ver todos los proyectos &rarr;</a
+      >
+    </div>
+    <div class="proyectos-grid">
+      {
+        proyectosDestacados.map((proyecto, index) => (
+          <ProjectCard {...proyecto} loading={index < 2 ? "eager" : "lazy"} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
