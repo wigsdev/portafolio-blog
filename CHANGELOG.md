@@ -14,6 +14,20 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.7.0] - 2026-11-08
+
+### Añadido
+- **Página Sobre Mí (`T-08`):** Creación de `src/pages/sobre-mi.astro` utilizando `BaseLayout.astro`, con biografía profesional, enfoque en arquitectura de software con Astro/TypeScript e integración de IA.
+- **Certificaciones Internacionales (`T-08`):** Sección dedicada a credenciales oficiales de Oracle Cloud Infrastructure (OCI Certified AI Foundations Associate), Cisco Networking Academy (Hacker Ético & CTF) e IBM SkillsBuild (Python & Data Analytics).
+- **Formación Continua y Base Académica (`T-08`):** Sección con enlaces a Nómada Bootcamp (Full Stack), Oracle Next Education / Alura y la Universidad Nacional Agraria de la Selva (UNAS).
+- **Acciones y Descarga Directa de CV (`T-08`):** Incorporación del documento `public/cv.pdf`, botón primario de visualización/descarga segura (`.btn .btn--primary`) y botón secundario de contacto (`.btn .btn--secondary`).
+- **Estilos CSS Modulares (`T-08`):** Clases `.sobre-mi-lista`, `.bootcamp-link` y `.sobre-mi-actions` añadidas a `src/styles/global.css` manteniendo la estructura semántica por capas.
+
+### Eliminado
+- **Plantilla Placeholder en Inglés (`T-08`):** Eliminación de `src/pages/about.astro` para consolidar la ruta `/sobre-mi/` como estándar canónico del sitio.
+
+---
+
 ## [0.6.0] - 2026-11-07
 
 ### Añadido
