@@ -15,6 +15,23 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.8.1] - 2026-11-08
+
+### Añadido
+
+- **Ruta Dinámica de Lectura de Artículos (`T-10`):** Implementación de `src/pages/blog/[...slug].astro` utilizando `render(post)` de `astro:content` en Astro 5 para la compilación de Markdown y MDX.
+- **Cálculo de Tiempo Estimado de Lectura (`T-10`):** Estimación dinámica en tiempo de compilación evaluando el conteo de palabras del cuerpo del artículo (`words / 200`).
+- **Plantilla de Lectura Unificada (`T-10`):** Refactorización de `src/layouts/BlogPost.astro` integrándolo con `BaseLayout.astro`, heredando la persistencia de modo oscuro, View Transitions (`ClientRouter`) y tipografía Atkinson.
+- **Metadatos y Badges Interactivos (`T-10`):** Imagen hero optimizada con `<Image />` (`1020x510`), fecha formateada con `FormattedDate.astro` y badges de etiquetas interactivas con `Badge.astro` enlazando a `/blog/tags/${tag}/`.
+- **Arquitectura de Secciones y Contenedores Full-Bleed (`T-10`):** Clases modulares `.container` y `.section` con espaciado vertical consistente (80px / `5rem`), líneas divisorias al 100% nativas y adaptación de `src/pages/index.astro` y `src/components/Footer.astro`.
+
+### Modificado
+
+- **Soporte de Título Opcional en BaseLayout (`T-10`):** Propiedad `hideTitle?: boolean` añadida a `src/layouts/BaseLayout.astro` para evitar duplicación del elemento `h1` en páginas y layouts con cabecera propia.
+- **Reorganización de Estilos Globales (`T-10`):** Limpieza, depuración y ordenamiento por afinidad lógica de `src/styles/global.css`.
+
+---
+
 ## [0.8.0] - 2026-11-08
 
 ### Añadido
