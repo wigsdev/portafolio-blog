@@ -9,38 +9,46 @@ const proyectosDestacados = proyectos.filter((p) => p.destacado);
 <BaseLayout
   pageTitle="Construyendo aplicaciones web rápidas, modernas e inteligentes"
   description="Hola, soy Wilmer Gulcochia, desarrollador web fullstack con IA. Explora mis proyectos y escríbeme."
-  mainClass="hero"
+  mainClass="has-sections"
+  hideTitle={true}
 >
-  <p>Hola, soy Wilmer Gulcochia, desarrollador web fullstack con IA.</p>
+  <!-- Sección Hero -->
+  <section class="section section--hero">
+    <div class="container">
+      <h1>Construyendo aplicaciones web rápidas, modernas e inteligentes</h1>
+      <p>Hola, soy Wilmer Gulcochia, desarrollador web fullstack con IA.</p>
+      <p>
+        Creo aplicaciones web rápidas y modernas con Astro, TypeScript e
+        integración de IA.
+      </p>
+      <p>
+        Enfocado en Core Web Vitals, arquitectura de islas, código limpio y
+        experiencias de usuario inteligentes.
+      </p>
 
-  <p>
-    Creo aplicaciones web rápidas y modernas con Astro, TypeScript e integración
-    de IA.
-  </p>
-
-  <p>
-    Enfocado en Core Web Vitals, arquitectura de islas, código limpio y
-    experiencias de usuario inteligentes.
-  </p>
-
-  <div class="hero-actions">
-    <a href="/proyectos/" class="btn btn--primary"> Ver proyectos </a>
-    <a href="/contacto/" class="btn btn--secondary"> Escríbeme </a>
-  </div>
-
-  <section class="seccion-proyectos">
-    <div class="seccion-header">
-      <h2>Proyectos</h2>
-      <a href="/proyectos/" class="seccion-link"
-        >Ver todos los proyectos &rarr;</a
-      >
+      <div class="hero-actions">
+        <a href="/proyectos/" class="btn btn--primary"> Ver proyectos </a>
+        <a href="/contacto/" class="btn btn--secondary"> Escríbeme </a>
+      </div>
     </div>
-    <div class="proyectos-grid">
-      {
-        proyectosDestacados.map((proyecto, index) => (
-          <ProjectCard {...proyecto} loading={index < 2 ? "eager" : "lazy"} />
-        ))
-      }
+  </section>
+
+  <!-- Sección Proyectos -->
+  <section class="section section--proyectos">
+    <div class="container">
+      <div class="seccion-header">
+        <h2>Proyectos</h2>
+        <a href="/proyectos/" class="seccion-link"
+          >Ver todos los proyectos &rarr;</a
+        >
+      </div>
+      <div class="proyectos-grid">
+        {
+          proyectosDestacados.map((proyecto, index) => (
+            <ProjectCard {...proyecto} loading={index < 2 ? "eager" : "lazy"} />
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>
