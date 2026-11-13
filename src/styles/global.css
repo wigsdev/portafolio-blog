@@ -187,6 +187,24 @@ main:not(.has-sections) {
     padding-block-end: 5rem;
 }
 
+.seccion-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-brand);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        color 150ms ease,
+        transform 150ms ease;
+}
+
+.seccion-link:hover {
+    color: var(--color-brand-hover);
+    text-decoration: underline;
+    transform: translateX(3px);
+}
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

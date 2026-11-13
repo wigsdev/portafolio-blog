@@ -34,11 +34,13 @@ const primaryTag = tags[0];
     </a>
   )}
   <div class="blog-card-body">
-    {primaryTag && (
-      <div class="blog-card-tag">
-        <a href={`/blog/tags/${primaryTag}/`} class="tag-link">
-          <Badge text={`${primaryTag}`} />
-        </a>
+    {tags.length > 0 && (
+      <div class="blog-card-tags">
+        {tags.map((tag) => (
+          <a href={`/blog/tags/${tag}/`} class="tag-link">
+            <Badge text={tag} />
+          </a>
+        ))}
       </div>
     )}
     <h3 class="blog-card-title">
@@ -132,8 +134,11 @@ const primaryTag = tags[0];
     flex: 1;
     padding: 1.25rem;
   }
-  .blog-card-tag {
-    margin-bottom: 0.625rem;
+  .blog-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 0.75rem;
   }
 
   .blog-card-title {

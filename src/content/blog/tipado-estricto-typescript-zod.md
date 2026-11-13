@@ -1,7 +1,7 @@
 ---
 title: 'Tipado Seguro y Validación en Compilación con TypeScript y Zod'
 description: 'Cómo combinar la potencia de TypeScript estricto con esquemas Zod en Astro Content Layer para garantizar la integridad de datos sin sorpresas en producción.'
-pubDate: 'Jun 15 2024'
+pubDate: 'Nov 09 2026'
 heroImage: '../../assets/blog-typescript-zod.webp'
 tags: ['typescript', 'astro', 'arquitectura']
 ---

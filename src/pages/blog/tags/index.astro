@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
+
+// Conteo de artículos por etiqueta: { astro: 5, css: 1, ... }
+const tagcounts = posts
+  .flatMap((post) => post.data.tags)
+  .reduce<Record<string, number>>((acc, tag) => {
+    acc[tag] = (acc[tag] ?? 0) + 1;
+    return acc;
+  }, {});
+
+// Más usadas primero: si empatan, orden alfabético
+const tags = Object.entries(tagcounts).sort(
+  ([tagA, countA], [tagB, countB]) =>
+    countB - countA || tagA.localeCompare(tagB),
+);
+---
+
+<BaseLayout
+  pageTitle="Etiquetas"
+  eyebrow="Explorar por tema"
+  description="Explora los artículos de blog organizados por etiquetas: Astro, TypeScript, arquitectura, IA, datos y más."
+>
+  <ul class="tag-cloud">
+    {tags.map(([tag, count]) => (
+      <li>
+        <a href={`/blog/tags/${tag}/`} class="tag-chip">
+          <span>{tag}</span>
+          <span class="tag-chip-count" aria-label={`${count} artículos`}>
+            {count}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      border-color 150ms ease,
+      color 150ms ease,
+      transform 150ms ease;
+  }
+  .tag-chip:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+    transform: translateY(-1px);
+  }
+  .tag-chip-count {
+    min-width: 1.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background-color: var(--color-surface-muted);
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+</style>

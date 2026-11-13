@@ -1,7 +1,7 @@
 ---
 title: 'Modelado Relacional y Optimización de Consultas SQL'
 description: 'Fundamentos de normalización, diseño de índices y optimización de planes de ejecución en motores de bases de datos relacionales como MySQL y Oracle.'
-pubDate: 'Jul 15 2024'
+pubDate: 'Oct 11 2026'
 heroImage: '../../assets/blog-sql-modelado.webp'
 tags: ['datos', 'arquitectura']
 ---

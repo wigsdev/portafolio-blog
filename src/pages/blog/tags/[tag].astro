@@ -1,0 +1,65 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  // Etiquetas únicas de toda la colección (Set elimina duplicados)
+  const uniqueTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+  // Una página estática por etiqueta, con solo sus artículos
+  return uniqueTags.map((tag) => ({
+    params: { tag },
+    props: { posts: posts.filter((post) => post.data.tags.includes(tag)) },
+  }));
+}
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const countLabel = posts.length === 1 ? "artículo" : "artículos";
+---
+
+<BaseLayout
+  pageTitle={tag}
+  eyebrow="Etiqueta"
+  description={`Artículos técnicos sobre ${tag}: desarrollo web, buenas prácticas y arquitectura de software.`}
+>
+  <div class="tag-page-header">
+    <p class="tag-page-count">
+      {posts.length} {countLabel}
+    </p>
+    <a href="/blog/tags/" class="seccion-link">
+      Ver todas las etiquetas &rarr;
+    </a>
+  </div>
+  <div class="cards-grid">
+    {posts.map((post) => (
+      <BlogCard post={post} />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .tag-page-count {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+</style>

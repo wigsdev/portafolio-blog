@@ -1,7 +1,7 @@
 ---
 title: 'Arquitectura CSS Modular y Tokens de Diseño Semánticos'
 description: 'Principios de ITCSS, variables CSS semánticas y soporte nativo de modo oscuro para evitar colisiones en cascada en aplicaciones web.'
-pubDate: 'Jul 10 2024'
+pubDate: 'Oct 16 2026'
 heroImage: '../../assets/blog-css-tokens.webp'
 tags: ['css', 'arquitectura', 'web-performance']
 ---

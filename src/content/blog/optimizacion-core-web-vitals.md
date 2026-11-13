@@ -1,7 +1,7 @@
 ---
 title: 'Maximizando Core Web Vitals: De LCP a CLS en Sitios Estáticos'
 description: 'Guía técnica para auditar y optimizar las métricas clave de Google: Largest Contentful Paint, Cumulative Layout Shift e Interaction to Next Paint.'
-pubDate: 'Jul 01 2024'
+pubDate: 'Oct 25 2026'
 heroImage: '../../assets/blog-web-vitals.webp'
 tags: ['web-performance', 'astro']
 ---
