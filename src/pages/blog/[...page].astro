@@ -1,0 +1,44 @@
+---
+import type { GetStaticPathsOptions, Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import Pagination from "../../components/Pagination.astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  return paginate(posts, { pageSize: 7 });
+}
+
+interface Props {
+  page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+const featuredPost = isFirstPage ? page.data[0] : null;
+const gridPosts = isFirstPage ? page.data.slice(1) : page.data;
+---
+
+<BaseLayout
+  pageTitle="Blog"
+  description="Artículos técnicos sobre desarrollo web moderno, Astro, TypeScript, Inteligencia Artificial y buenas prácticas de ingeniería de software."
+  hideTitle={true}
+>
+  {featuredPost && <BlogCard post={featuredPost} featured={true} />}
+  <div class="cards-grid blog-grid">
+    {gridPosts.map((post) => (
+      <BlogCard post={post} />
+    ))}
+  </div>
+
+  <Pagination page={page} />
+</BaseLayout>
+
+<style>
+  .blog-grid {
+    margin-top: 1rem;
+  }
+</style>

@@ -2,7 +2,7 @@
 title: 'Integración Práctica de Modelos LLM y Arquitecturas RAG'
 description: 'Fundamentos de los sistemas de Generación Aumentada por Recuperación (RAG) y diseño de agentes autónomos aplicados a productos digitales.'
 pubDate: 'Jun 20 2024'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+heroImage: '../../assets/blog-ia-rag.webp'
 tags: ['ia', 'arquitectura', 'datos']
 ---
 

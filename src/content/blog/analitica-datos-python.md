@@ -2,7 +2,7 @@
 title: 'De los Datos Espaciales a la Analítica Predictiva con Python'
 description: 'Metodologías de análisis, limpieza y control de calidad en grandes volúmenes de datos utilizando el ecosistema Python, Pandas y GeoPandas.'
 pubDate: 'Jul 05 2024'
-heroImage: '../../assets/blog-placeholder-1.jpg'
+heroImage: '../../assets/blog-analitica-python.webp'
 tags: ['datos', 'ia']
 ---
 

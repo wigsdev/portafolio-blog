@@ -129,6 +129,16 @@ p {
     text-decoration: underline;
 }
 
+.tag-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+}
+
+.tag-link:hover {
+    transform: translateY(-1px);
+}
+
 /* Estructura de secciones y contenedores */
 .container {
     width: 100%;
@@ -137,7 +147,7 @@ p {
     padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 64rem) {
     .container {
         max-width: 72rem;
     }
@@ -159,7 +169,7 @@ main:not(.has-sections) {
     padding: 2rem clamp(1rem, 4vw, 2rem);
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 64rem) {
     main:not(.has-sections) {
         max-width: 72rem;
     }
@@ -175,6 +185,24 @@ main:not(.has-sections) {
     border-top: none;
     padding-block-start: 3rem;
     padding-block-end: 5rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 64rem) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 40rem) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Botones */
@@ -256,7 +284,7 @@ main:not(.has-sections) {
     padding: 0 clamp(1rem, 4vw, 2rem);
 }
 
-@media (min-width: 90rem) {
+@media (min-width: 64rem) {
     .header-content {
         max-width: 72rem;
     }
