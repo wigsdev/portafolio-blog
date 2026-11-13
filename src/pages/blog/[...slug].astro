@@ -6,19 +6,39 @@ export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: post,
+    props: { post, allPosts: posts },
   }));
 }
-type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
+interface Props {
+  post: CollectionEntry<"blog">;
+  allPosts: CollectionEntry<"blog">[];
+}
+
+const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
 
 // Cálculo de tiempo de lectura estimado (~200 palabras por minuto)
 const words = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.ceil(words / 200));
+
+// Selección de hasta 3 artículos relacionados (prioriza tags compartidos y fecha)
+const currentTags = new Set(post.data.tags ?? []);
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => ({
+    post: p,
+    sharedTags: (p.data.tags ?? []).filter((t) => currentTags.has(t)).length,
+  }))
+  .sort(
+    (a, b) =>
+      b.sharedTags - a.sharedTags ||
+      b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf(),
+  )
+  .slice(0, 3)
+  .map((item) => item.post);
 ---
 
-<BlogPost {...post.data} readingTime={readingTime}>
+<BlogPost {...post.data} readingTime={readingTime} relatedPosts={relatedPosts}>
   <Content />
 </BlogPost>

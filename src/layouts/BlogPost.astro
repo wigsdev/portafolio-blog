@@ -4,9 +4,11 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Badge from "../components/Badge.astro";
+import BlogCard from "../components/BlogCard.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: number;
+  relatedPosts?: CollectionEntry<"blog">[];
 };
 
 const {
@@ -17,89 +19,239 @@ const {
   heroImage,
   tags = [],
   readingTime,
+  relatedPosts = [],
 } = Astro.props;
+
+const shareUrl = encodeURIComponent(Astro.url.href);
+const shareTitle = encodeURIComponent(title);
 ---
 
 <BaseLayout
   pageTitle={title}
   description={description}
-  eyebrow="BLOG"
+  mainClass="has-sections"
   hideTitle={true}
 >
-  <article class="blog-post">
-    {
-      heroImage && (
-        <div class="hero-image">
-          <Image width={1020} height={512} src={heroImage} alt={title} />
-        </div>
-      )
-    }
-    <div class="prose">
-      <header class="post-header">
-        <div class="post-meta">
-          <FormattedDate date={pubDate} />
-          {
-            readingTime && (
-              <span class="reading-time">. {readingTime} min de lectura</span>
-            )
-          }
-          {
-            updatedDate && (
-              <span class="last-updated-on">
-                . (Actualizado el <FormattedDate date={updatedDate} />)
-              </span>
-            )
-          }
-        </div>
-        <h1 class="post-title">{title}</h1>
-        {
-          tags && tags.length > 0 && (
+  <section class="section section--article">
+    <div class="container">
+      <article class="blog-post">
+        <header class="post-header">
+          <a href="/blog/" class="back-link">
+            &larr; Volver al blog
+          </a>
+
+          {tags && tags.length > 0 && (
             <div class="post-tags">
               {tags.map((tag) => (
                 <a href={`/blog/tags/${tag}/`} class="tag-link">
-                  <Badge text={`#${tag}`} />
+                  <Badge text={tag} />
                 </a>
               ))}
             </div>
-          )
-        }
-        <hr class="post-divider" />
-      </header>
-      <div class="post-content">
-        <slot />
-      </div>
+          )}
+
+          <h1 class="post-title">{title}</h1>
+
+          <div class="post-meta">
+            <FormattedDate date={pubDate} />
+            {readingTime && (
+              <>
+                <span class="meta-separator" aria-hidden="true">
+                  ·
+                </span>
+                <span class="reading-time">{readingTime} min de lectura</span>
+              </>
+            )}
+            {updatedDate && (
+              <>
+                <span class="meta-separator" aria-hidden="true">
+                  ·
+                </span>
+                <span class="last-updated-on">
+                  Actualizado el <FormattedDate date={updatedDate} />
+                </span>
+              </>
+            )}
+          </div>
+        </header>
+
+        {heroImage && (
+          <div class="hero-image">
+            <Image
+              width={1020}
+              height={512}
+              src={heroImage}
+              alt={title}
+              loading="eager"
+            />
+          </div>
+        )}
+
+        <div class="prose post-content">
+          <slot />
+        </div>
+
+        <footer class="post-footer">
+          <div class="author-card">
+            <img
+              src="/foto.jpg"
+              alt="Wilmer Gulcochía"
+              width="44"
+              height="44"
+              class="author-avatar"
+              loading="lazy"
+            />
+            <div class="author-info">
+              <p class="author-name">Wilmer Gulcochía</p>
+              <p class="author-bio">
+                Desarrollador web fullstack con IA, enfocado en Astro,
+                TypeScript y rendimiento web.
+              </p>
+            </div>
+          </div>
+
+          <div class="share-section">
+            <p class="share-label">Comparte este artículo</p>
+            <div class="share-actions">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn"
+              >
+                <span
+                  class="share-icon"
+                  style="--icon: url('/icons/social/x.svg')"
+                  aria-hidden="true"
+                ></span>
+                X / Twitter
+              </a>
+
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn"
+              >
+                <span
+                  class="share-icon"
+                  style="--icon: url('/icons/social/linkedin.svg')"
+                  aria-hidden="true"
+                ></span>
+                LinkedIn
+              </a>
+
+              <a
+                href={`https://news.ycombinator.com/submitlink?u=${shareUrl}&t=${shareTitle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn"
+              >
+                <span
+                  class="share-icon"
+                  style="--icon: url('/icons/social/hackernews.svg')"
+                  aria-hidden="true"
+                ></span>
+                Hacker News
+              </a>
+
+              <a
+                href={`https://www.reddit.com/submit?url=${shareUrl}&title=${shareTitle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn"
+              >
+                <span
+                  class="share-icon"
+                  style="--icon: url('/icons/social/reddit.svg')"
+                  aria-hidden="true"
+                ></span>
+                Reddit
+              </a>
+
+              <a
+                href={`https://wa.me/?text=${shareTitle}%20${shareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn"
+              >
+                <span
+                  class="share-icon"
+                  style="--icon: url('/icons/social/whatsapp.svg')"
+                  aria-hidden="true"
+                ></span>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </footer>
+      </article>
     </div>
-  </article>
+  </section>
+
+  {relatedPosts.length > 0 && (
+    <section class="section" aria-labelledby="related-heading">
+      <div class="container">
+        <h2 id="related-heading" class="related-title">
+          Artículos que te pueden gustar
+        </h2>
+        <div class="cards-grid">
+          {relatedPosts.map((related) => (
+            <BlogCard post={related} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
+  .section--article {
+    border-top: none;
+    padding-block-start: 2.5rem;
+    padding-block-end: 4rem;
+  }
+
   .blog-post {
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero-image {
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .hero-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
-    border: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.08));
-  }
-
-  .prose {
-    color: var(--color-text-main, #1e293b);
-    line-height: 1.75;
   }
 
   .post-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--color-brand);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition:
+      transform 150ms ease,
+      color 150ms ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-brand-hover);
+    transform: translateX(-3px);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-title {
+    font-size: clamp(1.85rem, 4vw, 2.75rem);
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    color: var(--color-text);
+    font-weight: 700;
   }
 
   .post-meta {
@@ -108,115 +260,241 @@ const {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: var(--color-text-muted, #64748b);
-    margin-bottom: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .meta-separator {
+    opacity: 0.6;
+  }
+
+  .reading-time {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text);
   }
 
   .last-updated-on {
     font-style: italic;
   }
-  .post-title {
-    font-size: 2.25rem;
-    line-height: 1.25;
-    margin: 0 0 1rem 0;
-    color: var(--color-text-main, #0f172a);
-    font-weight: 700;
+
+  .hero-image {
+    width: 100%;
+    margin-bottom: 2.5rem;
   }
-  .post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+
+  .hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 28rem;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--color-shadow-brand);
+    border: 1px solid var(--color-border);
   }
-  .tag-link {
-    text-decoration: none;
-    transition: transform 0.15s ease;
+
+  .prose {
+    color: var(--color-text);
+    line-height: 1.75;
   }
-  .tag-link:hover {
-    transform: translateY(-1px);
-  }
-  .post-divider {
-    border: 0;
-    border-top: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.1));
-    margin: 1.5rem 0 2rem 0;
-  }
+
   /* Estilos de tipografía y contenido de Markdown (.post-content) */
+  .post-content {
+    width: 100%;
+    max-width: 780px;
+    margin-inline: auto;
+  }
+
   .post-content :global(h2) {
     font-size: 1.75rem;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--color-text-main, #0f172a);
-    border-bottom: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.06));
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.5rem;
   }
+
   .post-content :global(h3) {
     font-size: 1.35rem;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
-    color: var(--color-text-main, #0f172a);
+    color: var(--color-text);
   }
+
   .post-content :global(p) {
     margin-bottom: 1.25rem;
+    max-width: 100%;
   }
+
   .post-content :global(ul),
   .post-content :global(ol) {
     margin-bottom: 1.25rem;
     padding-left: 1.5rem;
   }
+
   .post-content :global(li) {
     margin-bottom: 0.5rem;
   }
+
   .post-content :global(blockquote) {
     margin: 1.5rem 0;
     padding: 1rem 1.25rem;
-    border-left: 4px solid var(--color-accent, #3b82f6);
-    background-color: var(--color-surface, rgba(0, 0, 0, 0.02));
+    border-left: 4px solid var(--color-brand);
+    background-color: var(--color-surface);
     border-radius: 0 8px 8px 0;
     font-style: italic;
-    color: var(--color-text-main, #334155);
+    color: var(--color-text-muted);
   }
+
   .post-content :global(pre) {
     padding: 1rem 1.25rem;
     border-radius: 8px;
     margin: 1.5rem 0;
     overflow-x: auto;
-    border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.1));
+    border: 1px solid var(--color-border);
   }
+
   .post-content :global(code:not(pre code)) {
     padding: 0.2rem 0.4rem;
     font-size: 0.875em;
-    background-color: var(--color-surface, rgba(0, 0, 0, 0.05));
+    background-color: var(--color-surface-muted);
     border-radius: 4px;
-    color: var(--color-accent, #2563eb);
+    color: var(--color-brand);
   }
+
   .post-content :global(table) {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
     font-size: 0.95rem;
   }
+
   .post-content :global(th),
   .post-content :global(td) {
     padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border-subtle, rgba(0, 0, 0, 0.1));
+    border: 1px solid var(--color-border);
     text-align: left;
   }
+
   .post-content :global(th) {
-    background-color: var(--color-surface, rgba(0, 0, 0, 0.04));
+    background-color: var(--color-surface-muted);
     font-weight: 600;
+    color: var(--color-text);
   }
+
   .post-content :global(img) {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
     margin: 1.5rem 0;
   }
+
   .post-content :global(a) {
-    color: var(--color-accent, #2563eb);
+    color: var(--color-brand);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+
   .post-content :global(a:hover) {
-    opacity: 0.85;
+    color: var(--color-brand-hover);
+  }
+
+  /* Pie del artículo: Autor y Compartir */
+  .post-footer {
+    width: 100%;
+    max-width: 780px;
+    margin-inline: auto;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .author-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .author-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .author-name {
+    margin: 0 0 0.25rem 0;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+  }
+
+  .author-bio {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    max-width: 38ch;
+  }
+
+  .share-label {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .share-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-brand);
+    color: var(--color-text-inverse);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color 150ms ease,
+      transform 150ms ease;
+  }
+
+  .share-btn:hover {
+    background-color: var(--color-brand-hover);
+    transform: translateY(-1px);
+  }
+
+  .share-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask: var(--icon) no-repeat center / contain;
+    mask: var(--icon) no-repeat center / contain;
+  }
+
+  /* Artículos relacionados */
+  .related-title {
+    font-size: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--color-text);
   }
 </style>
