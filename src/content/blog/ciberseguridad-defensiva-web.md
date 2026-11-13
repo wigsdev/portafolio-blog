@@ -1,7 +1,7 @@
 ---
 title: 'Ciberseguridad Defensiva en Aplicaciones Web Modernas'
 description: 'Estrategias prácticas de seguridad aplicables al frontend y backend: cabeceras HTTP, protección contra XSS, CSRF y sanitización de entradas.'
-pubDate: 'Jun 25 2024'
+pubDate: 'Oct 30 2026'
 heroImage: '../../assets/blog-ciberseguridad.webp'
 tags: ['ciberseguridad', 'arquitectura', 'web-performance']
 ---

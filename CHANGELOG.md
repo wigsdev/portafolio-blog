@@ -15,6 +15,22 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.10.0] - 2026-11-13
+
+### Añadido
+
+- **Rutas Dinámicas de Taxonomía por Etiquetas (`T-12`):** Implementación de `src/pages/blog/tags/[tag].astro` con `getStaticPaths()` que genera páginas estáticas filtradas para cada una de las etiquetas del blog.
+- **Nube de Etiquetas con Conteo (`T-12`):** Nueva página índice `src/pages/blog/tags/index.astro` con agregación de conteo por etiqueta (`reduce`), orden descendente por frecuencia y diseño accesible en chips.
+- **Sección de Artículos Recientes en Inicio (`T-12`):** Integración de los 3 últimos artículos en `src/pages/index.astro` reutilizando `.cards-grid` y enlace a `/blog/`.
+
+### Modificado
+
+- **Etiquetas Múltiples en BlogCard (`T-12`):** `src/components/BlogCard.astro` ahora renderiza todas las etiquetas asociadas al artículo en lugar de solo la primera, enlazando directamente a su ruta de taxonomía.
+- **Microinteracción de Desplazamiento en Enlaces de Sección (`T-12`):** `.seccion-link` en `src/styles/global.css` centraliza transición de color y desplazamiento horizontal (`translateX(3px)`) en hover para enlaces de llamada a la acción.
+- **Actualización Editorial de Fechas (`T-12`):** Fechas de publicación actualizadas en los 10 artículos abarcando desde el 01 de octubre hasta el 13 de noviembre de 2026.
+
+---
+
 ## [0.9.0] - 2026-11-13
 
 ### Añadido

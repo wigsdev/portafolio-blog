@@ -1,7 +1,7 @@
 ---
 title: 'Arquitectura de Islas y Filosofía Zero-JS con Astro'
 description: 'Análisis técnico de cómo Astro compila a HTML estático puro por defecto y cómo hidratar componentes aislados para maximizar el rendimiento web.'
-pubDate: 'Jun 10 2024'
+pubDate: 'Nov 13 2026'
 heroImage: '../../assets/blog-astro-islas.webp'
 tags: ['astro', 'arquitectura', 'web-performance']
 ---
