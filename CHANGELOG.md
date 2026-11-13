@@ -15,6 +15,34 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.9.0] - 2026-11-13
+
+### Añadido
+
+- **Listado Paginado del Blog (`T-11`):** Ruta `src/pages/blog/[...page].astro` con `paginate()` y `getStaticPaths()` (`pageSize: 7`): en la página 1, un artículo destacado y 6 tarjetas en grilla. Reemplaza a `src/pages/blog/index.astro`.
+- **Componente `BlogCard.astro` (`T-11`):** Tarjeta de artículo con variante `featured` horizontal 50/50, etiqueta principal, descripción truncada, avatar del autor y metadatos (fecha y tiempo de lectura con ícono) alineados a la derecha.
+- **Componente `Pagination.astro` (`T-11`):** Navegación accesible (`<nav>`, `aria-disabled`) con indicador de página actual.
+- **Artículos Relacionados (`T-11`):** Sección "Artículos que te pueden gustar" en `[...slug].astro`, que elige hasta 3 artículos según las etiquetas compartidas y la fecha.
+- **Compartir en Redes Zero-JS (`T-11`):** Enlaces para compartir en X, LinkedIn, Hacker News, Reddit y WhatsApp, con íconos desde `public/icons/social/` aplicados mediante CSS `mask` y `currentColor`.
+- **Portadas Editoriales (`T-11`):** 10 portadas temáticas en WebP de 1600 px (35–79 KB) e imagen Open Graph por defecto `og-default.jpg` (1200×630).
+- **Utilidades CSS Reutilizables (`T-11`):** Clases globales `.cards-grid` (grilla 3/2/1) y `.tag-link` en `global.css`.
+
+### Modificado
+
+- **Plantilla de Lectura `BlogPost.astro` (`T-11`):** Nueva jerarquía de cabecera (volver al blog, etiquetas, título, metadatos e imagen hero). La cabecera y la imagen ocupan el ancho del contenedor, mientras el contenido y el pie se mantienen en 780px para facilitar la lectura. Se agregó un bloque de autor con foto y biografía breve.
+- **Ancho de Contenedores (`T-11`):** `.container`, `main`, `.header-content` y `.footer-content` pasan a `72rem` desde `64rem` (antes `90rem`), para que las tarjetas no se compriman en laptops de 1024–1439 px.
+- **Formato de Fecha (`T-11`):** `FormattedDate.astro` usa la configuración regional `es-ES` (`25 jul 2024`).
+
+### Corregido
+
+- **Modo Oscuro en Artículos (`T-11`):** `BlogPost.astro` usaba variables CSS inexistentes (`--color-text-main`, `--color-border-subtle`, `--color-accent`); se reemplazaron por los tokens `--color-text`, `--color-border` y `--color-brand`.
+
+### Eliminado
+
+- **Imágenes Genéricas (`T-11`):** Se eliminaron `blog-placeholder-*.jpg` de `src/assets/`.
+
+---
+
 ## [0.8.1] - 2026-11-08
 
 ### Añadido

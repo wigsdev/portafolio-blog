@@ -2,7 +2,7 @@
 title: "Guía de Sintaxis Markdown y Estándares de Redacción Técnica"
 description: "Referencia exhaustiva de sintaxis Markdown, formateo de bloques de código, tablas y buenas prácticas editoriales para blogs de ingeniería."
 pubDate: "Jul 25 2024"
-heroImage: "../../assets/blog-placeholder-4.jpg"
+heroImage: '../../assets/blog-markdown-guia.webp'
 tags: ["astro", "web-performance"]
 ---
 
