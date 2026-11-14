@@ -15,6 +15,22 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.11.0] - 2026-11-13
+
+### Añadido
+
+- **Isla Interactiva de Búsqueda y Filtrado en Vivo (`T-13`):** Integración de `@astrojs/preact` y desarrollo de `BlogFilterIsland.tsx` con hidratación parcial (`client:load`) para cumplir con el Requisito Oficial R6.
+- **Buscador en Vivo Expansible:** Campo interactivo de búsqueda con animación fluida al foco (`flex: 1`), placeholder contextual dinámico según la etiqueta activa y botón de limpieza inmediata.
+- **Cinta de Etiquetas Deslizable:** Chip `Todos` fijo con navegación suave de etiquetas mediante flechas `<` y `>` condicionales según límites del scroll, y soporte de arrastre con mouse (_drag-to-scroll_).
+- **Arquitectura de Modo Dual Limpia:** Coexistencia de paginación estática SSG de Astro con filtrado dinámico en memoria sobre el 100% del catálogo, pasando el paginador estático como `children` para su desmontaje declarativo al filtrar.
+
+### Modificado
+
+- **Estandarización de Estilos CSS (`T-13`):** Centralización de estilos de `.blog-card` y `.badge` en `src/styles/global.css` para compartir diseño entre Astro y Preact, y adición de la propiedad estándar `line-clamp` para compatibilidad moderna.
+- **Grilla de Proyectos Intrínseca (`T-13`):** `.proyectos-grid` utiliza `repeat(auto-fit, minmax(min(100%, 19rem), 1fr))` logrando 3 columnas en desktop, 2 en tablet y 1 en mobile sin media queries.
+
+---
+
 ## [0.10.0] - 2026-11-13
 
 ### Añadido
