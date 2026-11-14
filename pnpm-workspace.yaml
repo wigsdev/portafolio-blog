@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - '@astrojs/preact-renderer@0.1.3'
+  - '@astrojs/preact@6.1.6'
