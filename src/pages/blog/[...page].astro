@@ -4,6 +4,9 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 import Pagination from "../../components/Pagination.astro";
+import BlogFilterIsland, {
+  type PostItem,
+} from "../../components/BlogFilterIsland";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = (await getCollection("blog")).sort(
@@ -19,7 +22,42 @@ interface Props {
 const { page } = Astro.props;
 const isFirstPage = page.currentPage === 1;
 const featuredPost = isFirstPage ? page.data[0] : null;
-const gridPosts = isFirstPage ? page.data.slice(1) : page.data;
+
+// Obtenemos TODOS los posts de la colección para que el filtro/buscador
+// tenga acceso al 100% del catálogo sin importar en qué página esté el usuario
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const uniqueTags = [
+  ...new Set(allPosts.flatMap((p) => p.data.tags ?? [])),
+].sort();
+
+// Serializamos TODO el catálogo para la isla interactiva de Preact
+// Excluimos únicamente el featuredPost en la página 1 para evitar duplicarlo visualmente
+const postsParaIsla: PostItem[] = (
+  isFirstPage ? allPosts.filter((p) => p.id !== featuredPost?.id) : allPosts
+).map((post) => {
+  const words = post.body ? post.body.trim().split(/\s+/).length : 0;
+  const readingTime = Math.max(1, Math.ceil(words / 200));
+
+  return {
+    id: post.id,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate.toISOString(),
+    formattedDate: post.data.pubDate.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    tags: post.data.tags ?? [],
+    readingTime,
+    heroImage: post.data.heroImage?.src,
+  };
+});
+
+// Posts estáticos por defecto para la página actual
+const postsEstaticos = isFirstPage ? page.data.slice(1) : page.data;
 ---
 
 <BaseLayout
@@ -27,18 +65,16 @@ const gridPosts = isFirstPage ? page.data.slice(1) : page.data;
   description="Artículos técnicos sobre desarrollo web moderno, Astro, TypeScript, Inteligencia Artificial y buenas prácticas de ingeniería de software."
   hideTitle={true}
 >
+  {/* Tarjeta destacada solo en la página 1 */}
   {featuredPost && <BlogCard post={featuredPost} featured={true} />}
-  <div class="cards-grid blog-grid">
-    {gridPosts.map((post) => (
-      <BlogCard post={post} />
-    ))}
-  </div>
 
-  <Pagination page={page} />
+  {/* Isla Interactiva (Modo Dual): disponible en todas las páginas con el 100% del catálogo */}
+  <BlogFilterIsland
+    client:load
+    posts={postsParaIsla}
+    tags={uniqueTags}
+    initialPosts={postsEstaticos.map((p) => p.id)}
+  >
+    <Pagination page={page} />
+  </BlogFilterIsland>
 </BaseLayout>
-
-<style>
-  .blog-grid {
-    margin-top: 1rem;
-  }
-</style>
