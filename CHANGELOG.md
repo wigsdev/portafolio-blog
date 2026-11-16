@@ -15,6 +15,19 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.12.0] - 2026-11-16
+
+### Añadido
+
+- **Página de Contacto con Función de Servidor (`T-14` / R8):** Desarrollo de `src/pages/contacto.astro` con renderizado bajo demanda (*on-demand*) y canales de contacto directos unificados.
+- **Función de Servidor con Astro Actions (`T-14`):** Implementación de la acción `contact` en `src/actions/index.ts` con tipado seguro end-to-end y validación de formulario mediante `accept: 'form'`.
+- **Esquema Zod Centralizado (`T-14`):** Creación de `src/schemas/contact.ts` con reglas de validación para `nombre`, `email`, `asunto` y `mensaje` utilizando `astro/zod`.
+- **Adaptador de Servidor Netlify (`T-14`):** Integración de `@astrojs/netlify` en `astro.config.mjs` para habilitar funciones serverless preservando la generación estática (SSG) de todo el catálogo.
+- **Suite de Pruebas Unitarias TDD (`T-14`):** Creación de `tests/unit/contact.test.ts` en Vitest con 5 casos de prueba cubriendo validación de datos válidos, rechazo de campos incompletos y límites de longitud.
+- **Optimización de Iconografía Vectorial (`T-14`):** Reutilización de iconos estáticos desde `public/icons/social/` y adición de `public/icons/ui/` con color dinámico mediante máscaras CSS (`mask-image`), eliminando código SVG redundante en el HTML.
+
+---
+
 ## [0.11.1] - 2026-11-16
 
 ### Añadido
