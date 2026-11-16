@@ -15,6 +15,15 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.11.1] - 2026-11-16
+
+### Añadido
+
+- **Automatización de Git Hooks con Husky 9:** Integración de `husky@^9.1.7` con script de inicialización automática `"prepare": "husky"` en `package.json`.
+- **Pre-commit Hook de Calidad:** Configuración de `.husky/pre-commit` ejecutando `pnpm test` (suite unitaria de Vitest) previo a cada commit para garantizar que no ingresen regresiones a los branches.
+
+---
+
 ## [0.11.0] - 2026-11-13
 
 ### Añadido
