@@ -11,9 +11,30 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-15`).
+- **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-16`).
 
 ---
+
+## [0.13.0] - 2026-11-17
+
+### Añadido
+
+- **Rediseño Visual y Arquitectura de Contenidos de Sobre Mí (`T-15`):** Implementación integral en `src/pages/sobre-mi.astro` bajo arquitectura Zero-JS y diseño modular desacoplado.
+- **Capa de Datos Tipada (`src/data/credentials.ts`):** Centralización de credenciales y programas formativos en colecciones TypeScript fuertemente tipadas bajo interfaz `Credencial`, posibilitando escalabilidad y mantenimiento en un único archivo fuente.
+- **Componente Modular `CredentialCard.astro`:** Encapsulación de marcado semántico accesible (`<article>`, `<header>`, `<footer>`) y estilos CSS con soporte para enlaces opcionales y hover interactivo.
+- **Ficha de Presentación con Retrato Profesional:** Incorporación de tarjeta de perfil con fotografía personal optimizada (`/foto.jpg`), badge de disponibilidad con animación de pulso CSS (`🟢 Disponible para proyectos`) e indicador de ubicación geográfica con icono SVG vectorial (`📍 Uchiza, Perú`).
+- **Sección de Certificaciones:** Retícula adaptable de 3 credenciales validadas externamente:
+  - Oracle University: *OCI Certified AI Foundations Associate* (2026 – 2028 | ID: `331382997OCI26AICFA`).
+  - IBM SkillsBuild & Guayerd: *Fundamentos de Inteligencia Artificial* (2026 | 257 horas cátedra y práctica).
+  - IBM SkillsBuild & Guayerd: *Fundamentos de Data Analytics* (2024 | 255 horas cátedra y práctica).
+- **Sección de Formación Continua y Especializaciones:** Retícula estructurada cronológicamente de forma descendente (del más reciente al más antiguo):
+  - Nómada Bootcamp: *Bootcamp Full Stack Developer* (2026 – En curso | En formación activa).
+  - ONE AI FOR TECH (Alura & Oracle): *Inteligencia Artificial, RAG & Agentes* (2026 | 509 horas).
+  - ONE Grupo 9 (G9) (Alura & Oracle): *Backend Java & Spring Framework* (2025 – 2026 | 426 horas).
+  - ONE Grupo 4 (G4) (Alura & Oracle): *Front-End & Especialización React* (2022 – 2023 | 408 horas).
+  - Universidad Nacional Agraria de la Selva (UNAS): *Bachiller en Ciencias* (Grado Académico | Registrado en SUNEDU).
+- **Icono Vectorial de Ubicación:** Creación de `public/icons/ui/map-pin.svg` renderizado mediante técnica de máscara CSS (`mask-image`), preservando tokens semánticos de color.
+- **Currículum Vitae Optimizado para ATS:** Actualización de `public/cv.pdf` bajo estándar y metodología Harvard en formato lineal de alta compatibilidad algorítmica y texto seleccionable.
 
 ## [0.12.0] - 2026-11-16
 
