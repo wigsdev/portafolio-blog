@@ -473,7 +473,49 @@ Desarrollar la página `/contacto` integrando un formulario funcional que envíe
     {
         "id": "T-15",
         "sprint_num": 4,
-        "title": "[T-15] Migración Progresiva del Sistema de Diseño a Tailwind CSS",
+        "title": "[T-15] Rediseño Visual y Arquitectura de Contenidos de la Página Sobre Mí (/sobre-mi)",
+        "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
+        "labels": ["sprint:4", "priority: medium", "type: feature", "status: backlog"],
+        "body": """## Descripción
+Rediseñar integralmente la página `src/pages/sobre-mi.astro` para elevar su estándar visual, credibilidad profesional y jerarquía editorial, transformando el texto plano y listas estándar en una interfaz rica, atractiva y estructurada sin perder la filosofía Zero-JS.
+
+## Metadata
+| Campo | Valor |
+|---|---|
+| **ID Tarea** | `T-15` |
+| **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: feature` |
+| **Requisito Oficial** | R1 (Estructura semántica) / R5 (Arquitectura Zero-JS y Estilos) |
+| **Asignado a** | Wilmer (@wigsdev) |
+| **Archivos afectados** | `src/pages/sobre-mi.astro`, `src/styles/global.css` |
+| **Commit Sugerido** | `feat(about): rediseño visual de pagina sobre mi con perfil, stack y cards de certificacion (T-15)` |
+
+## Alcance del Rediseño Propuesto
+1. **Hero Bio / Perfil (2 Columnas en Desktop):**
+   - Columna izquierda con titular enfocado, bio narrativa de alto impacto y accesos directos al CV y contacto.
+   - Columna derecha con tarjeta de perfil enriquecida utilizando `public/foto.jpg`, badge de estado ("Disponible para proyectos/roles full-time") e indicadores rápidos (Ubicación, Rol, Especialidad).
+2. **Stack Tecnológico Visual Categorizado:**
+   - Organización en píldoras semánticas mediante `Badge.astro` clasificadas por: *Frontend*, *Datos & IA*, y *Cloud & DevOps*.
+3. **Certificaciones Internacionales en Formato Tarjeta (Bento Grid):**
+   - Sustituir viñetas planas por cards modulares para Oracle Cloud AI, Cisco Networking Academy e IBM Data Science con datos de vigencia e identidad de entidad emisora.
+4. **Línea de Formación Continua y Trayectoria:**
+   - Presentación estructurada de Nómada Bootcamp, ONE / Alura y formación universitaria de base (UNAS).
+5. **Barra de Llamada a la Acción (CTA de Cierre):**
+   - Sección de contacto y descarga directa de `public/cv.pdf`.
+
+## Criterios de Aceptación (DoD)
+- [ ] La página utiliza la foto de perfil (`public/foto.jpg`) con dimensiones explícitas, alt descriptivo y carga optimizada sin CLS.
+- [ ] Las certificaciones y formación se presentan en tarjetas modulares accesibles respetando los tokens de diseño (`--color-surface`, `--color-border`, `--color-brand`).
+- [ ] Arquitectura 100% Zero-JS sin JavaScript innecesario entregado al cliente.
+- [ ] Responsividad fluida validada en mobile (<640px), tablet (768px-1024px) y desktop (>=1024px / 1440px).
+- [ ] `pnpm test` y `pnpm build` ejecutan de forma limpia sin advertencias.
+""",
+    },
+    {
+        "id": "T-16",
+        "sprint_num": 4,
+        "title": "[T-16] Migración Progresiva del Sistema de Diseño a Tailwind CSS",
         "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
         "labels": ["sprint:4", "priority: medium", "type: style", "status: backlog"],
         "body": """## Descripción
@@ -482,7 +524,7 @@ Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar p
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-15` |
+| **ID Tarea** | `T-16` |
 | **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
 | **Prioridad** | `priority: medium` |
 | **Tipo** | `type: style` |
@@ -499,9 +541,9 @@ Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar p
 """,
     },
     {
-        "id": "T-16",
+        "id": "T-17",
         "sprint_num": 4,
-        "title": "[T-16] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
+        "title": "[T-17] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
         "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
         "labels": ["sprint:4", "priority: high", "type: structure", "status: backlog"],
         "body": """## Descripción
@@ -510,7 +552,7 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-16` |
+| **ID Tarea** | `T-17` |
 | **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: structure` |
@@ -530,9 +572,9 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
     # SPRINT 5 (23 Nov - 29 Nov 2026): Despliegue Público, Diapositivas & Sustentación
     # ══════════════════════════════════════════════════════════════════════════
     {
-        "id": "T-17",
+        "id": "T-18",
         "sprint_num": 5,
-        "title": "[T-17] Compilación Limpia y Despliegue en Producción con URL Pública",
+        "title": "[T-18] Compilación Limpia y Despliegue en Producción con URL Pública",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: critical", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -541,7 +583,7 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-17` |
+| **ID Tarea** | `T-18` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
@@ -557,9 +599,9 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 """,
     },
     {
-        "id": "T-18",
+        "id": "T-19",
         "sprint_num": 5,
-        "title": "[T-18] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
+        "title": "[T-19] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: high", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -568,7 +610,7 @@ Elaborar la presentación ejecutiva del proyecto final para la sesión de susten
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-18` |
+| **ID Tarea** | `T-19` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: presentation` |
