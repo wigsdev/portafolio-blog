@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CredentialCard from "../components/CredentialCard.astro";
+import { certificaciones, formaciones } from "../data/credentials";
 ---
 
 <BaseLayout
@@ -7,67 +9,259 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Conoce mi trayectoria como desarrollador web full-stack, especialista en soluciones con IA y credenciales técnicas internacionales."
   eyebrow="CONÓCEME"
 >
-  <p>
-    Soy desarrollador web full-stack enfocado en construir aplicaciones rápidas,
-    modernas e inteligentes. Trabajo principalmente con <strong>Astro</strong>, <strong>TypeScript</strong> y tecnologías web modernas, priorizando la arquitectura
-    limpia, el rendimiento de Core Web Vitals y una experiencia de usuario sólida.
-  </p>
+  <!-- 1. Sección Perfil: Contenido original + Tarjeta de Perfil -->
+  <section class="perfil" aria-label="Perfil profesional">
+    <div class="perfil-texto">
+      <p class="perfil-lead">
+        Soy desarrollador web full-stack enfocado en construir aplicaciones
+        rápidas, modernas e inteligentes. Trabajo principalmente con{" "}
+        <strong>Astro</strong>, <strong>TypeScript</strong> y tecnologías web
+        modernas, priorizando la arquitectura limpia, el rendimiento de Core Web
+        Vitals y una experiencia de usuario sólida.
+      </p>
 
-  <p>
-    Me especializo en integrar la <strong>Inteligencia Artificial</strong> en productos
-    digitales reales: desde sistemas de recuperación aumentada (RAG) y agentes autónomos,
-    hasta interfaces web reactivas y accesibles. Mi experiencia previa en análisis de datos
-    y sistemas espaciales me brinda un enfoque analítico y riguroso para resolver problemas complejos.
-  </p>
+      <p>
+        Me especializo en integrar la <strong>Inteligencia Artificial</strong>{" "}
+        en productos digitales reales: desde sistemas de recuperación aumentada
+        (RAG) y agentes autónomos, hasta interfaces web reactivas y accesibles.
+        Mi experiencia previa en análisis de datos y sistemas espaciales me
+        brinda un enfoque analítico y riguroso para resolver problemas
+        complejos.
+      </p>
 
-  <h2>Certificaciones Internacionales</h2>
+      <div class="sobre-mi-actions">
+        <a
+          href="/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--primary"
+        >
+          Ver mi CV (PDF)
+        </a>
+        <a href="/contacto/" class="btn btn--secondary">
+          Contáctame
+        </a>
+      </div>
+    </div>
 
-  <ul class="sobre-mi-lista">
-    <li>
-      <strong>Oracle Cloud Infrastructure (OCI):</strong> Certified AI Foundations Associate (Oracle University, 2026–2028).
-    </li>
-    <li>
-      <strong>Cisco Networking Academy:</strong> Hacker Ético & Desafío Capture The Flag (CTF).
-    </li>
-    <li>
-      <strong>IBM SkillsBuild / Developer Skills Network:</strong> Python 101 for Data Science & Fundamentos de Data Analytics.
-    </li>
-  </ul>
+    <!-- Tarjeta de Retrato Profesional -->
+    <aside class="perfil-card" aria-label="Ficha de presentación">
+      <div class="perfil-foto-frame">
+        <img
+          src="/foto.jpg"
+          alt="Fotografía de Wilmer Gulcochia"
+          width="200"
+          height="200"
+          loading="eager"
+          fetchpriority="high"
+          class="perfil-foto"
+        />
+      </div>
+      <div class="perfil-card-meta">
+        <div class="perfil-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Disponible para proyectos</span>
+        </div>
+        <div class="perfil-ubicacion">
+          <span
+            class="ubicacion-icon"
+            style="--icon: url('/icons/ui/map-pin.svg')"
+            aria-hidden="true"
+          ></span>
+          <span>Uchiza, Perú</span>
+        </div>
+      </div>
+    </aside>
+  </section>
 
-  <h2>Formación continua</h2>
+  <!-- 2. Sección Certificaciones -->
+  <section class="certificaciones-seccion" aria-labelledby="cert-title">
+    <h2 id="cert-title">Certificaciones</h2>
 
-  <p>
-    Complemento mi formación de base en ciencias con programas intensivos de especialización técnica:
-  </p>
+    <div class="cert-grid">
+      {certificaciones.map((cert) => (
+        <CredentialCard {...cert} />
+      ))}
+    </div>
+  </section>
 
-  <ul class="sobre-mi-lista">
-    <li>
-      Bootcamp Full Stack Developer en <a
-        href="https://www.nomadabootcamp.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bootcamp-link"
-      >Nómada Bootcamp</a>.
-    </li>
-    <li>
-      Especialización Frontend & JavaScript en <strong>Oracle Next Education (ONE) / Alura</strong>.
-    </li>
-    <li>
-      Bachiller por la <strong>Universidad Nacional Agraria de la Selva (UNAS)</strong>.
-    </li>
-  </ul>
+  <!-- 3. Sección Formación Continua -->
+  <section class="formacion-seccion" aria-labelledby="formacion-title">
+    <h2 id="formacion-title">Formación continua</h2>
+    <p class="formacion-intro">
+      Complemento mi formación de base en ciencias con programas intensivos de especialización técnica y desarrollo de software:
+    </p>
 
-  <div class="sobre-mi-actions">
-    <a
-      href="/cv.pdf"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn--primary"
-    >
-      Ver mi CV (PDF)
-    </a>
-    <a href="/contacto/" class="btn btn--secondary">
-      Contáctame
-    </a>
-  </div>
+    <div class="cert-grid">
+      {formaciones.map((formacion) => (
+        <CredentialCard {...formacion} />
+      ))}
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .perfil {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    align-items: center;
+    margin-block-end: 3.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .perfil {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+  }
+
+  .perfil-texto {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .perfil-lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin-block-start: 0;
+  }
+
+  .perfil-texto p {
+    max-width: 65ch;
+  }
+
+  /* Tarjeta de Perfil / Retrato */
+  .perfil-card {
+    flex-shrink: 0;
+    padding: 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: border-color 200ms ease;
+  }
+
+  .perfil-foto-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: var(--color-background);
+  }
+
+  @media (min-width: 48rem) {
+    .perfil-foto-frame {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  .perfil-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .perfil-card-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    width: 100%;
+  }
+
+  .perfil-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background-color: #10b981;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot {
+      animation: none;
+    }
+  }
+
+  .perfil-ubicacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .ubicacion-icon {
+    display: inline-block;
+    width: 0.9375rem;
+    height: 0.9375rem;
+    flex-shrink: 0;
+    background-color: var(--color-brand);
+    mask: var(--icon) no-repeat center / contain;
+    -webkit-mask: var(--icon) no-repeat center / contain;
+  }
+
+  .sobre-mi-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 2rem;
+  }
+
+  /* Secciones Modulares (Certificaciones y Formación) */
+  .certificaciones-seccion,
+  .formacion-seccion {
+    margin-block-end: 3.5rem;
+  }
+
+  .formacion-intro {
+    max-width: 65ch;
+    margin-block: 0.5rem 1.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-block-start: 1.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .cert-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+</style>
