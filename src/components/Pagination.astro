@@ -6,85 +6,38 @@ interface Props {
 }
 
 const { page } = Astro.props;
+
+const btnBaseClass =
+  "inline-flex items-center justify-center min-h-10 px-4 py-2 border border-border rounded-lg bg-surface text-text text-sm font-semibold no-underline transition-colors focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2";
+const btnActiveClass =
+  "hover:border-brand hover:bg-brand-soft hover:text-brand";
+const btnDisabledClass =
+  "opacity-40 cursor-not-allowed pointer-events-none text-text-muted";
 ---
 
 {page.lastPage > 1 && (
-  <nav class="pagination" aria-label="Paginación de artículos">
+  <nav class="flex items-center justify-center flex-wrap gap-4 mt-14 pt-8 border-t border-border" aria-label="Paginación de artículos">
     {page.url.prev ? (
-      <a href={page.url.prev} class="pagination-btn pagination-prev" rel="prev">
+      <a href={page.url.prev} class:list={[btnBaseClass, btnActiveClass]} rel="prev">
         &larr; Anterior
       </a>
     ) : (
-      <span class="pagination-btn pagination-disabled" aria-disabled="true">
+      <span class:list={[btnBaseClass, btnDisabledClass]} aria-disabled="true">
         &larr; Anterior
       </span>
     )}
-    <span class="pagination-indicator">
+    <span class="text-sm text-text-muted px-2 [&>strong]:text-text">
       Página <strong>{page.currentPage}</strong> de{" "}
       <strong>{page.lastPage}</strong>
     </span>
     {page.url.next ? (
-      <a href={page.url.next} class="pagination-btn pagination-next" rel="next">
+      <a href={page.url.next} class:list={[btnBaseClass, btnActiveClass]} rel="next">
         Siguiente &rarr;
       </a>
     ) : (
-      <span class="pagination-btn pagination-disabled" aria-disabled="true">
+      <span class:list={[btnBaseClass, btnDisabledClass]} aria-disabled="true">
         Siguiente &rarr;
       </span>
     )}
   </nav>
 )}
-
-<style>
-  .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 3.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-  }
-  .pagination-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition:
-      border-color 160ms ease,
-      background-color 160ms ease,
-      color 160ms ease;
-  }
-  .pagination-btn:hover:not(.pagination-disabled) {
-    border-color: var(--color-brand);
-    background-color: var(--color-brand-soft);
-    color: var(--color-brand);
-  }
-  .pagination-btn:focus-visible {
-    outline: 2px solid var(--color-brand);
-    outline-offset: 3px;
-  }
-  .pagination-disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    pointer-events: none;
-    color: var(--color-text-muted);
-  }
-  .pagination-indicator {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    padding: 0 0.5rem;
-  }
-  .pagination-indicator strong {
-    color: var(--color-text);
-  }
-</style>
