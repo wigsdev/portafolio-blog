@@ -17,11 +17,19 @@ const words = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.ceil(words / 200));
 ---
 
-<article class:list={["blog-card", { "blog-card--featured": featured }]}>
+<article
+  class:list={[
+    "group flex flex-col bg-surface border border-border rounded-xl overflow-hidden transition-all duration-180 ease-in-out hover:-translate-y-1 hover:shadow-[0_8px_20px_var(--color-shadow-brand)] hover:border-brand motion-reduce:transition-none motion-reduce:hover:translate-none",
+    featured && "md:grid md:grid-cols-[1.15fr_1fr] md:mb-10",
+  ]}
+>
   {heroImage && (
     <a
       href={`/blog/${post.id}/`}
-      class="blog-card-image-link"
+      class:list={[
+        "block overflow-hidden aspect-video bg-surface-muted",
+        featured && "md:aspect-auto md:h-full md:min-h-80",
+      ]}
       tabindex="-1"
       aria-hidden="true"
     >
@@ -30,113 +38,81 @@ const readingTime = Math.max(1, Math.ceil(words / 200));
         alt={title}
         width={featured ? 800 : 640}
         height={featured ? 450 : 360}
-        class="blog-card-image"
+        class="w-full h-full object-cover transition-transform duration-240 ease-in-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
         loading={featured ? "eager" : "lazy"}
       />
     </a>
   )}
-  <div class="blog-card-body">
+  <div
+    class:list={[
+      "flex flex-col flex-1 p-5",
+      featured && "md:p-8 md:justify-center",
+    ]}
+  >
     {tags.length > 0 && (
-      <div class="blog-card-tags">
+      <div class="flex flex-wrap gap-1.5 mb-3">
         {tags.map((tag) => (
-          <a href={`/blog/tags/${tag}/`} class="tag-link">
+          <a href={`/blog/tags/${tag}/`} class="no-underline">
             <Badge text={tag} />
           </a>
         ))}
       </div>
     )}
-    <h3 class="blog-card-title">
-      <a href={`/blog/${post.id}/`}>{title}</a>
+    <h3
+      class:list={[
+        "text-[1.2rem] font-bold leading-[1.35] m-0 mb-2",
+        featured && "md:text-[clamp(1.5rem,2.5vw,1.875rem)] md:mb-3",
+      ]}
+    >
+      <a
+        href={`/blog/${post.id}/`}
+        class="text-text no-underline transition-colors duration-150 hover:text-brand"
+      >
+        {title}
+      </a>
     </h3>
-    <p class="blog-card-description">{description}</p>
+    <p
+      class:list={[
+        "text-sm text-text-muted leading-normal m-0 mb-5 line-clamp-3",
+        featured && "md:text-base md:line-clamp-4 md:mb-6",
+      ]}
+    >
+      {description}
+    </p>
     {featured && (
-      <a href={`/blog/${post.id}/`} class="blog-card-cta">
+      <a
+        href={`/blog/${post.id}/`}
+        class="inline-flex items-center font-bold text-[0.9375rem] text-brand no-underline mb-4 hover:underline"
+      >
         Leer artículo &rarr;
       </a>
     )}
-    <footer class="blog-card-footer">
-      <div class="blog-card-author-group">
+    <footer class="flex items-center justify-between flex-wrap gap-2 text-xs text-text-muted mt-auto pt-3 border-t border-border">
+      <div class="inline-flex items-center gap-1.5">
         <img
           src="/foto.jpg"
           alt="Wilmer Gulcochía"
           width="20"
           height="20"
-          class="blog-card-avatar"
+          class="w-5 h-5 rounded-full object-cover shrink-0"
           loading="lazy"
         />
-        <span class="blog-card-author">Wilmer Gulcochía</span>
+        <span class="font-semibold text-text">Wilmer Gulcochía</span>
       </div>
-      <div class="blog-card-meta">
+      <div class="inline-flex items-center gap-1.5">
         <FormattedDate date={pubDate} />
-        <span class="blog-card-separator" aria-hidden="true">
+        <span class="text-text-muted opacity-60" aria-hidden="true">
           ·
         </span>
-        <span class="reading-time">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <span class="inline-flex items-center gap-1">
+          <span
+            class="inline-block w-3.25 h-3.25 bg-current [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+            style="--icon: url('/icons/ui/clock.svg')"
             aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
+          ></span>
           {readingTime} min
         </span>
       </div>
     </footer>
   </div>
 </article>
-
-<style>
-  /* Variante destacada (Horizontal en desktop) */
-  @media (min-width: 48rem) {
-    .blog-card--featured {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      margin-bottom: 2.5rem;
-    }
-
-    .blog-card--featured .blog-card-image-link {
-      aspect-ratio: auto;
-      height: 100%;
-      min-height: 20rem;
-    }
-
-    .blog-card--featured .blog-card-body {
-      padding: 2rem;
-      justify-content: center;
-    }
-
-    .blog-card--featured .blog-card-title {
-      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
-      margin-bottom: 0.75rem;
-    }
-
-    .blog-card--featured .blog-card-description {
-      font-size: 1rem;
-      -webkit-line-clamp: 4;
-      line-clamp: 4;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  .blog-card-cta {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 0.9375rem;
-    color: var(--color-brand);
-    text-decoration: none;
-    margin-bottom: 1rem;
-  }
-
-  .blog-card-cta:hover {
-    text-decoration: underline;
-  }
-</style>
