@@ -33,33 +33,20 @@ const countLabel = posts.length === 1 ? "artículo" : "artículos";
   eyebrow="Etiqueta"
   description={`Artículos técnicos sobre ${tag}: desarrollo web, buenas prácticas y arquitectura de software.`}
 >
-  <div class="tag-page-header">
-    <p class="tag-page-count">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+    <p class="m-0 text-[0.9375rem] text-text-muted">
       {posts.length} {countLabel}
     </p>
-    <a href="/blog/tags/" class="seccion-link">
+    <a
+      href="/blog/tags/"
+      class="inline-flex items-center gap-1 text-brand font-bold no-underline transition-all duration-150 hover:text-brand-hover hover:underline hover:translate-x-0.75"
+    >
       Ver todas las etiquetas &rarr;
     </a>
   </div>
-  <div class="cards-grid">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {posts.map((post) => (
       <BlogCard post={post} />
     ))}
   </div>
 </BaseLayout>
-
-<style>
-  .tag-page-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-  .tag-page-count {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--color-text-muted);
-  }
-</style>
