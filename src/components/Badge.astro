@@ -7,26 +7,11 @@ interface Props {
 const { text, class: className } = Astro.props;
 ---
 
-<span class:list={["badge", className]}>
-  <span class="badge-text">{text}</span>
+<span
+  class:list={[
+    "inline-flex items-center px-2 py-1 border border-text-muted rounded-full text-text-muted bg-surface text-xs font-semibold leading-none",
+    className,
+  ]}
+>
+  <span>{text}</span>
 </span>
-
-<style>
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid var(--color-text-muted);
-    border-radius: 999px;
-    color: var(--color-text-muted);
-    background-color: var(--color-surface);
-  }
-
-  .badge-text {
-    padding: 0;
-    color: inherit;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1;
-  }
-</style>

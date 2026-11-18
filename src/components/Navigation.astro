@@ -1,37 +1,44 @@
 ---
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navLinks = [
+  { href: "/", label: "Inicio", isCurrent: currentPath === "/" },
+  {
+    href: "/sobre-mi/",
+    label: "Sobre mí",
+    isCurrent: currentPath === "/sobre-mi",
+  },
+  { href: "/blog/", label: "Blog", isCurrent: currentPath.startsWith("/blog") },
+  {
+    href: "/proyectos/",
+    label: "Proyectos",
+    isCurrent: currentPath.startsWith("/proyectos"),
+  },
+  {
+    href: "/contacto/",
+    label: "Contacto",
+    isCurrent: currentPath === "/contacto",
+  },
+];
 ---
 
 <nav
-  class="primary-navigation"
+  class="primary-navigation flex flex-wrap justify-end gap-2"
   id="primary-navigation"
   aria-label="Navegación principal"
 >
-  <a href="/" aria-current={currentPath === "/" ? "page" : undefined}>
-    Inicio
-  </a>
-  <a
-    href="/sobre-mi/"
-    aria-current={currentPath === "/sobre-mi/" ? "page" : undefined}
-  >
-    Sobre mí
-  </a>
-  <a
-    href="/blog/"
-    aria-current={currentPath.startsWith("/blog") ? "page" : undefined}
-  >
-    Blog
-  </a>
-  <a
-    href="/proyectos/"
-    aria-current={currentPath.startsWith("/proyectos") ? "page" : undefined}
-  >
-    Proyectos
-  </a>
-  <a
-    href="/contacto/"
-    aria-current={currentPath === "/contacto/" ? "page" : undefined}
-  >
-    Contacto
-  </a>
+  {navLinks.map(({ href, label, isCurrent }) => (
+    <a
+      href={href}
+      aria-current={isCurrent ? "page" : undefined}
+      class:list={[
+        "inline-block px-3 py-2 rounded-lg text-[0.8125rem] transition-colors no-underline focus-visible:outline-2 focus-visible:outline-brand-hover",
+        isCurrent
+          ? "font-bold text-brand bg-transparent hover:text-text-inverse hover:bg-surface-muted"
+          : "font-medium text-nav-link hover:text-text hover:bg-surface-muted",
+      ]}
+    >
+      {label}
+    </a>
+  ))}
 </nav>

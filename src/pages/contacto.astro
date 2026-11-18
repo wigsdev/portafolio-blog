@@ -7,7 +7,8 @@ export const prerender = false;
 const result = Astro.getActionResult(actions.contact);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 const isSuccess = Boolean(result && !result.error && result.data?.success);
-const generalError = result?.error && !isInputError(result.error) ? result.error.message : null;
+const generalError =
+  result?.error && !isInputError(result.error) ? result.error.message : null;
 ---
 
 <BaseLayout
@@ -15,44 +16,84 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
   description="Elige el canal adecuado según lo que tengas en mente o envíame un mensaje directo a través del formulario."
   eyebrow="CONTACTO"
 >
-  <p class="contacto-intro">
-    ¿Tienes un proyecto en mente, una consulta técnica o simplemente quieres conectar?
-    Puedes utilizar cualquiera de mis canales directos o enviarme un mensaje mediante el formulario.
+  <p class="text-[1.05rem] leading-[1.7] mb-8 text-text">
+    ¿Tienes un proyecto en mente, una consulta técnica o simplemente quieres
+    conectar? Puedes utilizar cualquiera de mis canales directos o enviarme un
+    mensaje mediante el formulario.
   </p>
 
   {isSuccess && (
-    <div class="alert alert--success" role="status" aria-live="polite">
-      <span class="alert-icon" style="--icon: url('/icons/ui/check-circle.svg')" aria-hidden="true"></span>
-      <div class="alert-content">
-        <h3>¡Mensaje recibido con éxito!</h3>
-        <p>{result?.data?.message}</p>
-        <a href="/contacto/" class="btn btn--secondary btn--sm">Enviar otro mensaje</a>
+    <div
+      class="flex items-start gap-3.5 p-5 rounded-[10px] mb-10 bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-600/15 dark:border-emerald-500/40 dark:text-emerald-300"
+      role="status"
+      aria-live="polite"
+    >
+      <span
+        class="shrink-0 w-5 h-5 mt-0.5 bg-current [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+        style="--icon: url('/icons/ui/check-circle.svg')"
+        aria-hidden="true"
+      ></span>
+      <div>
+        <h3 class="m-0 mb-1.5 text-[1.05rem] font-bold">
+          ¡Mensaje recibido con éxito!
+        </h3>
+        <p class="m-0 mb-3 text-[0.95rem] leading-normal">
+          {result?.data?.message}
+        </p>
+        <a
+          href="/contacto/"
+          class="inline-flex min-h-9 items-center justify-center px-3.5 py-1.5 rounded-lg text-sm font-semibold no-underline cursor-pointer bg-surface text-text border border-border transition-colors hover:bg-surface-muted hover:border-text-muted"
+        >
+          Enviar otro mensaje
+        </a>
       </div>
     </div>
   )}
 
   {generalError && (
-    <div class="alert alert--error" role="alert">
-      <span class="alert-icon" style="--icon: url('/icons/ui/alert-circle.svg')" aria-hidden="true"></span>
-      <div class="alert-content">
-        <h3>Ocurrió un error</h3>
-        <p>{generalError}</p>
+    <div
+      class="flex items-start gap-3.5 p-5 rounded-[10px] mb-10 bg-red-50 border border-red-200 text-red-800 dark:bg-red-600/15 dark:border-red-500/40 dark:text-red-300"
+      role="alert"
+    >
+      <span
+        class="shrink-0 w-5 h-5 mt-0.5 bg-current [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+        style="--icon: url('/icons/ui/alert-circle.svg')"
+        aria-hidden="true"
+      ></span>
+      <div>
+        <h3 class="m-0 mb-1.5 text-[1.05rem] font-bold">Ocurrió un error</h3>
+        <p class="m-0 text-[0.95rem] leading-normal">{generalError}</p>
       </div>
     </div>
   )}
 
   {!isSuccess && (
-    <section class="contacto-formulario-seccion" aria-labelledby="form-heading">
-      <h2 id="form-heading">Envíame un mensaje directo</h2>
-      <p class="form-desc">
-        Todos los campos marcados con <span class="required" aria-hidden="true">*</span> son obligatorios y se validan en el servidor mediante Zod.
+    <section class="mt-4 pb-10" aria-labelledby="form-heading">
+      <h2 id="form-heading" class="text-2xl font-bold mt-0 mb-2 text-text">
+        Envíame un mensaje directo
+      </h2>
+      <p class="mb-6 text-text-muted text-[0.95rem]">
+        Todos los campos marcados con{" "}
+        <span class="text-brand font-bold" aria-hidden="true">
+          *
+        </span>{" "}
+        son obligatorios y se validan en el servidor mediante Zod.
       </p>
 
-      <form method="POST" action={actions.contact} class="contact-form" novalidate id="contact-form">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="nombre">
-              Nombre completo <span class="required" aria-hidden="true">*</span>
+      <form
+        method="POST"
+        action={actions.contact}
+        class="flex flex-col gap-5 max-w-176"
+        novalidate
+        id="contact-form"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="flex flex-col gap-1.5">
+            <label for="nombre" class="text-[0.925rem] font-semibold text-text">
+              Nombre completo{" "}
+              <span class="text-brand font-bold" aria-hidden="true">
+                *
+              </span>
             </label>
             <input
               type="text"
@@ -64,17 +105,25 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
               aria-describedby={inputErrors.nombre ? "nombre-error" : undefined}
               placeholder="Ej. Ana García"
               autocomplete="name"
+              class="w-full py-3 px-4 font-inherit text-[0.975rem] text-text bg-surface border border-border rounded-lg transition-all duration-160 focus:outline-none focus:border-brand focus:ring-3 focus:ring-brand-soft aria-invalid:border-red-600"
             />
             {inputErrors.nombre && (
-              <p id="nombre-error" class="field-error" role="alert">
+              <p
+                id="nombre-error"
+                class="m-0 text-red-600 dark:text-red-300 text-[0.85rem] font-medium"
+                role="alert"
+              >
                 {inputErrors.nombre[0]}
               </p>
             )}
           </div>
 
-          <div class="form-group">
-            <label for="email">
-              Correo electrónico <span class="required" aria-hidden="true">*</span>
+          <div class="flex flex-col gap-1.5">
+            <label for="email" class="text-[0.925rem] font-semibold text-text">
+              Correo electrónico{" "}
+              <span class="text-brand font-bold" aria-hidden="true">
+                *
+              </span>
             </label>
             <input
               type="email"
@@ -86,18 +135,26 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
               aria-describedby={inputErrors.email ? "email-error" : undefined}
               placeholder="ana@ejemplo.com"
               autocomplete="email"
+              class="w-full py-3 px-4 font-inherit text-[0.975rem] text-text bg-surface border border-border rounded-lg transition-all duration-160 focus:outline-none focus:border-brand focus:ring-3 focus:ring-brand-soft aria-invalid:border-red-600"
             />
             {inputErrors.email && (
-              <p id="email-error" class="field-error" role="alert">
+              <p
+                id="email-error"
+                class="m-0 text-red-600 dark:text-red-300 text-[0.85rem] font-medium"
+                role="alert"
+              >
                 {inputErrors.email[0]}
               </p>
             )}
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="asunto">
-            Asunto <span class="required" aria-hidden="true">*</span>
+        <div class="flex flex-col gap-1.5">
+          <label for="asunto" class="text-[0.925rem] font-semibold text-text">
+            Asunto{" "}
+            <span class="text-brand font-bold" aria-hidden="true">
+              *
+            </span>
           </label>
           <input
             type="text"
@@ -108,17 +165,25 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
             aria-invalid={inputErrors.asunto ? "true" : undefined}
             aria-describedby={inputErrors.asunto ? "asunto-error" : undefined}
             placeholder="Ej. Propuesta de desarrollo o consulta técnica"
+            class="w-full py-3 px-4 font-inherit text-[0.975rem] text-text bg-surface border border-border rounded-lg transition-all duration-160 focus:outline-none focus:border-brand focus:ring-3 focus:ring-brand-soft aria-invalid:border-red-600"
           />
           {inputErrors.asunto && (
-            <p id="asunto-error" class="field-error" role="alert">
+            <p
+              id="asunto-error"
+              class="m-0 text-red-600 dark:text-red-300 text-[0.85rem] font-medium"
+              role="alert"
+            >
               {inputErrors.asunto[0]}
             </p>
           )}
         </div>
 
-        <div class="form-group">
-          <label for="mensaje">
-            Mensaje <span class="required" aria-hidden="true">*</span>
+        <div class="flex flex-col gap-1.5">
+          <label for="mensaje" class="text-[0.925rem] font-semibold text-text">
+            Mensaje{" "}
+            <span class="text-brand font-bold" aria-hidden="true">
+              *
+            </span>
           </label>
           <textarea
             id="mensaje"
@@ -129,16 +194,25 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
             aria-invalid={inputErrors.mensaje ? "true" : undefined}
             aria-describedby={inputErrors.mensaje ? "mensaje-error" : undefined}
             placeholder="Cuéntame sobre tu proyecto, objetivos o la consulta que deseas realizar..."
+            class="w-full py-3 px-4 font-inherit text-[0.975rem] text-text bg-surface border border-border rounded-lg transition-all duration-160 focus:outline-none focus:border-brand focus:ring-3 focus:ring-brand-soft aria-invalid:border-red-600 resize-y min-h-28"
           ></textarea>
           {inputErrors.mensaje && (
-            <p id="mensaje-error" class="field-error" role="alert">
+            <p
+              id="mensaje-error"
+              class="m-0 text-red-600 dark:text-red-300 text-[0.85rem] font-medium"
+              role="alert"
+            >
               {inputErrors.mensaje[0]}
             </p>
           )}
         </div>
 
-        <div class="form-actions">
-          <button type="submit" class="btn btn--primary" id="submit-btn">
+        <div class="mt-2">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center py-2.5 px-5 rounded-lg text-sm font-semibold no-underline cursor-pointer bg-brand text-text-inverse border border-transparent transition-colors duration-150 hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-3"
+            id="submit-btn"
+          >
             Enviar mensaje
           </button>
         </div>
@@ -146,304 +220,90 @@ const generalError = result?.error && !isInputError(result.error) ? result.error
     </section>
   )}
 
-  <section class="contacto-bloque">
-    <h2>¿Quieres trabajar en algo juntos?</h2>
-    <p>
-      He trabajado en proyectos individuales y equipos multidisciplinarios. Si buscas
-      colaboración profesional o consultoría, puedes escribirme directamente.
+  <section class="mt-10 pt-8 border-t border-border">
+    <h2 class="text-2xl font-bold mt-0 mb-2 text-text">
+      ¿Quieres trabajar en algo juntos?
+    </h2>
+    <p class="mb-5 text-text-muted">
+      He trabajado en proyectos individuales y equipos multidisciplinarios. Si
+      buscas colaboración profesional o consultoría, puedes escribirme
+      directamente.
     </p>
-    <div class="contacto-canales">
-      <a href="mailto:karlwgs1989@gmail.com" class="contacto-enlace">
-        <span class="contacto-icono" style="--icon: url('/icons/social/email.svg')" aria-hidden="true"></span>
+    <div class="flex flex-wrap items-center gap-6">
+      <a
+        href="mailto:karlwgs1989@gmail.com"
+        class="inline-flex items-center gap-2 text-brand font-bold no-underline transition-all duration-160 hover:text-brand-hover hover:underline hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-brand-hover focus-visible:outline-offset-3 rounded"
+      >
+        <span
+          class="inline-block w-4.5 h-4.5 bg-current shrink-0 [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+          style="--icon: url('/icons/social/email.svg')"
+          aria-hidden="true"
+        ></span>
         <span>karlwgs1989@gmail.com</span>
       </a>
       <a
         href="https://www.linkedin.com/in/wigsdev/"
         target="_blank"
         rel="noopener noreferrer"
-        class="contacto-enlace"
+        class="inline-flex items-center gap-2 text-brand font-bold no-underline transition-all duration-160 hover:text-brand-hover hover:underline hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-brand-hover focus-visible:outline-offset-3 rounded"
       >
-        <span class="contacto-icono" style="--icon: url('/icons/social/linkedin.svg')" aria-hidden="true"></span>
+        <span
+          class="inline-block w-4.5 h-4.5 bg-current shrink-0 [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+          style="--icon: url('/icons/social/linkedin.svg')"
+          aria-hidden="true"
+        ></span>
         <span>LinkedIn</span>
       </a>
     </div>
   </section>
 
-  <section class="contacto-bloque">
-    <h2>¿Solo quieres saludar?</h2>
-    <p>Conecta a través de mis redes sociales profesionales o comunitarias.</p>
-    <div class="contacto-canales">
+  <section class="mt-10 pt-8 border-t border-border">
+    <h2 class="text-2xl font-bold mt-0 mb-2 text-text">
+      ¿Solo quieres saludar?
+    </h2>
+    <p class="mb-5 text-text-muted">
+      Conecta a través de mis redes sociales profesionales o comunitarias.
+    </p>
+    <div class="flex flex-wrap items-center gap-6">
       <a
         href="https://github.com/wigsdev"
         target="_blank"
         rel="noopener noreferrer"
-        class="contacto-enlace"
+        class="inline-flex items-center gap-2 text-brand font-bold no-underline transition-all duration-160 hover:text-brand-hover hover:underline hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-brand-hover focus-visible:outline-offset-3 rounded"
       >
-        <span class="contacto-icono" style="--icon: url('/icons/social/github.svg')" aria-hidden="true"></span>
+        <span
+          class="inline-block w-4.5 h-4.5 bg-current shrink-0 [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+          style="--icon: url('/icons/social/github.svg')"
+          aria-hidden="true"
+        ></span>
         <span>GitHub</span>
       </a>
       <a
         href="https://www.instagram.com/wigsdev/"
         target="_blank"
         rel="noopener noreferrer"
-        class="contacto-enlace"
+        class="inline-flex items-center gap-2 text-brand font-bold no-underline transition-all duration-160 hover:text-brand-hover hover:underline hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-brand-hover focus-visible:outline-offset-3 rounded"
       >
-        <span class="contacto-icono" style="--icon: url('/icons/social/instagram.svg')" aria-hidden="true"></span>
+        <span
+          class="inline-block w-4.5 h-4.5 bg-current shrink-0 [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+          style="--icon: url('/icons/social/instagram.svg')"
+          aria-hidden="true"
+        ></span>
         <span>Instagram</span>
       </a>
       <a
         href="https://web.facebook.com/wilmergulcochia/"
         target="_blank"
         rel="noopener noreferrer"
-        class="contacto-enlace"
+        class="inline-flex items-center gap-2 text-brand font-bold no-underline transition-all duration-160 hover:text-brand-hover hover:underline hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-brand-hover focus-visible:outline-offset-3 rounded"
       >
-        <span class="contacto-icono" style="--icon: url('/icons/social/facebook.svg')" aria-hidden="true"></span>
+        <span
+          class="inline-block w-4.5 h-4.5 bg-current shrink-0 [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
+          style="--icon: url('/icons/social/facebook.svg')"
+          aria-hidden="true"
+        ></span>
         <span>Facebook</span>
       </a>
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .contacto-intro {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-block-end: 2rem;
-  }
-
-  /* Alertas accesibles de confirmación y error */
-  .alert {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.875rem;
-    padding: 1.25rem;
-    border-radius: 0.625rem;
-    margin-block-end: 2.5rem;
-    animation: fadeIn 200ms ease;
-  }
-
-  .alert-icon {
-    flex-shrink: 0;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-top: 0.125rem;
-    background-color: currentColor;
-    mask: var(--icon) no-repeat center / contain;
-    -webkit-mask: var(--icon) no-repeat center / contain;
-  }
-
-  .alert-content h3 {
-    margin: 0 0 0.35rem 0;
-    font-size: 1.05rem;
-  }
-
-  .alert-content p {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  .alert--success {
-    background-color: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    color: #065f46;
-  }
-
-  .alert--error {
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #991b1b;
-  }
-
-  :global(html.dark) .alert--success {
-    background-color: rgba(5, 150, 105, 0.15);
-    border-color: rgba(16, 185, 129, 0.4);
-    color: #6ee7b7;
-  }
-
-  :global(html.dark) .alert--error {
-    background-color: rgba(220, 38, 38, 0.15);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #fca5a5;
-  }
-
-  .btn--sm {
-    min-height: 2.25rem;
-    padding: 0.375rem 0.875rem;
-    font-size: 0.875rem;
-  }
-
-  /* Sección y formulario de contacto */
-  .contacto-formulario-seccion {
-    margin-block-start: 1rem;
-    padding-block-end: 2.5rem;
-  }
-
-  .contacto-formulario-seccion h2 {
-    margin-block: 0 0.5rem;
-  }
-
-  .form-desc {
-    margin-block-end: 1.5rem;
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-  }
-
-  .required {
-    color: var(--color-brand);
-    font-weight: 700;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    max-width: 44rem;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  @media (min-width: 38rem) {
-    .form-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-  }
-
-  .form-group label {
-    font-size: 0.925rem;
-    font-weight: 650;
-    color: var(--color-text);
-  }
-
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-family: inherit;
-    font-size: 0.975rem;
-    color: var(--color-text);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    transition: border-color 160ms ease, box-shadow 160ms ease;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px var(--color-brand-soft);
-  }
-
-  .form-group input[aria-invalid="true"],
-  .form-group textarea[aria-invalid="true"] {
-    border-color: #dc2626;
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 7rem;
-  }
-
-  .field-error {
-    margin: 0;
-    color: #dc2626;
-    font-size: 0.85rem;
-    font-weight: 550;
-  }
-
-  :global(html.dark) .field-error {
-    color: #fca5a5;
-  }
-
-  .form-actions {
-    margin-block-start: 0.5rem;
-  }
-
-  /* Canales de contacto directos */
-  .contacto-bloque {
-    margin-block-start: 2.5rem;
-    padding-block-start: 2rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .contacto-bloque h2 {
-    margin-block: 0 0.5rem;
-  }
-
-  .contacto-bloque p {
-    margin-block-end: 1.25rem;
-    color: var(--color-text-muted);
-  }
-
-  .contacto-canales {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .contacto-enlace {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-brand);
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 160ms ease, transform 160ms ease;
-  }
-
-  .contacto-icono {
-    display: inline-block;
-    width: 1.125rem;
-    height: 1.125rem;
-    background-color: currentColor;
-    mask: var(--icon) no-repeat center / contain;
-    -webkit-mask: var(--icon) no-repeat center / contain;
-    flex-shrink: 0;
-  }
-
-  .contacto-enlace:hover {
-    color: var(--color-brand-hover);
-    text-decoration: underline;
-    transform: translateY(-1px);
-  }
-
-  .contacto-enlace:focus-visible {
-    border-radius: 0.25rem;
-    outline: 2px solid var(--color-brand-hover);
-    outline-offset: 3px;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .alert,
-    .contacto-enlace,
-    .contacto-icono,
-    .form-group input,
-    .form-group textarea {
-      animation: none;
-      transition: none;
-    }
-  }
-</style>

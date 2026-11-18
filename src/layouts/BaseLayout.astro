@@ -46,11 +46,27 @@ const {
     </script>
     <ClientRouter />
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen m-0 p-0 w-full overflow-x-clip font-atkinson leading-relaxed text-text bg-background transition-colors duration-200">
     <Header />
-    <main class={mainClass}>
-      {eyebrow && <span class="page-eyebrow">{eyebrow}</span>}
-      {!hideTitle && pageTitle && <h1>{pageTitle}</h1>}
+    <main
+      class:list={[
+        "flex-1 w-full",
+        mainClass === "has-sections"
+          ? "max-w-none p-0 m-0"
+          : "max-w-240 lg:max-w-6xl mx-auto py-8 px-4 md:px-8",
+        mainClass,
+      ]}
+    >
+      {eyebrow && (
+        <span class="inline-block text-brand text-xs font-extrabold uppercase tracking-[0.08em] leading-tight mb-1">
+          {eyebrow}
+        </span>
+      )}
+      {!hideTitle && pageTitle && (
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight mt-0 mb-4">
+          {pageTitle}
+        </h1>
+      )}
       <slot />
     </main>
     <Footer />
