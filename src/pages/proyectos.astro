@@ -9,22 +9,22 @@ import { proyectos } from "../data/projects";
   description="Explora proyectos de desarrollo, sus tecnologías y enlaces a demos y repositorios."
   eyebrow="PROYECTOS PERSONALES"
 >
-  <p>
+  <p class="max-w-[65ch] text-text text-base leading-relaxed mb-6">
     Proyectos destacados con foco en código limpio, Core Web Vitals e interfaces
     interactivas.
   </p>
 
-  <div class="proyectos-grid">
-    {
-      proyectos.map((proyecto, index) => (
-        <ProjectCard {...proyecto} loading={index < 3 ? "eager" : "lazy"} />
-      ))
-    }
+  <div class="mt-6 grid grid-cols-[repeat(auto-fit,minmax(min(100%,19rem),1fr))] gap-6">
+    {proyectos.map((proyecto, index) => (
+      <ProjectCard {...proyecto} loading={index < 3 ? "eager" : "lazy"} />
+    ))}
   </div>
 
-  <section class="proyectos-github">
-    <h2>Explora más en GitHub</h2>
-    <p>
+  <section class="mt-14 pt-8 border-t border-border">
+    <h2 class="text-2xl font-bold mt-0 mb-2 text-text">
+      Explora más en GitHub
+    </h2>
+    <p class="max-w-[65ch] text-text text-base leading-relaxed mb-6">
       Encuentra más proyectos, experimentos personales y código abierto en mi
       perfil.
     </p>
@@ -32,7 +32,7 @@ import { proyectos } from "../data/projects";
       href="https://github.com/wigsdev"
       target="_blank"
       rel="noopener noreferrer"
-      class="btn btn--secondary"
+      class="inline-flex items-center justify-center py-2.5 px-5 rounded-lg text-sm font-semibold no-underline cursor-pointer bg-surface text-text border border-border transition-colors duration-150 hover:bg-surface-muted hover:border-text-muted focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-3"
     >
       Ver mi GitHub
     </a>
