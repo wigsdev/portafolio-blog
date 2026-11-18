@@ -11,9 +11,24 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 4:** Migración progresiva del sistema de diseño a Tailwind CSS (`T-16`).
+- **Sprint 4:** Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90 (`T-17`).
 
 ---
+
+## [0.14.0] - 2026-11-17
+
+### Añadido
+
+- **Motor de Utilidades Tailwind CSS v4 (`T-16` / R2):** Integración oficial de `@tailwindcss/vite` y `tailwindcss@^4.3.5` como plugin nativo de Vite en `astro.config.mjs`, prescindiendo de plugins legados de Astro y sin requerir archivo `tailwind.config.mjs`.
+- **Arquitectura de Coexistencia Híbrida y Blindaje de Preflight:** Importación controlada de `@import "tailwindcss/theme.css"` y `@import "tailwindcss/utilities.css"` en `src/styles/global.css`, evitando que el reset agresivo de Tailwind (Preflight) sobreescriba los estilos soberanos y tipografía del sitio.
+- **Mapeo Semántico al Tema de Tailwind (`@theme`):** Vinculación directa de todas las variables CSS (`--color-brand`, `--color-surface`, `--color-background`, `--color-border`, etc.) y la fuente local Atkinson (`--font-atkinson`), permitiendo que las clases utilitarias (`bg-surface`, `text-brand`, `border-border`) respondan en tiempo real al cambio de tema dark/light sin requerir prefijos `dark:` duplicados.
+
+### Modificado
+
+- **Migración Progresiva de Componente `Badge.astro`:** Refactorización a clases de utilidad de Tailwind (`inline-flex`, `px-2`, `py-1`, `border-text-muted`, `rounded-full`), eliminando su bloque de estilos aislados y manteniendo su comportamiento idéntico.
+- **Migración Progresiva de Componente `Pagination.astro`:** Refactorización a utilidades de Tailwind (`flex`, `border-border`, `hover:border-brand`, `hover:bg-brand-soft`), depurando más de 50 líneas de CSS scoped.
+- **Migración Progresiva de Componente `ProjectCard.astro`:** Refactorización integral de la tarjeta de catálogo a clases de Tailwind (layout flex, aspect-ratio, badges, botones interactivos de Demo y GitHub), eliminando más de 100 líneas de estilos locales.
+- **Migración Progresiva de Componente `CredentialCard.astro`:** Refactorización a utilidades de Tailwind conservando la transición suave de hover, elevación y bordes de marca.
 
 ## [0.13.0] - 2026-11-17
 
