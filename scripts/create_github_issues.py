@@ -5,11 +5,11 @@ Portafolio + Blog — Script de Automatización de GitHub Issues y Milestones.
 Basado en el Product Backlog oficial:
   - docs/backlog.md
 
-Publica o actualiza el catálogo completo de 20 tareas atómicas organizadas en 5 Sprints:
+Publica o actualiza el catálogo completo de 21 tareas atómicas organizadas en 5 Sprints:
   - Sprint 1 (26 Oct - 01 Nov 2026): T-01 a T-04 (Fundamentos, Sistema de Diseño & Layouts Base)
   - Sprint 2 (02 Nov - 08 Nov 2026): T-05 a T-08 (Portafolio Personal & Optimización de Imágenes)
   - Sprint 3 (09 Nov - 15 Nov 2026): T-09 a T-12 (Blog Técnico, Content Collections & Rutas Dinámicas)
-  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-18 (Isla Interactiva, Servidor, Sobre Mí, Tailwind, Refactorización & SEO 90+)
+  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-18.1 (Isla Interactiva, Servidor, Sobre Mí, Tailwind, Refactorización & SEO 90+)
   - Sprint 5 (23 Nov - 29 Nov 2026): T-19 a T-20 (Despliegue Público, Diapositivas & Sustentación)
 
 Uso:
@@ -594,6 +594,47 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 - [ ] `sitemap-index.xml` y `rss.xml` generados correctamente en el build de producción.
 - [ ] Meta tags OpenGraph y Twitter en todas las páginas.
 - [ ] Puntaje de Lighthouse >= 90 verificado en Rendimiento y Accesibilidad.
+""",
+    },
+    {
+        "id": "T-18.1",
+        "sprint_num": 4,
+        "title": "[T-18.1] Subsanación de Observaciones Lighthouse: Contraste WCAG AA, Imágenes y CSS Crítico",
+        "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
+        "labels": ["sprint:4", "priority: medium", "type: style", "status: backlog"],
+        "body": """## Descripción
+Subsanar los hallazgos técnicos detectados durante la auditoría Lighthouse Mobile (`Slow 4G`) de la tarea padre `T-18` (#16): corregir el ratio de contraste WCAG 2.1 AA en botones primarios bajo modo oscuro, desambiguar el propósito accesible de enlaces repetidos en tarjetas de proyectos, migrar imágenes residuales de componentes `.astro` al pipeline `<Image />` de `astro:assets` y eliminar el bloqueo de renderizado inicial incrustando las hojas de estilo en compilación.
+
+## Metadata
+| Campo | Valor |
+|---|---|
+| **ID Subtarea** | `T-18.1` (Tarea padre: `T-18` / #16) |
+| **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: style` |
+| **Requisitos Oficiales** | R9 (Lighthouse y Accesibilidad WCAG AA) + R5 (`astro:assets`) |
+| **Asignado a** | Wilmer (@wigsdev) |
+| **Archivos afectados** | `src/styles/global.css`, `src/components/Navigation.astro`, `src/components/ProjectCard.astro`, `src/components/Logo.astro`, `src/components/BlogCard.astro`, `src/layouts/BlogPost.astro`, `src/pages/sobre-mi.astro`, `astro.config.mjs`, `tests/unit/tokens.test.ts` |
+| **Commit Sugerido** | `fix(a11y,perf): subsanar contraste dark mode, optimizar imagenes astro:assets e incrustar css critico (T-18.1)` |
+
+## Alcance Técnico
+1. **Contraste WCAG AA en Modo Oscuro (`Contrast`):**
+   - Definir `--color-text-inverse: #141416` en `html.dark` (`src/styles/global.css`), elevando el contraste sobre `--color-brand` (`#ff526d`) de `3.14:1` a **`5.86:1`**.
+   - Ajustar `hover:text-brand-hover` en el ítem activo de `Navigation.astro`.
+2. **Propósito Accesible en Enlaces (`Identical links have the same purpose`):**
+   - Añadir `aria-label` descriptivos con el nombre del proyecto en los enlaces `"Demo"` y `"GitHub"` de `ProjectCard.astro`.
+3. **Entrega de Imágenes con `astro:assets` (`Improve image delivery`):**
+   - Incorporar `logo.png` y `foto.jpg` en `src/assets/` y renderizarlos con `<Image />` en `Logo.astro`, `BlogCard.astro`, `BlogPost.astro` y `sobre-mi.astro` (conservando `public/foto.jpg` únicamente para la isla CSR `BlogCardItem.tsx`).
+4. **Eliminación de Petición CSS Bloqueante (`Render-blocking requests`):**
+   - Configurar `build: { inlineStylesheets: "always" }` en `astro.config.mjs` para evitar el viaje de red adicional en redes móviles lentas.
+
+## Criterios de Aceptación (DoD)
+- [ ] Cero alertas de `color-contrast` en Lighthouse Mobile tanto en modo oscuro como en modo claro.
+- [ ] Cero alertas de `identical-links-same-purpose` en las tarjetas de proyectos.
+- [ ] `Logo.astro` y avatares estáticos procesados con Sharp (`<Image />`) en formato WebP con dimensiones exactas.
+- [ ] Cero peticiones externas de CSS bloqueando el renderizado inicial (`Render-blocking requests`).
+- [ ] Puntaje de Lighthouse Mobile verificado: **Accessibility 100**, **Best Practices 100**, **SEO 100** y **Performance >= 98**.
+- [ ] Suite `pnpm test` pasando al 100% y compilación `pnpm build` limpia.
 """,
     },
 
