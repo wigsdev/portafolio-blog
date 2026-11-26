@@ -405,11 +405,11 @@ Integrar Tailwind CSS v4 con `@tailwindcss/vite`, mapear variables semánticas (
 Refactorizar y unificar los componentes del catálogo del blog para eliminar la duplicación de código de la tarjeta (Principio DRY). Desacoplar la tarjeta a un componente común reutilizable en Preact/Astro (`BlogCardItem.tsx`) y purgar la sobreingeniería de arrastre manual con mouse (Drag-to-Scroll) en `BlogFilterIsland.tsx`, reduciendo el componente a menos de 200 líneas y aligerando el bundle de JavaScript cliente.
 
 **Criterios de Aceptación:**
-- [ ] Componente unificado `BlogCardItem.tsx` creado y renderizando con fidelidad 1:1 tanto en Astro (SSR estático) como en Preact (CSR dinámico).
-- [ ] Tarjeta clonada eliminada de `BlogFilterIsland.tsx` (cero duplicación de código).
-- [ ] Lógica de arrastre manual por mouse eliminada; navegación táctil nativa y botones `<` / `>` funcionando correctamente.
-- [ ] Cero regresiones visuales en modo claro y modo oscuro.
-- [ ] Todas las pruebas unitarias pasando (`pnpm test`) y compilación limpia (`pnpm build`).
+- [x] Componente unificado `BlogCardItem.tsx` creado y renderizando con fidelidad 1:1 tanto en Astro (SSR estático) como en Preact (CSR dinámico).
+- [x] Tarjeta clonada eliminada de `BlogFilterIsland.tsx` (cero duplicación de código).
+- [x] Lógica de arrastre manual por mouse eliminada; navegación táctil nativa y botones `<` / `>` funcionando correctamente.
+- [x] Cero regresiones visuales en modo claro y modo oscuro.
+- [x] Todas las pruebas unitarias pasando (`pnpm test`) y compilación limpia (`pnpm build`).
 
 ---
 
@@ -426,9 +426,31 @@ Refactorizar y unificar los componentes del catálogo del blog para eliminar la 
 Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas OpenGraph, Twitter cards y canonicals en todas las páginas. Ejecutar auditoría Lighthouse y optimizar Core Web Vitals (LCP, CLS, INP) para garantizar un puntaje ≥ 90 en Rendimiento, Accesibilidad y SEO (Requisito R9).
 
 **Criterios de Aceptación:**
-- [ ] `sitemap-index.xml` y `rss.xml` generados correctamente en el build de producción.
-- [ ] Meta tags OpenGraph y Twitter en todas las páginas.
-- [ ] Puntaje de Lighthouse ≥ 90 verificado en Rendimiento y Accesibilidad.
+- [x] `sitemap-index.xml` y `rss.xml` generados correctamente en el build de producción.
+- [x] Meta tags OpenGraph y Twitter en todas las páginas.
+- [x] Puntaje de Lighthouse ≥ 90 verificado en Rendimiento y Accesibilidad.
+
+---
+
+#### T-18.1 — Subsanación de Observaciones Lighthouse: Contraste WCAG AA, Imágenes y CSS Crítico
+| Campo | Valor |
+|---|---|
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: style` |
+| **Dependencias** | T-18 |
+| **Complejidad** | Baja (1 día) |
+| **Archivos afectados** | `src/styles/global.css`, `src/components/Navigation.astro`, `src/components/ProjectCard.astro`, `src/components/Logo.astro`, `src/components/BlogCard.astro`, `src/layouts/BlogPost.astro`, `src/pages/sobre-mi.astro`, `astro.config.mjs`, `tests/unit/tokens.test.ts` |
+
+**Descripción y Contexto Técnico:**  
+Subsanar los hallazgos técnicos detectados durante la auditoría Lighthouse Mobile (`Slow 4G`) de la tarea padre `T-18` (#16): corregir el ratio de contraste WCAG 2.1 AA en botones primarios bajo modo oscuro (`--color-text-inverse: #141416`), desambiguar el propósito accesible de enlaces repetidos en tarjetas de proyectos (`aria-label`), migrar imágenes residuales de componentes `.astro` al pipeline `<Image />` de `astro:assets` y eliminar el bloqueo de renderizado inicial incrustando las hojas de estilo en compilación (`inlineStylesheets: "always"`).
+
+**Criterios de Aceptación:**
+- [x] Cero alertas de `color-contrast` en Lighthouse Mobile tanto en modo oscuro como en modo claro.
+- [x] Cero alertas de `identical-links-same-purpose` en las tarjetas de proyectos.
+- [x] `Logo.astro` y avatares estáticos procesados con Sharp (`<Image />`) en formato WebP con dimensiones exactas.
+- [x] Cero peticiones externas de CSS bloqueando el renderizado inicial (`Render-blocking requests`).
+- [x] Puntaje de Lighthouse Mobile verificado: **Accessibility 100**, **Best Practices 100**, **SEO 100** y **Performance ≥ 98**.
+- [x] Suite `pnpm test` pasando al 100% y compilación `pnpm build` limpia.
 
 ---
 
@@ -439,7 +461,7 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 |---|---|
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
-| **Dependencias** | T-18 |
+| **Dependencias** | T-18, T-18.1 |
 | **Complejidad** | Baja (1 día) |
 | **Archivos afectados** | `astro.config.mjs`, `package.json`, configuraciones de hosting |
 
