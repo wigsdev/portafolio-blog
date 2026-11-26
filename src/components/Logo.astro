@@ -1,7 +1,14 @@
-<img
+---
+import { Image } from "astro:assets";
+import logoImg from "../assets/logo.png";
+---
+
+<Image
   class="brand-logo block w-10 h-10 rounded-full object-cover shrink-0"
-  src="/logo.png"
+  src={logoImg}
   alt=""
-  width="40"
-  height="40"
+  width={40}
+  height={40}
+  densities={[1, 2]}
+  loading="eager"
 />

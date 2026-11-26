@@ -16,6 +16,9 @@ export default defineConfig({
     mode: "standalone",
   }),
   integrations: [mdx(), sitemap(), preact()],
+  build: {
+    inlineStylesheets: "always",
+  },
   image: {
     service: sharpImageService(),
   },
