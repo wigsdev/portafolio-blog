@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CredentialCard from "../components/CredentialCard.astro";
 import { certificaciones, formaciones } from "../data/credentials";
+import profilePhoto from "../assets/foto.jpg";
 ---
 
 <BaseLayout
@@ -56,11 +58,12 @@ import { certificaciones, formaciones } from "../data/credentials";
       aria-label="Ficha de presentación"
     >
       <div class="w-45 h-45 md:w-50 md:h-50 rounded-xl overflow-hidden bg-background">
-        <img
-          src="/foto.jpg"
+        <Image
+          src={profilePhoto}
           alt="Fotografía de Wilmer Gulcochia"
-          width="200"
-          height="200"
+          width={200}
+          height={200}
+          densities={[1, 1.25]}
           loading="eager"
           fetchpriority="high"
           class="w-full h-full object-cover block"

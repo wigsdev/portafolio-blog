@@ -15,6 +15,24 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ---
 
+## [0.14.3] - 2026-11-25
+
+### Corregido
+
+- **Contraste WCAG 2.1 AA en Modo Oscuro (`T-18.1` / `#40` / R9):**
+  - Ajuste semántico de `--color-text-inverse: #141416` en `html.dark` (`src/styles/global.css`), elevando el contraste sobre `--color-brand` (`#ff526d`) de `3.14:1` a **`5.86:1`** (`7.33:1` en hover) y alcanzando **100/100 en Accessibility**.
+  - Corrección del estado hover del enlace activo en `src/components/Navigation.astro` (`hover:text-brand-hover`) y validación automatizada en `tests/unit/tokens.test.ts`.
+  - Desambiguación del propósito accesible de enlaces repetidos (`Demo` y `GitHub`) en `src/components/ProjectCard.astro` mediante atributos `aria-label` contextuales por proyecto.
+
+### Optimizado
+
+- **Entrega de Imágenes con Sharp y Cadena Crítica CSS (`T-18.1` / R5, R9):**
+  - Migración de `Logo.astro` (`logo.png`) y retratos estáticos (`foto.jpg`) en `BlogCard.astro`, `BlogPost.astro` y `sobre-mi.astro` al componente `<Image />` de `astro:assets` con densidades responsivas WebP (reduciendo avatares de `23.9 KiB` a `238 B`).
+  - Configuración de `build.inlineStylesheets: "always"` en `astro.config.mjs` eliminando hojas de estilo externas bloqueantes.
+  - Certificación Lighthouse Mobile (`Slow 4G`): **Performance 99** (`FCP 1.5s`, `LCP 1.8s`, `TBT 50ms`, `CLS 0`), **Accessibility 100**, **Best Practices 100**, **SEO 100**.
+
+---
+
 ## [0.14.2] - 2026-11-25
 
 ### Añadido

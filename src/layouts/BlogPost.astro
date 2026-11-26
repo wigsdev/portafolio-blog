@@ -5,6 +5,7 @@ import BaseLayout from "./BaseLayout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Badge from "../components/Badge.astro";
 import BlogCard from "../components/BlogCard.astro";
+import authorAvatar from "../assets/foto.jpg";
 
 type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: number;
@@ -103,11 +104,12 @@ const shareTitle = encodeURIComponent(title);
 
         <footer class="w-full max-w-195 mx-auto mt-14 pt-8 border-t border-border flex flex-col gap-8">
           <div class="flex items-start gap-4">
-            <img
-              src="/foto.jpg"
+            <Image
+              src={authorAvatar}
               alt="Wilmer Gulcochía"
-              width="44"
-              height="44"
+              width={44}
+              height={44}
+              densities={[1, 2]}
               class="w-11 h-11 shrink-0 rounded-full object-cover"
               loading="lazy"
             />
