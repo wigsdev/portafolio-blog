@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { z } from 'astro/zod';
 import { contactSchema } from '../../src/schemas/contact';
 
 describe('Contact Form Zod Schema Validation', () => {
@@ -30,7 +31,7 @@ describe('Contact Form Zod Schema Validation', () => {
     const result = contactSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
     if (!result.success) {
-      const errors = result.error.flatten().fieldErrors;
+      const errors = z.flattenError(result.error).fieldErrors;
       expect(errors.nombre).toBeDefined();
       expect(errors.nombre?.[0]).toBe('El nombre debe tener al menos 2 caracteres');
     }
@@ -47,7 +48,7 @@ describe('Contact Form Zod Schema Validation', () => {
     const result = contactSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
     if (!result.success) {
-      const errors = result.error.flatten().fieldErrors;
+      const errors = z.flattenError(result.error).fieldErrors;
       expect(errors.email).toBeDefined();
       expect(errors.email?.[0]).toBe('Ingresa un correo electrónico válido');
     }
@@ -64,7 +65,7 @@ describe('Contact Form Zod Schema Validation', () => {
     const result = contactSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
     if (!result.success) {
-      const errors = result.error.flatten().fieldErrors;
+      const errors = z.flattenError(result.error).fieldErrors;
       expect(errors.mensaje).toBeDefined();
       expect(errors.mensaje?.[0]).toBe('El mensaje debe tener al menos 10 caracteres');
     }
@@ -76,7 +77,7 @@ describe('Contact Form Zod Schema Validation', () => {
     const result = contactSchema.safeParse(emptyData);
     expect(result.success).toBe(false);
     if (!result.success) {
-      const errors = result.error.flatten().fieldErrors;
+      const errors = z.flattenError(result.error).fieldErrors;
       expect(errors.nombre?.[0]).toBe('El nombre es obligatorio');
       expect(errors.email?.[0]).toBe('El correo electrónico es obligatorio');
       expect(errors.asunto?.[0]).toBe('El asunto es obligatorio');

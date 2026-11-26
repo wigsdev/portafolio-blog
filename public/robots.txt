@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://wigsdev.netlify.app/sitemap-index.xml

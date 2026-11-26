@@ -6,15 +6,24 @@ import { defineConfig, fontProviders, sharpImageService } from "astro/config";
 
 import preact from "@astrojs/preact";
 import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 
 import tailwindcss from "@tailwindcss/vite";
 
+const siteUrl =
+  process.env.SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://portafolio-blog-wigsdev.vercel.app");
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://wigsdev.netlify.app",
-  adapter: node({
-    mode: "standalone",
-  }),
+  site: siteUrl,
+  adapter: process.env.VERCEL
+    ? vercel()
+    : node({
+        mode: "standalone",
+      }),
   integrations: [mdx(), sitemap(), preact()],
   build: {
     inlineStylesheets: "always",

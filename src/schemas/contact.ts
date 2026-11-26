@@ -7,9 +7,9 @@ export const contactSchema = z.object({
     .min(2, 'El nombre debe tener al menos 2 caracteres')
     .max(100, 'El nombre no puede exceder 100 caracteres'),
   email: z
-    .string({ message: 'El correo electrónico es obligatorio' })
+    .string({ error: 'El correo electrónico es obligatorio' })
     .trim()
-    .email('Ingresa un correo electrónico válido'),
+    .pipe(z.email({ error: 'Ingresa un correo electrónico válido' })),
   asunto: z
     .string({ message: 'El asunto es obligatorio' })
     .trim()
