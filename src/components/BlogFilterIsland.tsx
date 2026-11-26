@@ -1,16 +1,9 @@
 import { useState, useMemo, useRef, useEffect } from "preact/hooks";
 import type { ComponentChildren } from "preact";
+import BlogCardItem, { type PostItem } from "./BlogCardItem";
 
-export interface PostItem {
-  id: string;
-  title: string;
-  description: string;
-  pubDate: string;
-  formattedDate: string;
-  tags: string[];
-  readingTime: number;
-  heroImage?: string;
-}
+// Re-exportamos PostItem para mantener compatibilidad con las páginas de Astro
+export type { PostItem };
 
 interface Props {
   posts: PostItem[];
@@ -35,12 +28,6 @@ export default function BlogFilterIsland({
 
   // Referencia al contenedor de scroll horizontal de tags
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  // Referencias para el soporte Drag-to-Scroll (arrastrar con el mouse)
-  const isMouseDownRef = useRef<boolean>(false);
-  const startXRef = useRef<number>(0);
-  const scrollLeftStartRef = useRef<number>(0);
-  const hasDraggedRef = useRef<boolean>(false);
 
   // Comprobar si se puede hacer scroll hacia la izquierda o derecha
   const updateScrollButtons = () => {
@@ -78,31 +65,6 @@ export default function BlogFilterIsland({
         behavior: "smooth",
       });
     }
-  };
-
-  // Manejadores de Drag-to-Scroll con mouse
-  const handleMouseDown = (e: MouseEvent) => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    isMouseDownRef.current = true;
-    hasDraggedRef.current = false;
-    startXRef.current = e.pageX - el.offsetLeft;
-    scrollLeftStartRef.current = el.scrollLeft;
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isMouseDownRef.current || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startXRef.current) * 1.4;
-    if (Math.abs(walk) > 4) {
-      hasDraggedRef.current = true;
-    }
-    scrollContainerRef.current.scrollLeft = scrollLeftStartRef.current - walk;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    isMouseDownRef.current = false;
   };
 
   // Filtrado instantáneo en memoria
@@ -168,14 +130,10 @@ export default function BlogFilterIsland({
               </button>
             )}
 
-            {/* Contenedor de chips con arrastre (Drag-to-Scroll) */}
+            {/* Contenedor de chips deslizables (scroll táctil nativo + flechas) */}
             <div
-              class="flex items-center gap-1.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden scroll-smooth p-0.5 cursor-grab active:cursor-grabbing select-none"
+              class="flex items-center gap-1.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden scroll-smooth p-0.5 select-none"
               ref={scrollContainerRef}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUpOrLeave}
-              onMouseLeave={handleMouseUpOrLeave}
             >
               {tags.map((tag) => (
                 <button
@@ -186,11 +144,7 @@ export default function BlogFilterIsland({
                       ? "bg-brand text-text-inverse border-brand hover:bg-brand-hover hover:text-text-inverse"
                       : "border-transparent bg-transparent text-text-muted hover:text-text hover:bg-surface-muted"
                   }`}
-                  onClick={() => {
-                    if (!hasDraggedRef.current) {
-                      setSelectedTag(tag);
-                    }
-                  }}
+                  onClick={() => setSelectedTag(tag)}
                 >
                   {tag}
                 </button>
@@ -289,88 +243,11 @@ export default function BlogFilterIsland({
         </div>
       )}
 
-      {/* Grilla Reactiva de Resultados */}
+      {/* Grilla Reactiva de Resultados (Consumiendo BlogCardItem unificado) */}
       {filteredPosts.length > 0 ? (
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {filteredPosts.map((post) => (
-            <article
-              key={post.id}
-              class="group flex flex-col bg-surface border border-border rounded-xl overflow-hidden transition-all duration-180 ease-in-out hover:-translate-y-1 hover:shadow-[0_8px_20px_var(--color-shadow-brand)] hover:border-brand motion-reduce:transition-none motion-reduce:hover:translate-none"
-            >
-              {post.heroImage && (
-                <a
-                  href={`/blog/${post.id}/`}
-                  class="block overflow-hidden aspect-video bg-surface-muted"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                >
-                  <img
-                    src={post.heroImage}
-                    alt={post.title}
-                    class="w-full h-full object-cover transition-transform duration-240 ease-in-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
-                    loading="lazy"
-                  />
-                </a>
-              )}
-              <div class="flex flex-col flex-1 p-5">
-                {post.tags.length > 0 && (
-                  <div class="flex flex-wrap gap-1.5 mb-3">
-                    {post.tags.map((t) => (
-                      <a
-                        key={t}
-                        href={`/blog/tags/${t}/`}
-                        class="no-underline"
-                        title={`Ver artículos con la etiqueta ${t}`}
-                      >
-                        <span class="inline-flex items-center px-2 py-1 border border-text-muted rounded-full text-text-muted bg-surface text-xs font-semibold leading-none">
-                          {t}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                )}
-                <h3 class="text-[1.2rem] font-bold leading-[1.35] m-0 mb-2">
-                  <a
-                    href={`/blog/${post.id}/`}
-                    class="text-text no-underline transition-colors duration-150 hover:text-brand"
-                  >
-                    {post.title}
-                  </a>
-                </h3>
-                <p class="text-sm text-text-muted leading-normal m-0 mb-5 line-clamp-3">
-                  {post.description}
-                </p>
-                <footer class="flex items-center justify-between flex-wrap gap-2 text-xs text-text-muted mt-auto pt-3 border-t border-border">
-                  <div class="inline-flex items-center gap-1.5">
-                    <img
-                      src="/foto.jpg"
-                      alt="Wilmer Gulcochía"
-                      width="20"
-                      height="20"
-                      class="w-5 h-5 rounded-full object-cover shrink-0"
-                      loading="lazy"
-                    />
-                    <span class="font-semibold text-text">
-                      Wilmer Gulcochía
-                    </span>
-                  </div>
-                  <div class="inline-flex items-center gap-1.5">
-                    <time dateTime={post.pubDate}>{post.formattedDate}</time>
-                    <span class="text-text-muted opacity-60" aria-hidden="true">
-                      ·
-                    </span>
-                    <span class="inline-flex items-center gap-1">
-                      <span
-                        class="inline-block w-3.25 h-3.25 bg-current [mask:var(--icon)_no-repeat_center/contain] [-webkit-mask:var(--icon)_no-repeat_center/contain]"
-                        style={{ "--icon": "url('/icons/ui/clock.svg')" }}
-                        aria-hidden="true"
-                      ></span>
-                      {post.readingTime} min
-                    </span>
-                  </div>
-                </footer>
-              </div>
-            </article>
+            <BlogCardItem key={post.id} post={post} />
           ))}
         </div>
       ) : (
