@@ -11,7 +11,25 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 4:** Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90 (`T-17`).
+- **Sprint 4:** Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90 (`T-18`).
+
+---
+
+## [0.14.1] - 2026-11-25
+
+### Añadido
+
+- **Componente Compartido de Tarjeta de Blog (`T-17` / R6):** Creación de `src/components/BlogCardItem.tsx` para Preact, desacoplando la tarjeta de artículo con interfaz tipada `PostItem`, clases canónicas de Tailwind CSS v4, animaciones de elevación y reloj de lectura SVG (`/icons/ui/clock.svg`) con máscara CSS (`[mask:var(--icon)]`).
+
+### Modificado
+
+- **Refactorización y Poda de Isla Interactiva de Blog (`T-17` / R6):** 
+  - Eliminación de ~80 líneas de marcado duplicado en `src/components/BlogFilterIsland.tsx`, consumiendo el nuevo componente `BlogCardItem`.
+  - Poda integral de sobreingeniería de listeners de mouse para *Drag-to-Scroll* (`handleMouseDown`, `handleMouseMove`, `hasDraggedRef`, multiplicadores de arrastre), preservando el desplazamiento táctil nativo (`overflow-x-auto scroll-smooth`) y controles por flechas `<` y `>`.
+  - Re-exportación retrocompatible de `type { PostItem }` para la plantilla paginada `src/pages/blog/[...page].astro`.
+- **Blindaje del Servicio de Imágenes Nativo (`T-17` / R2):**
+  - Configuración explícita de `sharpImageService()` en `astro.config.mjs` con `imageCDN: false` y `devFeatures: false` en `@astrojs/netlify`.
+  - Resolución del error `502 Bad Gateway` en desarrollo, garantizando que el componente `<Image />` en `BlogCard.astro` procese las imágenes localmente mediante Sharp sin depender de proxies externos.
 
 ---
 

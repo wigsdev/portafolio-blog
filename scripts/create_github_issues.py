@@ -5,12 +5,12 @@ Portafolio + Blog — Script de Automatización de GitHub Issues y Milestones.
 Basado en el Product Backlog oficial:
   - docs/backlog.md
 
-Publica o actualiza el catálogo completo de 18 tareas atómicas organizadas en 5 Sprints:
+Publica o actualiza el catálogo completo de 20 tareas atómicas organizadas en 5 Sprints:
   - Sprint 1 (26 Oct - 01 Nov 2026): T-01 a T-04 (Fundamentos, Sistema de Diseño & Layouts Base)
   - Sprint 2 (02 Nov - 08 Nov 2026): T-05 a T-08 (Portafolio Personal & Optimización de Imágenes)
   - Sprint 3 (09 Nov - 15 Nov 2026): T-09 a T-12 (Blog Técnico, Content Collections & Rutas Dinámicas)
-  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-16 (Isla Interactiva, Funciones de Servidor, Tailwind CSS & SEO 90+)
-  - Sprint 5 (23 Nov - 29 Nov 2026): T-17 a T-18 (Despliegue Público, Diapositivas & Sustentación)
+  - Sprint 4 (16 Nov - 22 Nov 2026): T-13 a T-18 (Isla Interactiva, Servidor, Sobre Mí, Tailwind, Refactorización & SEO 90+)
+  - Sprint 5 (23 Nov - 29 Nov 2026): T-19 a T-20 (Despliegue Público, Diapositivas & Sustentación)
 
 Uso:
   python3 scripts/create_github_issues.py [--dry-run] [--repo OWNER/REPO] [--sprint SPRINT_NUM] [--update] [--no-project] [--assignee USUARIO] [--move-status "En progreso"]
@@ -543,7 +543,36 @@ Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar p
     {
         "id": "T-17",
         "sprint_num": 4,
-        "title": "[T-17] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
+        "title": "[T-17] Refactorización y Unificación de Componentes de Blog (BlogFilterIsland y BlogCardItem)",
+        "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
+        "labels": ["sprint:4", "priority: medium", "type: feature", "status: backlog"],
+        "body": """## Descripción
+Refactorizar y unificar los componentes del catálogo del blog (`src/components/BlogFilterIsland.tsx` y `src/components/BlogCard.astro`) para eliminar la duplicación de código (Principio DRY), desacoplar la tarjeta a un componente común reutilizable en Preact/Astro, y depurar la sobreingeniería de arrastre manual con mouse (Drag-to-Scroll).
+
+## Metadata
+| Campo | Valor |
+|---|---|
+| **ID Tarea** | `T-17` |
+| **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: feature` |
+| **Requisito Oficial** | R6 (Isla interactiva optimizada) + R2 (Tailwind CSS v4) |
+| **Asignado a** | Wilmer (@wigsdev) |
+| **Archivos afectados** | `src/components/BlogCardItem.tsx`, `src/components/BlogFilterIsland.tsx`, `src/components/BlogCard.astro` |
+| **Commit Sugerido** | `refactor(blog): unificar componente de tarjeta y depurar drag-to-scroll en isla de filtros (T-17)` |
+
+## Criterios de Aceptación (DoD)
+- [ ] Componente unificado `BlogCardItem.tsx` creado y renderizando con fidelidad 1:1 tanto en Astro (SSR estático) como en Preact (CSR dinámico).
+- [ ] Tarjeta clonada eliminada de `BlogFilterIsland.tsx` (cero duplicación de código).
+- [ ] Lógica de arrastre manual por mouse eliminada; navegación táctil nativa y botones `<` / `>` funcionando correctamente.
+- [ ] Cero regresiones visuales en modo claro y modo oscuro.
+- [ ] Todas las pruebas unitarias pasando (`pnpm test`) y compilación limpia (`pnpm build`).
+""",
+    },
+    {
+        "id": "T-18",
+        "sprint_num": 4,
+        "title": "[T-18] Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90",
         "milestone": "Sprint 4: Isla Interactiva, Funciones de Servidor & SEO 90+",
         "labels": ["sprint:4", "priority: high", "type: structure", "status: backlog"],
         "body": """## Descripción
@@ -552,7 +581,7 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-17` |
+| **ID Tarea** | `T-18` |
 | **Sprint** | Sprint 4 (16 Nov – 22 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: structure` |
@@ -572,9 +601,9 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
     # SPRINT 5 (23 Nov - 29 Nov 2026): Despliegue Público, Diapositivas & Sustentación
     # ══════════════════════════════════════════════════════════════════════════
     {
-        "id": "T-18",
+        "id": "T-19",
         "sprint_num": 5,
-        "title": "[T-18] Compilación Limpia y Despliegue en Producción con URL Pública",
+        "title": "[T-19] Compilación Limpia y Despliegue en Producción con URL Pública",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: critical", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -583,7 +612,7 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-18` |
+| **ID Tarea** | `T-19` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
@@ -599,9 +628,9 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 """,
     },
     {
-        "id": "T-19",
+        "id": "T-20",
         "sprint_num": 5,
-        "title": "[T-19] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
+        "title": "[T-20] Diapositivas de Presentación y Guía de Sustentación del Proyecto",
         "milestone": "Sprint 5: Despliegue Público, Diapositivas & Sustentación",
         "labels": ["sprint:5", "priority: high", "type: presentation", "status: backlog"],
         "body": """## Descripción
@@ -610,7 +639,7 @@ Elaborar la presentación ejecutiva del proyecto final para la sesión de susten
 ## Metadata
 | Campo | Valor |
 |---|---|
-| **ID Tarea** | `T-19` |
+| **ID Tarea** | `T-20` |
 | **Sprint** | Sprint 5 (23 Nov – 29 Nov 2026) |
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: presentation` |

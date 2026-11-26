@@ -2,7 +2,7 @@
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig, fontProviders, sharpImageService } from "astro/config";
 
 import preact from "@astrojs/preact";
 import netlify from "@astrojs/netlify";
@@ -12,8 +12,14 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
-  adapter: netlify(),
+  adapter: netlify({
+    imageCDN: false,
+    devFeatures: false,
+  }),
   integrations: [mdx(), sitemap(), preact()],
+  image: {
+    service: sharpImageService(),
+  },
 
   fonts: [
     {
