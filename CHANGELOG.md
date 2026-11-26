@@ -11,7 +11,27 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 5:** Compilación Limpia, Cero Errores TypeScript y Cero Warnings (`T-19`).
+- **Sprint 5:** Diapositivas de Presentación y Guía de Sustentación del Proyecto (`T-20`).
+
+---
+
+## [1.0.0] - 2026-11-26
+
+### Añadido
+
+- **Despliegue Oficial en Producción con Vercel (`T-19` / `#17` / R10):**
+  - Despliegue público en alta disponibilidad sobre infraestructura Vercel Edge CDN: [`https://portafolio-blog-seven.vercel.app`](https://portafolio-blog-seven.vercel.app).
+  - Arquitectura multi-entorno con adaptador dual en `astro.config.mjs`: `@astrojs/vercel` en producción en la nube (Build Output API v3) y `@astrojs/node` en modo standalone para desarrollo local (`pnpm preview`).
+  - Endpoint dinámico pre-renderizado `src/pages/robots.txt.ts` enlazado al dominio canónico y sitemap XML autodetectado.
+  - Soporte Serverless nativo para endpoints SSR (`/contacto` con `astro:actions` y validación tipada con Zod).
+
+### Corregido
+
+- **Auditoría Estricta de Tipos y Cero Advertencias (`T-19` / DoD):**
+  - Certificación completa de `astro check` con **0 errores, 0 warnings y 0 hints** en 41 archivos del proyecto.
+  - Purgado de importaciones obsoletas en `src/pages/blog/tags/[tag].astro`.
+  - Actualización de sintaxis Zod en `src/schemas/contact.ts` (`.pipe(z.email(...))`) y `tests/unit/contact.test.ts` (`z.flattenError`).
+  - Suite de pruebas unitarias 100% aprobada (4/4 suites, 11/11 tests en Vitest).
 
 ---
 

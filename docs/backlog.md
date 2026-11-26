@@ -469,9 +469,9 @@ Subsanar los hallazgos técnicos detectados durante la auditoría Lighthouse Mob
 Validar que `pnpm build` compile sin ningún error ni advertencias en estático. Desplegar en plataforma de hosting con SSL activo y URL pública accesible (Netlify, Vercel o Cloudflare Pages), cumpliendo el Requisito R10.
 
 **Criterios de Aceptación:**
-- [ ] `pnpm build` exitoso con salida estática en `dist/`.
-- [ ] Sitio desplegado y navegable en URL pública en producción.
-- [ ] Todas las rutas, imágenes optimizadas y el formulario de servidor funcionan correctamente en la URL pública.
+- [x] `pnpm build` exitoso con salida estática en `dist/` (local) y Build Output API v3 en `.vercel/output/` (producción).
+- [x] Sitio desplegado y navegable en URL pública en producción (`https://portafolio-blog-seven.vercel.app`).
+- [x] Todas las rutas, imágenes optimizadas y el formulario de servidor (`astro:actions`) funcionan correctamente en la URL pública.
 
 ---
 

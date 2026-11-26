@@ -31,6 +31,7 @@ __pycache__/
 *.pyc
 *.pyo
 
-# netlify local cache
+# netlify & vercel local cache
 .netlify/
+.vercel/
 

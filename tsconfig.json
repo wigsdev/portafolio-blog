@@ -5,7 +5,9 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    ".vercel",
+    ".reference"
   ],
   "compilerOptions": {
     "strictNullChecks": true,
