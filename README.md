@@ -3,11 +3,14 @@
 <div align="center">
 
 ![Astro](https://img.shields.io/badge/Astro-7.4-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Production-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![pnpm](https://img.shields.io/badge/pnpm-9.x-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
-![SemVer](https://img.shields.io/badge/SemVer-2.0.0-informational?style=for-the-badge)
+![SemVer](https://img.shields.io/badge/SemVer-1.0.0-informational?style=for-the-badge)
 ![Zero-JS](https://img.shields.io/badge/Architecture-Zero--JS-success?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+
+### 🌐 [Visitar Sitio en Producción: portafolio-blog-seven.vercel.app](https://portafolio-blog-seven.vercel.app)
 
 </div>
 
@@ -28,7 +31,8 @@ Desarrollado y mantenido por **Wilmer Gulcochía ([@wigsdev](https://github.com/
 | **Multimedia & Rendimiento** | Optimización de imágenes con `<Image />` y motor `sharp`                                                                 |
 | **Navegación & SPA**         | View Transitions nativas con `<ClientRouter />`                                                                          |
 | **Interactividad**           | Arquitectura de Islas con directivas `client:*`                                                                          |
-| **Servidor & APIs**          | Endpoints de servidor y validación de formularios                                                                        |
+| **Servidor & APIs**          | Endpoints de servidor y validación de formularios (`astro:actions` + Zod) desplegados en Vercel Serverless (Node 22)   |
+| **Hosting & CDN**            | [Vercel](https://portafolio-blog-seven.vercel.app) con Build Output API v3, Edge CDN y SSL automático                    |
 | **SEO & Sindicación**        | Metadatos OpenGraph, Twitter Cards, `@astrojs/sitemap` y feed RSS (`@astrojs/rss`)                                       |
 
 ---
@@ -83,7 +87,7 @@ El desarrollo se organiza en **5 Sprints** con fechas reales (26 de octubre al 2
 - **Sprint 2:** Portafolio Personal & Optimización de Imágenes (Tareas T-05 a T-08).
 - **Sprint 3:** Blog Técnico, Content Collections & Rutas Dinámicas (Tareas T-09 a T-12).
 - **Sprint 4:** Isla Interactiva, Funciones de Servidor, Migración Tailwind & SEO 90+ (Tareas T-13 a T-16).
-- **Sprint 5:** Despliegue en Producción & Presentación del Proyecto (Tareas T-17 a T-18).
+- **Sprint 5:** Despliegue en Producción & Presentación del Proyecto (Tareas T-17 a T-20).
 
 Consulta el detalle completo en [**`docs/backlog.md`**](docs/backlog.md) y las normas de contribución en [**`docs/workflow.md`**](docs/workflow.md).
 
