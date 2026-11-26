@@ -25,6 +25,7 @@ describe('T-02: Sistema de Tokens CSS y Soporte Dark/Light', () => {
 		expect(globalCssContent).toContain('--color-border: #33333a;');
 		expect(globalCssContent).toContain('--color-text: #f0edf0;');
 		expect(globalCssContent).toContain('--color-text-muted: #d1d1d1;');
+		expect(globalCssContent).toContain('--color-text-inverse: #141416;');
 	});
 
 	it('debe aplicar la fuente local Atkinson y contenedor fluido en el body', () => {
