@@ -5,16 +5,15 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig, fontProviders, sharpImageService } from "astro/config";
 
 import preact from "@astrojs/preact";
-import netlify from "@astrojs/netlify";
+import node from "@astrojs/node";
 
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
-  adapter: netlify({
-    imageCDN: false,
-    devFeatures: false,
+  site: "https://wigsdev.netlify.app",
+  adapter: node({
+    mode: "standalone",
   }),
   integrations: [mdx(), sitemap(), preact()],
   image: {

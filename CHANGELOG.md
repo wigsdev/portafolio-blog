@@ -11,7 +11,28 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 4:** Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse >= 90 (`T-18`).
+- **Sprint 5:** Compilación Limpia, Cero Errores TypeScript y Cero Warnings (`T-19`).
+
+---
+
+## [0.14.2] - 2026-11-25
+
+### Añadido
+
+- **Auditoría SEO, Metadatos y Core Web Vitals (`T-18` / R9):**
+  - Creación de `public/robots.txt` permitiendo rastreo e indexación y enlazando al sitemap oficial `https://wigsdev.netlify.app/sitemap-index.xml`.
+  - Configuración de suite de pruebas automatizadas `tests/unit/seo.test.ts` (11/11 tests pasando).
+  - Certificación de puntajes Lighthouse en modo Mobile: **Performance 97**, **Accessibility 95**, **Best Practices 100**, **SEO 100** (superando la meta de la consigna >= 90).
+
+### Modificado
+
+- **Arquitectura de Servidor Limpia y Desacoplada (`T-18` / R8):**
+  - Reemplazo del adaptador de plataforma propietario `@astrojs/netlify` por el adaptador estándar universal `@astrojs/node` en modo `standalone`.
+  - Habilitación del comando nativo `pnpm preview` para previsualizaciones de producción locales.
+  - Reducción drástica del tiempo de compilación de 3m 39s a 11.9s.
+- **Enriquecimiento del Feed RSS y Metadatos Sociales:**
+  - `src/pages/rss.xml.js` configurado con ordenación cronológica descendente, `<language>es-ES</language>` y tags en cada entrada.
+  - `src/components/BaseHead.astro` blindado con URLs canónicas absolutas, metadatos Twitter Cards completos (`summary_large_image`, `twitter:creator`), meta autor y soporte para imágenes dinámicas por artículo (`heroImage`) a través de `BaseLayout.astro`.
 
 ---
 
