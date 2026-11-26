@@ -65,7 +65,7 @@ Una tarea se considera **Done** cuando:
 | **Sprint 1 (Semana 1)** | 26 Oct – 01 Nov 2026 | Fundamentos, Sistema de Diseño & Layouts Base | R1, R2, R7 |
 | **Sprint 2 (Semana 2)** | 02 Nov – 08 Nov 2026 | Portafolio Personal & Optimización de Imágenes | R1, R5 |
 | **Sprint 3 (Semana 3)** | 09 Nov – 15 Nov 2026 | Blog Técnico, Content Collections & Rutas Dinámicas | R3, R4 |
-| **Sprint 4 (Semana 4)** | 16 Nov – 22 Nov 2026 | Isla Interactiva, Servidor, Migración Tailwind & SEO 90+ | R2, R6, R8, R9 |
+| **Sprint 4 (Semana 4)** | 16 Nov – 22 Nov 2026 | Isla Interactiva, Servidor, Sobre Mí, Tailwind, Refactorización & SEO 90+ | R2, R6, R8, R9 |
 | **Sprint 5 (Semana 5)** | 23 Nov – 29 Nov 2026 | Despliegue Público, Diapositivas & Sustentación | R10 |
 
 ---
@@ -351,32 +351,74 @@ Desarrollar la página `/contacto` integrando un formulario funcional que envíe
 
 ---
 
-#### T-15 — Migración Progresiva del Sistema de Diseño a Tailwind CSS
+#### T-15 — Rediseño Visual y Arquitectura de Contenidos de la Página Sobre Mí (/sobre-mi)
+| Campo | Valor |
+|---|---|
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: feature` |
+| **Dependencias** | T-08 |
+| **Complejidad** | Media (2 días) |
+| **Archivos afectados** | `src/pages/sobre-mi.astro`, `src/styles/global.css`, `public/foto.jpg`, `public/cv.pdf` |
+
+**Descripción y Contexto Técnico:**  
+Rediseñar integralmente la página `/sobre-mi` elevando su estándar visual y jerarquía editorial: ficha asimétrica con retrato optimizado, badge pulsante de disponibilidad, ubicación geográfica con icono vectorial, capa de datos tipada `src/data/credentials.ts`, componente `CredentialCard.astro` y CV descargable bajo formato ATS.
+
+**Criterios de Aceptación:**
+- [x] Bio con tarjeta de perfil enriquecida (`foto.jpg`), badge de disponibilidad y ubicación.
+- [x] Certificaciones y formación continua en tarjetas modulares accesibles (`CredentialCard.astro`).
+- [x] Descarga de CV actualizado bajo metodología Harvard / ATS.
+- [x] Arquitectura 100% Zero-JS preservada.
+
+---
+
+#### T-16 — Migración Progresiva del Sistema de Diseño a Tailwind CSS
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: medium` |
 | **Tipo** | `type: style` |
 | **Dependencias** | T-02, T-03, T-05 |
-| **Complejidad** | Media (1 a 2 días) |
-| **Archivos afectados** | `astro.config.mjs`, `package.json`, `tailwind.config.mjs` (o directivas CSS), componentes clave |
+| **Complejidad** | Alta (3 días) |
+| **Archivos afectados** | `astro.config.mjs`, `src/styles/global.css`, componentes UI y páginas principales |
 
 **Descripción y Contexto Técnico:**  
-Instalar y configurar la integración oficial de Tailwind CSS en Astro. Migrar progresivamente los componentes centrales (Header, ProjectCard, BlogCard) y utilidades de espaciado a clases de Tailwind, manteniendo la compatibilidad con las variables semánticas de color dark/light y la fuente local *Atkinson*, evaluando el impacto en el bundle generado (Requisito R2).
+Integrar Tailwind CSS v4 con `@tailwindcss/vite`, mapear variables semánticas (`@theme`), habilitar variante `@custom-variant dark`, migrar todos los componentes y páginas purgando bloques `<style>` locales, extraer SVGs externos a `public/icons/ui/` y sanear `global.css` preservando cero regresión visual y tipografía Atkinson (Requisito R2).
 
 **Criterios de Aceptación:**
-- [ ] Integración de Tailwind instalada y configurada en `astro.config.mjs`.
-- [ ] Variables CSS de `docs/diseno.md` mapeadas en la configuración de tema de Tailwind.
-- [ ] Componentes clave refactorizados a utilidades de Tailwind conservando fidelidad visual y responsive.
-- [ ] `pnpm build` compila con purga JIT limpia y sin errores de estilos.
+- [x] Motor Tailwind v4 integrado sin preflight disruptivo.
+- [x] Tokens dark/light y fuente Atkinson mapeados y operativos.
+- [x] Átomos, navegación, blog y páginas principales migrados a clases utilitarias.
+- [x] 100% de SVGs desacoplados a `public/icons/ui/` con máscaras CSS.
+- [x] `global.css` depurado y 9/9 tests pasando en Vitest.
 
 ---
 
-#### T-16 — Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse ≥ 90
+#### T-17 — Refactorización y Unificación de Componentes de Blog (BlogFilterIsland y BlogCardItem)
+| Campo | Valor |
+|---|---|
+| **Prioridad** | `priority: medium` |
+| **Tipo** | `type: feature` |
+| **Dependencias** | T-13, T-16 |
+| **Complejidad** | Media (1 día) |
+| **Archivos afectados** | `src/components/BlogCardItem.tsx`, `src/components/BlogFilterIsland.tsx`, `src/components/BlogCard.astro` |
+
+**Descripción y Contexto Técnico:**  
+Refactorizar y unificar los componentes del catálogo del blog para eliminar la duplicación de código de la tarjeta (Principio DRY). Desacoplar la tarjeta a un componente común reutilizable en Preact/Astro (`BlogCardItem.tsx`) y purgar la sobreingeniería de arrastre manual con mouse (Drag-to-Scroll) en `BlogFilterIsland.tsx`, reduciendo el componente a menos de 200 líneas y aligerando el bundle de JavaScript cliente.
+
+**Criterios de Aceptación:**
+- [ ] Componente unificado `BlogCardItem.tsx` creado y renderizando con fidelidad 1:1 tanto en Astro (SSR estático) como en Preact (CSR dinámico).
+- [ ] Tarjeta clonada eliminada de `BlogFilterIsland.tsx` (cero duplicación de código).
+- [ ] Lógica de arrastre manual por mouse eliminada; navegación táctil nativa y botones `<` / `>` funcionando correctamente.
+- [ ] Cero regresiones visuales en modo claro y modo oscuro.
+- [ ] Todas las pruebas unitarias pasando (`pnpm test`) y compilación limpia (`pnpm build`).
+
+---
+
+#### T-18 — Auditoría SEO, Sitemap, Feed RSS y Meta Lighthouse ≥ 90
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: structure` |
-| **Dependencias** | T-13, T-14, T-15 |
+| **Dependencias** | T-13, T-14, T-16, T-17 |
 | **Complejidad** | Media (1 a 2 días) |
 | **Archivos afectados** | `src/pages/rss.xml.js`, `astro.config.mjs`, componentes de metadatos |
 
@@ -392,17 +434,17 @@ Configurar `@astrojs/sitemap` y el feed RSS en `/rss.xml`. Verificar etiquetas O
 
 ### SPRINT 5 — Despliegue Público, Diapositivas & Sustentación (23 Nov – 29 Nov 2026)
 
-#### T-17 — Compilación Limpia y Despliegue en Producción con URL Pública
+#### T-19 — Compilación Limpia y Despliegue en Producción con URL Pública
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: critical` |
 | **Tipo** | `type: presentation` |
-| **Dependencias** | T-16 |
+| **Dependencias** | T-18 |
 | **Complejidad** | Baja (1 día) |
 | **Archivos afectados** | `astro.config.mjs`, `package.json`, configuraciones de hosting |
 
 **Descripción y Contexto Técnico:**  
-Validar que `pnpm build` compile sin ningún error ni advertencias en estático. Desplegar en plataforma de hosting con SSL activo y URL pública accesible (Vercel, Netlify o Cloudflare Pages), cumpliendo el Requisito R10.
+Validar que `pnpm build` compile sin ningún error ni advertencias en estático. Desplegar en plataforma de hosting con SSL activo y URL pública accesible (Netlify, Vercel o Cloudflare Pages), cumpliendo el Requisito R10.
 
 **Criterios de Aceptación:**
 - [ ] `pnpm build` exitoso con salida estática en `dist/`.
@@ -411,12 +453,12 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 
 ---
 
-#### T-18 — Diapositivas de Presentación y Guía de Sustentación del Proyecto
+#### T-20 — Diapositivas de Presentación y Guía de Sustentación del Proyecto
 | Campo | Valor |
 |---|---|
 | **Prioridad** | `priority: high` |
 | **Tipo** | `type: presentation` |
-| **Dependencias** | T-17 |
+| **Dependencias** | T-19 |
 | **Complejidad** | Media (2 a 3 días) |
 | **Archivos afectados** | `docs/diapositivas-presentacion.md`, `docs/diapositivas-presentacion.html`, `docs/guia-demostracion.md` |
 
