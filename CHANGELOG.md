@@ -11,7 +11,17 @@ y este proyecto se adhiere a [Semantic Versioning (SemVer 2.0.0)](https://semver
 
 ### Planificado
 
-- **Sprint 5:** Diapositivas de Presentación y Guía de Sustentación del Proyecto (`T-20`).
+- Mejoras evolutivas post-lanzamiento (v1.x).
+
+---
+
+## [1.0.1] - 2026-11-27
+
+### Añadido
+
+- **Presentación Ejecutiva del Proyecto Final (`T-20` / `#18`):**
+  - Construcción de `docs/diapositivas-presentacion.html`, presentación web HTML5 interactiva autocontenida bajo el enfoque *Product-First* en 2 Actos (12 diapositivas), con la identidad visual oficial del proyecto (`#141416` / `#ff526d`, tipografía Atkinson), navegación por teclado y pantalla completa, 10 modales de código real con resaltador nativo One Dark Pro y exportación optimizada a PDF 16:9 (`@media print`).
+  - Incorporación de captura real de producción (`docs/preview.png`), archivo oficial `LICENSE` (MIT) y refinamiento integral de `README.md` y `docs/backlog.md` marcando el cierre completo del Sprint 5 (20/20 tareas completadas).
 
 ---
 

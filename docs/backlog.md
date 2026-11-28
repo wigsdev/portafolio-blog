@@ -482,12 +482,12 @@ Validar que `pnpm build` compile sin ningún error ni advertencias en estático.
 | **Tipo** | `type: presentation` |
 | **Dependencias** | T-19 |
 | **Complejidad** | Media (2 a 3 días) |
-| **Archivos afectados** | `docs/diapositivas-presentacion.md`, `docs/diapositivas-presentacion.html`, `docs/guia-demostracion.md` |
+| **Archivos afectados** | `docs/diapositivas-presentacion.html` |
 
 **Descripción y Contexto Técnico:**  
-Elaborar la presentación ejecutiva del proyecto final para la sesión de sustentación. Redactar las diapositivas en Markdown y generar la versión HTML interactiva con Reveal.js o similar, documentando arquitectura, cumplimiento de los 10 requisitos de la consigna y demo en vivo.
+Elaborar la presentación ejecutiva interactiva del proyecto final en HTML5 autocontenido bajo enfoque *Product-First*, documentando propuesta de valor, arquitectura híbrida, cumplimiento de los 10 requisitos de la consigna y demostración en vivo.
 
 **Criterios de Aceptación:**
-- [ ] `docs/diapositivas-presentacion.html` interactiva y lista para proyectar.
-- [ ] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones, servidor y migración a Tailwind.
-- [ ] Guía paso a paso de demostración para la sustentación final.
+- [x] `docs/diapositivas-presentacion.html` interactiva y lista para proyectar.
+- [x] Cobertura de arquitectura de islas, Zero-JS, View Transitions, colecciones, servidor y migración a Tailwind.
+- [x] Flujo de demostración en vivo y matriz de cumplimiento 10/10 integrados en la presentación.

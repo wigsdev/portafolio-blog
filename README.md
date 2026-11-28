@@ -1,39 +1,84 @@
-# 🚀 Portafolio Personal & Blog
+# 🚀 Portafolio Personal & Blog Técnico
 
-<div align="center">
+![Astro](https://img.shields.io/badge/Astro-7.4-FF5D01?style=flat-square&logo=astro&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Preact](https://img.shields.io/badge/Preact-11.2-673AB8?style=flat-square&logo=preact&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![pnpm](https://img.shields.io/badge/pnpm-9.x-F69220?style=flat-square&logo=pnpm&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Production-000000?style=flat-square&logo=vercel&logoColor=white)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-4x100-10B981?style=flat-square&logo=lighthouse&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
-![Astro](https://img.shields.io/badge/Astro-7.4-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-Production-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-9.x-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
-![SemVer](https://img.shields.io/badge/SemVer-1.0.0-informational?style=for-the-badge)
-![Zero-JS](https://img.shields.io/badge/Architecture-Zero--JS-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+Plataforma personal y blog de ingeniería construida con **Astro 7.4**, **Tailwind CSS v4**, **Preact** y **TypeScript** bajo una arquitectura híbrida (**95% SSG en Edge CDN + 5% SSR Serverless**). Entrega cero JavaScript por defecto (_Zero-JS_), accesibilidad certificada **WCAG 2.1 AA** y navegación continua con **View Transitions**.
 
-### 🌐 [Visitar Sitio en Producción: portafolio-blog-seven.vercel.app](https://portafolio-blog-seven.vercel.app)
+🌐 **Demo en producción:** [portafolio-blog-seven.vercel.app](https://portafolio-blog-seven.vercel.app)
 
-</div>
+[![Vista previa en producción del Portafolio Personal y Blog Técnico de Wilmer Gulcochía](docs/preview.png)](https://portafolio-blog-seven.vercel.app)
 
-Sitio web profesional de alto rendimiento desarrollado con **Astro 7.4 (Astro 5 Core)**, **TypeScript** y **Arquitectura de Islas**. Diseñado para maximizar los **Core Web Vitals**, entregar cero JavaScript por defecto (_Zero-JS_) y ofrecer una experiencia fluida mediante **View Transitions**.
+---
 
-Desarrollado y mantenido por **Wilmer Gulcochía ([@wigsdev](https://github.com/wigsdev))**.
+## ✨ Características Principales
+
+- **Portafolio y Trayectoria:** Catálogo curado de proyectos con enlaces directos a demos y código fuente, junto con perfil profesional, credenciales y CV descargable.
+- **Blog Técnico con Contratos de Datos:** 10 artículos en Markdown y MDX validados en tiempo de compilación, con paginación, rutas por etiquetas, lectura estimada y artículos relacionados.
+- **Búsqueda y Filtrado Instantáneo:** Isla interactiva que filtra todo el catálogo por etiqueta y texto en `< 1 ms` en memoria, sin recargas ni peticiones de red.
+- **Contacto Resiliente en Servidor:** Formulario validado extremo a extremo en servidor con mejora progresiva (operativo incluso con JavaScript deshabilitado).
+- **Accesibilidad Real y SEO Completo:** Modo Claro/Oscuro persistente sin parpadeos (*FOUC*), contraste certificado `5.86:1`, tipografía local de alta legibilidad, imágenes WebP, Sitemap, RSS 2.0 y OpenGraph.
+
+---
+
+## 🏆 Métricas en Producción (Lighthouse Mobile · Slow 4G)
+
+| Performance | Accessibility | Best Practices | SEO | FCP / LCP | TBT | CLS | Carga Inicial |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **100** | **100** | **100** | **100** | **1.4 s** | **20 ms** | **0** | **74.1 KiB** |
+
+> Calidad automatizada: **`0` errores / `0` warnings** en `astro check` (41 archivos) · **`11/11` tests** aprobados en Vitest 5.
 
 ---
 
 ## 🛠️ Stack Tecnológico
 
-| Capa                         | Tecnologías                                                                                                              |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Núcleo & SSG**             | [Astro 7.4](https://astro.build) (Astro 5 Core Engine) con Vite 8                                                        |
-| **Lenguaje**                 | JavaScript (ESM) & TypeScript estricto                                                                                   |
-| **Estilos & Tipografía**     | CSS Scoped · CSS Tokens (Modo Claro/Oscuro) · Fuente local _Atkinson_ con Astro Font Provider API                        |
-| **Contenido Tipado**         | Content Collections (`astro:content` con `loader: glob`) validadas con **Zod** · Soporte Markdown y MDX (`@astrojs/mdx`) |
-| **Multimedia & Rendimiento** | Optimización de imágenes con `<Image />` y motor `sharp`                                                                 |
-| **Navegación & SPA**         | View Transitions nativas con `<ClientRouter />`                                                                          |
-| **Interactividad**           | Arquitectura de Islas con directivas `client:*`                                                                          |
-| **Servidor & APIs**          | Endpoints de servidor y validación de formularios (`astro:actions` + Zod) desplegados en Vercel Serverless (Node 22)   |
-| **Hosting & CDN**            | [Vercel](https://portafolio-blog-seven.vercel.app) con Build Output API v3, Edge CDN y SSL automático                    |
-| **SEO & Sindicación**        | Metadatos OpenGraph, Twitter Cards, `@astrojs/sitemap` y feed RSS (`@astrojs/rss`)                                       |
+| Área | Tecnologías |
+| --- | --- |
+| **Framework & Renderizado** | [Astro 7.4](https://astro.build) · Vite 8 · View Transitions (`<ClientRouter />`) · 26 rutas SSG + 1 ruta SSR |
+| **Estilos & Tipografía** | Tailwind CSS v4 (`@tailwindcss/vite`) · Tokens Dark/Light · Fuente local _Atkinson_ (Astro Font API) |
+| **Interactividad & Contenido** | Preact 11 (`@astrojs/preact`) · Content Collections (`glob`) + Zod · Markdown & MDX · Sharp (`<Image />`) |
+| **Servidor & Despliegue** | Astro Actions + Zod · Adaptador dual `@astrojs/vercel` (producción) / `@astrojs/node` (local) |
+| **SEO & Calidad** | `@astrojs/sitemap` · `@astrojs/rss` · `robots.txt.ts` · TypeScript 6 · Vitest 5 · Husky |
+
+---
+
+## ⚡ Inicio Rápido
+
+**Prerrequisitos:** `Node.js >= 22.23.4` y `pnpm >= 9`. No requiere variables `.env` ni claves externas para ejecutarse en local.
+
+```bash
+git clone https://github.com/wigsdev/portafolio-blog.git
+cd portafolio-blog
+pnpm install
+pnpm dev # Disponible en http://localhost:4321
+```
+
+| Comando | Propósito |
+| --- | --- |
+| `pnpm astro dev --background` | Inicia el servidor de desarrollo en segundo plano (`status`, `logs`, `stop`) |
+| `pnpm check` | Auditoría estricta de tipos y plantillas (`astro check`) |
+| `pnpm test` | Ejecuta las 4 suites de pruebas unitarias (Vitest) |
+| `pnpm build` | Compila el proyecto (`dist/` en local o `.vercel/output/` en Vercel) |
+| `pnpm preview` | Previsualiza localmente el build de producción (`@astrojs/node` standalone) |
+
+---
+
+## ☁️ Despliegue y Variables de Entorno
+
+El proyecto detecta automáticamente el entorno en `astro.config.mjs`: en **Vercel** activa `@astrojs/vercel` (Edge CDN + Serverless Function Node 22 para `/contacto`) y en **local** utiliza `@astrojs/node` para mantener `pnpm preview` operativo sin dependencias externas.
+
+| Variable | Requerida | Descripción |
+| --- | :---: | --- |
+| `VERCEL` | Automática (CI) | Activa el adaptador `@astrojs/vercel` durante el build en la nube |
+| `VERCEL_PROJECT_PRODUCTION_URL` | Automática (CI) | Define el dominio canónico (`Astro.site`) para Sitemap, RSS y `robots.txt` |
+| `SITE_URL` | Opcional | Sobrescribe manualmente la URL canónica en entornos personalizados |
 
 ---
 
@@ -41,78 +86,49 @@ Desarrollado y mantenido por **Wilmer Gulcochía ([@wigsdev](https://github.com/
 
 ```text
 portafolio-blog/
-├── docs/                       # Gobernanza, Backlog oficial y Workflow de desarrollo
-│   ├── backlog.md              # Catálogo de 17 tareas en 5 Sprints
-│   └── workflow.md             # Git Flow unipersonal, Conventional Commits y DoD
-├── scripts/                    # Utilidades de automatización
-│   └── create_github_issues.py # Sincronización de Milestones y tareas con GitHub CLI
-├── public/                     # Assets estáticos directos (favicon, cv.pdf)
+├── docs/                              # Gobernanza, diseño y presentación ejecutiva
+│   ├── backlog.md                     # Catálogo de 20 tareas en 5 Sprints
+│   ├── diseno.md                      # Sistema de diseño, tokens y accesibilidad
+│   ├── workflow.md                    # Git Flow, Conventional Commits y DoD
+│   ├── diapositivas-presentacion.html # Presentación HTML5 interactiva (Product-First)
+│   └── preview.png                    # Captura real de producción
+├── public/                            # Favicons, íconos UI (SVG masks) y cv.pdf
 ├── src/
-│   ├── assets/                 # Imágenes procesadas con sharp y fuentes locales
-│   ├── components/             # Componentes reutilizables de UI (Header, Footer, Cards)
-│   ├── content/                # Colecciones de contenido Markdown/MDX
-│   │   └── blog/               # Artículos técnicos publicados
-│   ├── layouts/                # BaseLayout con View Transitions y layouts de lectura
-│   ├── pages/                  # Enrutamiento basado en archivos y rutas dinámicas
-│   └── styles/                 # Variables semánticas globales y resets CSS
-├── astro.config.mjs            # Configuración de integraciones, sitemap y fuentes
-├── package.json
-└── tsconfig.json
+│   ├── actions/                       # Astro Actions de servidor (contacto)
+│   ├── assets/                        # Imágenes optimizadas con Sharp y fuentes Atkinson
+│   ├── components/                    # 16 componentes reutilizables (.astro y Preact .tsx)
+│   ├── content/blog/                  # 10 artículos técnicos (9 .md + 1 .mdx)
+│   ├── data/                          # Catálogos tipados de proyectos y credenciales
+│   ├── layouts/                       # BaseLayout (View Transitions + tema) y BlogPost
+│   ├── pages/                         # Rutas estáticas, dinámicas, paginadas, RSS, robots y /contacto SSR
+│   ├── schemas/                       # Esquemas Zod compartidos
+│   ├── styles/                        # Tailwind CSS v4 (@theme) y tokens Dark/Light
+│   └── content.config.ts              # Content Layer API (glob + Zod)
+├── tests/unit/                        # 4 suites Vitest (contact, seo, tokens, smoke)
+├── astro.config.mjs                   # Adaptador dual, integraciones, Sharp y Font API
+└── LICENSE                            # Licencia MIT
 ```
 
 ---
 
-## 🧞 Comandos de Desarrollo
+## 📋 Documentación y Versionado
 
-Todos los comandos se ejecutan con **`pnpm`**:
-
-| Comando                                             | Propósito                                              |
-| --------------------------------------------------- | ------------------------------------------------------ |
-| `pnpm install`                                      | Instala las dependencias del proyecto                  |
-| `pnpm astro dev --background`                       | Inicia el servidor de desarrollo en segundo plano      |
-| `pnpm astro dev status`                             | Verifica el estado del servidor en background          |
-| `pnpm astro dev logs`                               | Muestra los registros del servidor en tiempo real      |
-| `pnpm astro dev stop`                               | Detiene el servidor en desarrollo                      |
-| `pnpm build`                                        | Compila el sitio estático para producción en `./dist/` |
-| `pnpm preview`                                      | Previsualiza localmente el build de producción         |
-| `python3 scripts/create_github_issues.py --dry-run` | Simula la creación de issues en GitHub                 |
-
----
-
-## 📋 Gestión Ágil del Proyecto
-
-El desarrollo se organiza en **5 Sprints** con fechas reales (26 de octubre al 29 de noviembre de 2026):
-
-- **Sprint 1:** Fundamentos, Sistema de Diseño & Layouts Base (Tareas T-01 a T-04).
-- **Sprint 2:** Portafolio Personal & Optimización de Imágenes (Tareas T-05 a T-08).
-- **Sprint 3:** Blog Técnico, Content Collections & Rutas Dinámicas (Tareas T-09 a T-12).
-- **Sprint 4:** Isla Interactiva, Funciones de Servidor, Migración Tailwind & SEO 90+ (Tareas T-13 a T-16).
-- **Sprint 5:** Despliegue en Producción & Presentación del Proyecto (Tareas T-17 a T-20).
-
-Consulta el detalle completo en [**`docs/backlog.md`**](docs/backlog.md) y las normas de contribución en [**`docs/workflow.md`**](docs/workflow.md).
-
----
-
-## 🏷️ Versionado Semántico (SemVer) & Historial de Cambios
-
-Este proyecto se rige estrictamente por la especificación [SemVer 2.0.0](https://semver.org/lang/es/):
-
-```text
-MAJOR.MINOR.PATCH
-```
-
-- **MAJOR (vX.0.0):** Cambios de arquitectura o modificaciones que rompen compatibilidad retroactiva.
-- **MINOR (v0.X.0):** Nuevas funcionalidades, páginas, módulos o endpoints compatibles hacia atrás.
-- **PATCH (v0.0.X):** Correcciones de errores, ajustes de estilos o parches de dependencias compatibles.
-
-Todo el historial de versiones, adiciones y correcciones se documenta activamente en [**`CHANGELOG.md`**](CHANGELOG.md) siguiendo la guía de [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
+- **Gestión Ágil:** 5 Sprints completados (`20/20` tareas) documentados en [**`docs/backlog.md`**](docs/backlog.md) y [**`docs/workflow.md`**](docs/workflow.md).
+- **Historial de Cambios:** Versionado bajo [SemVer 2.0.0](https://semver.org/lang/es/) y [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) en [**`CHANGELOG.md`**](CHANGELOG.md).
 
 ---
 
 ## 👤 Autor
 
-**Wilmer Gulcochía**
+**Wilmer Gulcochía** — Full-Stack Web Developer
 
+- **Sitio Web:** [portafolio-blog-seven.vercel.app](https://portafolio-blog-seven.vercel.app)
 - **GitHub:** [@wigsdev](https://github.com/wigsdev)
 - **LinkedIn:** [wigsdev](https://linkedin.com/in/wigsdev/)
 - **Correo:** [karlwgs1989@gmail.com](mailto:karlwgs1989@gmail.com)
+
+---
+
+## 📄 Licencia
+
+Distribuido bajo la licencia [**MIT**](LICENSE). © 2026 Wilmer Gulcochía.

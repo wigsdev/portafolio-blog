@@ -1,0 +1,2571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio Personal &amp; Blog Técnico — Presentación Ejecutiva (@wigsdev)</title>
+
+  <!-- Google Fonts: Atkinson Hyperlegible (Identidad Oficial) + JetBrains Mono (Código) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ── Reset & Base Layout (100% Viewport Width & Height) ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* ── Paleta Oficial Portafolio-Blog (Modo Oscuro · WCAG 2.1 AA) ── */
+      --bg-dark: #0e0e10;
+      --bg-slide: #141416;
+      --bg-surface: #1e1e22;
+      --bg-surface-muted: #27272c;
+      --bg-code: #0b0b0e;
+      --border-color: #33333a;
+
+      --accent-brand: #ff526d;
+      --accent-brand-hover: #ff758c;
+      --accent-brand-soft: rgba(255, 82, 109, 0.14);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-soft: rgba(56, 189, 248, 0.13);
+      --accent-emerald: #10b981;
+      --accent-emerald-soft: rgba(16, 185, 129, 0.14);
+      --accent-gold: #fbbf24;
+
+      --text-main: #f0edf0;
+      --text-secondary: #dad5d8;
+      --text-muted: #a8a2a6;
+      --text-inverse: #141416;
+
+      --font-body: 'Atkinson Hyperlegible', 'Atkinson', system-ui, -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+
+    html,
+    body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background-color: var(--bg-slide);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Contenedor Principal ── */
+    .deck-container {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(255, 82, 109, 0.08), transparent 42%),
+        radial-gradient(circle at 12% 88%, rgba(56, 189, 248, 0.06), transparent 40%),
+        var(--bg-slide);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Cabecera Superior Fluida ── */
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: clamp(0.55rem, 1.25vh, 0.95rem) clamp(1.5rem, 2.6vw, 3.2rem);
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(20, 20, 22, 0.94);
+      backdrop-filter: blur(10px);
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-title {
+      font-size: clamp(1.15rem, 1.35vw, 1.5rem);
+      color: var(--text-main);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      white-space: nowrap;
+    }
+
+    .brand-accent {
+      color: var(--accent-brand);
+    }
+
+    .act-pill {
+      padding: 0.24rem 0.78rem;
+      border-radius: 9999px;
+      font-size: clamp(0.74rem, 0.85vw, 0.86rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+
+    .act-pill.act-1 {
+      background: var(--accent-brand-soft);
+      color: var(--accent-brand-hover);
+      border-color: rgba(255, 82, 109, 0.38);
+    }
+
+    .act-pill.act-2 {
+      background: var(--accent-cyan-soft);
+      color: var(--accent-cyan);
+      border-color: rgba(56, 189, 248, 0.38);
+    }
+
+    .badge-req {
+      background-color: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.3rem 1rem;
+      border-radius: 9999px;
+      font-size: clamp(0.76rem, 0.88vw, 0.9rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Barra de Progreso ── */
+    .progress-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(51, 51, 58, 0.6);
+      flex-shrink: 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 8.33%;
+      background: linear-gradient(90deg, var(--accent-brand), var(--accent-brand-hover));
+      transition: width 0.25s ease;
+    }
+
+    /* ── Área Principal de Diapositiva ── */
+    .slide-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(0.95rem, 1.8vh, 1.7rem) clamp(1.5rem, 2.6vw, 3.2rem);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.22s ease-in-out;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+    }
+
+    .slide-req {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-code);
+      font-size: clamp(0.78rem, 0.92vw, 0.9rem);
+      color: var(--accent-brand-hover);
+      background: var(--accent-brand-soft);
+      border: 1px solid rgba(255, 82, 109, 0.3);
+      border-radius: 6px;
+      padding: 0.22rem 0.7rem;
+      margin-bottom: clamp(0.35rem, 0.75vh, 0.55rem);
+      width: fit-content;
+      flex-shrink: 0;
+    }
+
+    .slide-req.req-tech {
+      color: var(--accent-cyan);
+      background: var(--accent-cyan-soft);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .slide-title {
+      font-size: clamp(1.85rem, 2.32vw, 2.55rem);
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      margin-bottom: clamp(0.75rem, 1.5vh, 1.25rem);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Grillas Fluidas Calibradas para 1366×768 y 1080p ── */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 44% 56%;
+      gap: clamp(1rem, 1.8vw, 2rem);
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .split-grid-50 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 1.8vw, 2rem);
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .split-grid-62 {
+      display: grid;
+      grid-template-columns: 62% 38%;
+      gap: clamp(1rem, 1.8vw, 1.9rem);
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.95rem, 1.6vw, 1.6rem);
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── Tarjetas de Información (Zona Descriptiva) ── */
+    .info-card {
+      background-color: rgba(30, 30, 34, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: clamp(1.15rem, 2.2vh, 1.75rem) clamp(1.25rem, 1.8vw, 1.85rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.75rem, 1.5vh, 1.15rem);
+      justify-content: flex-start;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    .info-card.highlight-card {
+      border-color: rgba(255, 82, 109, 0.45);
+      background: linear-gradient(180deg, rgba(255, 82, 109, 0.08) 0%, rgba(30, 30, 34, 0.92) 45%);
+    }
+
+    .info-card.emerald-card {
+      border-color: rgba(16, 185, 129, 0.42);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(30, 30, 34, 0.92) 45%);
+    }
+
+    .info-card::-webkit-scrollbar,
+    pre::-webkit-scrollbar,
+    .code-modal-body::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .info-card::-webkit-scrollbar-track,
+    pre::-webkit-scrollbar-track,
+    .code-modal-body::-webkit-scrollbar-track {
+      background: rgba(20, 20, 22, 0.7);
+      border-radius: 4px;
+    }
+
+    .info-card::-webkit-scrollbar-thumb,
+    pre::-webkit-scrollbar-thumb,
+    .code-modal-body::-webkit-scrollbar-thumb {
+      background: var(--accent-brand);
+      border-radius: 4px;
+    }
+
+    .info-card h3 {
+      font-size: clamp(1.26rem, 1.56vw, 1.56rem);
+      color: var(--accent-brand-hover);
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: clamp(0.45rem, 0.9vh, 0.7rem);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .info-card h3.title-cyan {
+      color: var(--accent-cyan);
+    }
+
+    .info-card h3.title-emerald {
+      color: var(--accent-emerald);
+    }
+
+    /* ── Lista Descriptiva Escalada (+19% en 1366×768) ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.75rem, 1.55vh, 1.15rem);
+      font-size: clamp(1.08rem, 1.32vw, 1.28rem);
+      line-height: 1.52;
+      color: var(--text-secondary);
+    }
+
+    .bullet-list.compact-bullets {
+      font-size: clamp(0.98rem, 1.18vw, 1.14rem);
+      gap: clamp(0.55rem, 1.1vh, 0.85rem);
+      line-height: 1.46;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: clamp(1.3rem, 1.6vw, 1.65rem);
+    }
+
+    .bullet-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent-brand);
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    .bullet-list.cyan-bullets li::before {
+      color: var(--accent-cyan);
+    }
+
+    .bullet-list.emerald-bullets li::before {
+      color: var(--accent-emerald);
+    }
+
+    .bullet-list strong {
+      color: var(--text-main);
+    }
+
+    /* ── Énfasis Limpio para Métricas (Sin Ruido de Cajas) ── */
+    .hi-brand { color: var(--accent-brand-hover) !important; font-weight: 700; }
+    .hi-emerald { color: #34d399 !important; font-weight: 700; }
+    .hi-cyan { color: #7dd3fc !important; font-weight: 700; }
+
+    /* ── Píldoras Inline de Código Real (Armónicas y Sin Corte) ── */
+    .info-card code,
+    .bullet-list code,
+    .rubric-table code {
+      font-family: var(--font-code);
+      font-size: 0.85em;
+      font-weight: 600;
+      color: #fda4af;
+      background: rgba(255, 82, 109, 0.1);
+      border: 1px solid rgba(255, 82, 109, 0.25);
+      padding: 0.08rem 0.36rem;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .cyan-bullets code {
+      color: #7dd3fc;
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.26);
+    }
+
+    .emerald-bullets code {
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.26);
+    }
+
+    /* ── Banners Inferiores de Síntesis (Equilibran la Altura de Tarjetas) ── */
+    .quote-banner {
+      margin-top: auto;
+      padding: clamp(0.75rem, 1.4vh, 1.05rem) clamp(1rem, 1.5vw, 1.3rem);
+      border-radius: 12px;
+      background: rgba(255, 82, 109, 0.1);
+      border-left: 4px solid var(--accent-brand);
+      font-size: clamp(0.98rem, 1.18vw, 1.14rem);
+      line-height: 1.45;
+      color: var(--text-main);
+    }
+
+    .quote-banner.banner-muted {
+      background: rgba(255, 255, 255, 0.04);
+      border-left-color: #64748b;
+      color: var(--text-secondary);
+    }
+
+    .card-takeaway {
+      margin-top: auto;
+      padding: clamp(0.65rem, 1.25vh, 0.9rem) clamp(0.9rem, 1.3vw, 1.15rem);
+      border-radius: 10px;
+      background: rgba(20, 20, 22, 0.72);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-brand);
+      font-size: clamp(0.94rem, 1.12vw, 1.08rem);
+      line-height: 1.4;
+      color: var(--text-secondary);
+    }
+
+    .card-takeaway.takeaway-cyan {
+      border-left-color: var(--accent-cyan);
+    }
+
+    /* ── Tarjeta de Código Escalada (+19% en 1366×768) ── */
+    .code-card {
+      background-color: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: clamp(1rem, 1.9vh, 1.45rem) clamp(1.15rem, 1.6vw, 1.55rem);
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: nowrap;
+      font-family: var(--font-code);
+      font-size: clamp(0.84rem, 1vw, 0.96rem);
+      color: var(--text-muted);
+      margin-bottom: clamp(0.55rem, 1.15vh, 0.95rem);
+      padding-bottom: clamp(0.45rem, 0.9vh, 0.7rem);
+      border-bottom: 1px solid #26262e;
+      flex-shrink: 0;
+    }
+
+    .code-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .code-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .code-dots {
+      display: flex;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-red { background-color: #ef4444; }
+    .dot-yellow { background-color: #f59e0b; }
+    .dot-green { background-color: #10b981; }
+
+    pre {
+      font-family: var(--font-code);
+      font-size: clamp(0.94rem, 1.12vw, 1.1rem);
+      line-height: 1.56;
+      color: #e2e8f0;
+      overflow: auto;
+      white-space: pre;
+      flex: 1;
+      display: block;
+    }
+
+    pre code {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      white-space: pre;
+      color: #e2e8f0;
+    }
+
+    .btn-expand-code {
+      background: var(--accent-brand-soft);
+      color: var(--accent-brand-hover);
+      border: 1px solid rgba(255, 82, 109, 0.38);
+      padding: 0.28rem 0.7rem;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: clamp(0.76rem, 0.88vw, 0.86rem);
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .btn-expand-code:hover {
+      background: var(--accent-brand);
+      color: var(--text-inverse);
+      border-color: var(--accent-brand);
+      box-shadow: 0 0 14px rgba(255, 82, 109, 0.4);
+    }
+
+    /* ── Portada Escalada ── */
+    .cover-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      gap: clamp(1.1rem, 2.3vh, 1.85rem);
+    }
+
+    .cover-title {
+      font-size: clamp(2.7rem, 3.65vw, 4.1rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      max-width: 24ch;
+    }
+
+    .cover-subtitle {
+      font-size: clamp(1.2rem, 1.52vw, 1.62rem);
+      color: var(--text-secondary);
+      max-width: 56ch;
+      line-height: 1.48;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      font-size: clamp(0.98rem, 1.18vw, 1.14rem);
+      color: var(--text-muted);
+    }
+
+    .cover-meta strong {
+      color: var(--text-main);
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(170px, 1fr));
+      gap: clamp(0.85rem, 1.5vw, 1.4rem);
+      width: 100%;
+      max-width: 1040px;
+    }
+
+    .kpi-box {
+      background: rgba(30, 30, 34, 0.92);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: clamp(0.9rem, 1.85vh, 1.35rem) 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .kpi-value {
+      font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+      font-weight: 700;
+      color: var(--accent-brand);
+      line-height: 1.1;
+    }
+
+    .kpi-value.emerald {
+      color: var(--accent-emerald);
+    }
+
+    .kpi-value.cyan {
+      color: var(--accent-cyan);
+    }
+
+    .kpi-label {
+      font-size: clamp(0.8rem, 0.95vw, 0.92rem);
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Botones de Demo y Enlaces ── */
+    .btn-launch-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: var(--accent-brand);
+      color: var(--text-inverse) !important;
+      font-family: var(--font-body);
+      font-size: clamp(1.08rem, 1.32vw, 1.28rem);
+      font-weight: 700;
+      padding: clamp(0.68rem, 1.45vh, 0.95rem) clamp(1.4rem, 2.2vw, 2.1rem);
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(255, 82, 109, 0.32);
+      transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-launch-demo:hover {
+      background: var(--accent-brand-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(255, 82, 109, 0.48);
+    }
+
+    .btn-secondary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--bg-surface);
+      color: var(--text-main) !important;
+      border: 1px solid var(--border-color);
+      font-size: clamp(0.95rem, 1.12vw, 1.08rem);
+      font-weight: 700;
+      padding: clamp(0.58rem, 1.2vh, 0.82rem) clamp(1rem, 1.5vw, 1.4rem);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.18s ease, background-color 0.18s ease;
+    }
+
+    .btn-secondary-link:hover {
+      border-color: var(--accent-brand);
+      background: var(--bg-surface-muted);
+    }
+
+    /* ── Pilares y Demo Box ── */
+    .pillar-metric {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: auto;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      background: rgba(20, 20, 22, 0.82);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-code);
+      font-size: clamp(0.86rem, 1.02vw, 0.98rem);
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .demo-center-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .demo-box {
+      width: 100%;
+      padding: clamp(1.2rem, 2.5vh, 1.9rem) clamp(1.1rem, 1.8vw, 1.6rem);
+      background: rgba(255, 82, 109, 0.08);
+      border: 1px solid rgba(255, 82, 109, 0.35);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.85rem, 1.7vh, 1.25rem);
+      text-align: center;
+    }
+
+    .demo-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+    }
+
+    .demo-note {
+      font-family: var(--font-code);
+      font-size: clamp(0.88rem, 1.02vw, 0.98rem);
+      color: var(--text-secondary);
+    }
+
+    /* ── Anillos Lighthouse 4x100 Escalados ── */
+    .lh-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.55rem, 0.9vw, 0.9rem);
+    }
+
+    .lh-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      border-radius: 12px;
+      padding: clamp(0.65rem, 1.3vh, 0.95rem) 0.4rem;
+    }
+
+    .lh-ring {
+      width: clamp(56px, 4.6vw, 70px);
+      height: clamp(56px, 4.6vw, 70px);
+      border-radius: 50%;
+      border: 4px solid var(--accent-emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.2rem, 1.5vw, 1.48rem);
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.14);
+    }
+
+    .lh-label {
+      font-size: clamp(0.78rem, 0.92vw, 0.9rem);
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    .vitals-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem;
+    }
+
+    .vital-chip {
+      background: rgba(20, 20, 22, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem 0.5rem;
+      text-align: center;
+    }
+
+    .vital-chip strong {
+      display: block;
+      font-family: var(--font-code);
+      font-size: clamp(1.02rem, 1.24vw, 1.2rem);
+      color: #34d399;
+    }
+
+    .vital-chip span {
+      font-size: clamp(0.74rem, 0.88vw, 0.84rem);
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    /* ── Tabla de Rúbrica Escalada (+23% en 1366×768) ── */
+    .rubric-table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.88rem, 1.06vw, 1.02rem);
+      color: var(--text-secondary);
+    }
+
+    .rubric-table th {
+      text-align: left;
+      padding: clamp(0.45rem, 0.9vh, 0.65rem) 0.65rem;
+      background: rgba(39, 39, 44, 0.95);
+      color: var(--accent-brand-hover);
+      border-bottom: 2px solid var(--border-color);
+      font-weight: 700;
+    }
+
+    .rubric-table td {
+      padding: clamp(0.38rem, 0.78vh, 0.58rem) 0.65rem;
+      border-bottom: 1px solid rgba(51, 51, 58, 0.55);
+      vertical-align: middle;
+    }
+
+    .rubric-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rubric-table tr:hover td {
+      background: rgba(255, 82, 109, 0.05);
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 0.18rem 0.58rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: clamp(0.76rem, 0.88vw, 0.85rem);
+      white-space: nowrap;
+      background: var(--accent-emerald-soft);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .closing-banner {
+      text-align: center;
+      color: var(--accent-gold);
+      font-weight: 700;
+      font-size: clamp(1.12rem, 1.38vw, 1.35rem);
+    }
+
+    /* ── Colores de Sintaxis Inline en Diapositivas ── */
+    .kw { color: #c678dd !important; font-weight: 600; }
+    .fn { color: #61afef !important; font-weight: 600; }
+    .str { color: #98c379 !important; }
+    .num { color: #d19a66 !important; }
+    .cm { color: #7f848e !important; font-style: italic; }
+    .op { color: #56b6c2 !important; }
+    .tag { color: #e06c75 !important; }
+    .attr { color: #e5c07b !important; }
+
+    /* ── Modal Flotante de Código Completo ── */
+    .code-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: rgba(8, 8, 10, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 3vh, 2.5rem);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .code-modal-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .code-modal-window {
+      width: 92vw;
+      max-width: 1200px;
+      height: 86vh;
+      background-color: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 82, 109, 0.25);
+      overflow: hidden;
+    }
+
+    .code-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.4rem;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .code-modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .code-modal-filename {
+      font-family: var(--font-code);
+      font-size: clamp(0.95rem, 1.15vw, 1.12rem);
+      font-weight: 700;
+      color: var(--accent-brand-hover);
+    }
+
+    .code-modal-badge {
+      font-size: 0.76rem;
+      background: var(--accent-emerald-soft);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.16rem 0.58rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .code-modal-close {
+      background: rgba(239, 68, 68, 0.14);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      padding: 0.36rem 0.9rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .code-modal-close:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+    }
+
+    .code-modal-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1rem 0;
+      background-color: var(--bg-code);
+      font-family: var(--font-code);
+      font-size: clamp(0.92rem, 1.08vw, 1.04rem);
+      line-height: 1.58;
+      tab-size: 2;
+      color: #e2e8f0;
+    }
+
+    .editor-code-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+      width: max-content;
+    }
+
+    .editor-line {
+      display: flex;
+      align-items: baseline;
+      min-height: 1.58em;
+      padding-right: 2rem;
+    }
+
+    .editor-line:hover {
+      background-color: rgba(255, 82, 109, 0.05);
+    }
+
+    .line-num {
+      width: 3.6rem;
+      min-width: 3.6rem;
+      padding-right: 1.15rem;
+      text-align: right;
+      color: #5c6370;
+      user-select: none;
+      font-size: 0.86em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .line-code {
+      flex: 1;
+      white-space: pre;
+      color: #e2e8f0;
+    }
+
+    .code-modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.4rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* ── Tokens One Dark Pro y Muestras de Color ── */
+    .token.comment { color: #7f848e !important; font-style: italic; }
+    .token.keyword { color: #c678dd !important; font-weight: 600; }
+    .token.tag { color: #e06c75 !important; }
+    .token.attr-name { color: #e5c07b !important; }
+    .token.property { color: #e06c75 !important; }
+    .token.function { color: #61afef !important; }
+    .token.string { color: #98c379 !important; }
+    .token.number, .token.boolean { color: #d19a66 !important; }
+    .color-swatch {
+      display: inline-block;
+      width: 0.82em;
+      height: 0.82em;
+      margin-right: 0.3em;
+      vertical-align: -0.1em;
+      border-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+    }
+
+    /* ── Pie de Navegación ── */
+    .deck-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(0.5rem, 1.15vh, 0.9rem) clamp(1.5rem, 2.6vw, 3.2rem);
+      border-top: 1px solid var(--border-color);
+      background-color: rgba(20, 20, 22, 0.96);
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.42rem 1.25rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: clamp(0.88rem, 1.02vw, 1rem);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.18s, border-color 0.18s, color 0.18s, opacity 0.18s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background-color: var(--accent-brand);
+      border-color: var(--accent-brand);
+      color: var(--text-inverse);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .footer-center {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+    }
+
+    .counter {
+      font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .shortcut-hint {
+      font-size: clamp(0.76rem, 0.88vw, 0.85rem);
+      color: var(--text-muted);
+    }
+
+    kbd {
+      font-family: var(--font-code);
+      font-size: 0.86em;
+      padding: 0.08rem 0.36rem;
+      border-radius: 4px;
+      background: var(--bg-surface-muted);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    /* ── Estilos de Impresión a PDF 16:9 (Ctrl + P) ── */
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 100vw !important;
+        height: auto !important;
+        overflow: visible !important;
+        background-color: #141416 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .deck-header,
+      .progress-track,
+      .deck-footer,
+      .btn-expand-code,
+      .code-modal-overlay {
+        display: none !important;
+      }
+
+      .deck-container,
+      .slide-viewport {
+        position: static !important;
+        width: 100vw !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+        background: #141416 !important;
+      }
+
+      .slide {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        padding: 1.5rem 2.8rem !important;
+        background: #141416 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="deck-container">
+    <!-- Cabecera Superior -->
+    <header class="deck-header">
+      <div class="header-left">
+        <span id="act-pill" class="act-pill act-1">ACTO I · PRODUCTO</span>
+        <div class="brand-title">
+          <span>🚀</span> Portafolio &amp; Blog <span class="brand-accent">@wigsdev</span>
+        </div>
+      </div>
+      <div id="req-badge" class="badge-req">PORTADA · v1.0.0</div>
+    </header>
+
+    <div class="progress-track" aria-hidden="true">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <!-- Área de Diapositivas (12 Slides · 2 Actos Product-First) -->
+    <main class="slide-viewport">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide active">
+        <div class="cover-layout">
+          <div class="slide-req">📋 Acto I · El Producto &amp; Valor | Sesión 16 — Proyecto Final Astro 7</div>
+          <h1 class="cover-title">Portafolio Personal &amp; Blog Técnico</h1>
+          <p class="cover-subtitle">
+            Velocidad extrema, arquitectura <strong>Zero-JS por defecto</strong> e hibridación
+            <strong>95% SSG + 5% SSR</strong> con Astro 7.4, Tailwind v4, Preact y Vercel Serverless.
+          </p>
+
+          <div class="cover-meta">
+            <span>👤 <strong>Wilmer Gulcochía Sánchez (@wigsdev)</strong></span>
+            <span>·</span>
+            <span>🎓 Curso: <strong>Astro 7.3 con JavaScript</strong></span>
+            <span>·</span>
+            <span>🏷️ Versión: <strong>v1.0.0</strong></span>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-box">
+              <span class="kpi-value emerald">4 × 100</span>
+              <span class="kpi-label">Lighthouse Mobile 4G</span>
+            </div>
+            <div class="kpi-box">
+              <span class="kpi-value">74.1 KiB</span>
+              <span class="kpi-label">Carga Inicial Total</span>
+            </div>
+            <div class="kpi-box">
+              <span class="kpi-value cyan">1.4 s</span>
+              <span class="kpi-label">FCP / LCP · CLS 0</span>
+            </div>
+            <div class="kpi-box">
+              <span class="kpi-value emerald">11 / 11</span>
+              <span class="kpi-label">Tests · 0 Errores TS</span>
+            </div>
+          </div>
+
+          <div class="cover-links">
+            <a href="https://portafolio-blog-seven.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-launch-demo">
+              <span>🌐</span>
+              <span>portafolio-blog-seven.vercel.app</span>
+              <span>↗</span>
+            </a>
+            <a href="https://github.com/wigsdev/portafolio-blog" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">
+              <span>💻</span>
+              <span>github.com/wigsdev/portafolio-blog</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: EL DOLOR DEL USUARIO -->
+      <section class="slide">
+        <div class="slide-req">📋 Acto I · El Problema Real | Contexto de Producto (R6, R9)</div>
+        <h2 class="slide-title">🎯 El Dolor del Usuario: ¿Por qué fallan los portafolios actuales?</h2>
+        <div class="split-grid-50">
+          <div class="info-card">
+            <h3>❌ Fricción en Soluciones Tradicionales</h3>
+            <ul class="bullet-list">
+              <li><strong>SPAs sobrecargadas de JavaScript:</strong> Descargan entre <span class="hi-brand">300 KB</span> y <span class="hi-brand">1 MB</span> de runtime solo para mostrar texto estático en móviles 4G.</li>
+              <li><strong>Contenido Markdown frágil:</strong> Sin contratos de datos, una fecha inválida o portada faltante rompe la interfaz en producción.</li>
+              <li><strong>Accesibilidad y SEO secundarios:</strong> Bajo contraste en modo oscuro, parpadeos de tema (<em>FOUC</em>) y ausencia de sitemap o RSS.</li>
+              <li><strong>Formularios desprotegidos:</strong> Validación limitada al navegador o dependencia total de servicios cerrados de terceros.</li>
+            </ul>
+            <div class="quote-banner banner-muted">
+              📉 <strong>Costo real:</strong> Más del <strong>53% de usuarios móviles</strong> abandona un sitio cuando tarda más de 3 segundos en renderizar.
+            </div>
+          </div>
+
+          <div class="info-card highlight-card">
+            <h3>💡 La Oportunidad Product-First</h3>
+            <ul class="bullet-list emerald-bullets">
+              <li><strong>Primera prueba de ingeniería:</strong> Un portafolio técnico demuestra criterio arquitectónico ante reclutadores y clientes en los primeros 3 segundos.</li>
+              <li><strong>Plataforma dual unificada:</strong> Integra vitrina de proyectos, credenciales con CV descargable y un <strong>blog técnico de 10 artículos</strong>.</li>
+              <li><strong>Cero desperdicio de recursos:</strong> Entrega HTML estático instantáneo en lectura y activa JS o servidor únicamente donde agrega valor real.</li>
+            </ul>
+            <div class="quote-banner">
+              🧠 <strong>Regla de Oro:</strong> <em>“A nadie le importa cómo construiste el motor hasta que primero siente qué tan rápido y suave viaja el automóvil.”</em>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA SOLUCIÓN Y PROPUESTA DE VALOR -->
+      <section class="slide">
+        <div class="slide-req">📋 Acto I · Propuesta de Valor | Visión Integral (R1–R10)</div>
+        <h2 class="slide-title">💡 La Solución: 3 Pilares Tangibles para el Usuario</h2>
+        <div class="pillars-grid">
+          <div class="info-card highlight-card">
+            <h3><span>⚡</span> 1. Velocidad Instantánea</h3>
+            <ul class="bullet-list">
+              <li><strong>Zero-JS por defecto:</strong> 26 rutas pre-renderizadas servidas directamente desde Vercel Edge CDN.</li>
+              <li><strong>Pipeline Sharp + CSS Inline:</strong> 35 assets en WebP/SVG y estilos críticos incrustados sin bloqueo de red.</li>
+              <li><strong>Estabilidad visual absoluta:</strong> Tipografía precargada y dimensiones fijas que eliminan saltos de página.</li>
+            </ul>
+            <span class="pillar-metric">74.1 KiB · LCP 1.4s · TBT 20ms · CLS 0</span>
+          </div>
+
+          <div class="info-card">
+            <h3 class="title-cyan"><span>✨</span> 2. Experiencia App-like</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>View Transitions nativas:</strong> Navegación continua entre páginas sin recargas bruscas del navegador.</li>
+              <li><strong>Filtrado reactivo (<span class="hi-cyan">0 ms</span>):</strong> Isla Preact que combina etiquetas y búsqueda de texto en memoria.</li>
+              <li><strong>Modo Oscuro / Claro sin FOUC:</strong> Preferencia persistente con lectura ergonómica en fuente <em>Atkinson</em>.</li>
+            </ul>
+            <span class="pillar-metric">10 Artículos · 6 Proyectos · Filtro 0 ms</span>
+          </div>
+
+          <div class="info-card emerald-card">
+            <h3 class="title-emerald"><span>🛡️</span> 3. Rigor de Ingeniería</h3>
+            <ul class="bullet-list emerald-bullets">
+              <li><strong>Servidor bajo demanda:</strong> Formulario <code>/contacto</code> validado con Astro Actions + Zod en Node 22.</li>
+              <li><strong>Accesibilidad certificada:</strong> Contraste WCAG 2.1 AA (<span class="hi-emerald">5.86:1</span>), navegación por teclado y ARIA.</li>
+              <li><strong>Calidad verificable:</strong> Auditoría estricta de tipos y suite automatizada de pruebas unitarias.</li>
+            </ul>
+            <span class="pillar-metric">4×100 Lighthouse · 11/11 Tests</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: DEMO EN VIVO INMEDIATA -->
+      <section class="slide">
+        <div class="slide-req">📋 Acto I · Momento ¡Wow! | Validación Directa en Producción (2m 15s)</div>
+        <h2 class="slide-title">🎬 Demostración en Vivo Inmediata (Live Showcase)</h2>
+        <div class="split-grid-50">
+          <div class="info-card">
+            <h3>🧪 Hoja de Ruta: Camino Feliz + Error Controlado</h3>
+            <ul class="bullet-list">
+              <li><strong>1. Fluidez y Tema (<code>/</code> ➔ <code>/sobre-mi/</code> ➔ <code>/proyectos/</code>):</strong> Transiciones suaves sin recarga y alternancia Dark/Light sin parpadeos.</li>
+              <li><strong>2. Isla Interactiva y MDX (<code>/blog/</code>):</strong> Búsqueda y filtro por etiquetas en <span class="hi-brand">0 ms</span> sobre los 10 artículos y lectura <code>.mdx</code>.</li>
+              <li><strong>3. Error Controlado y Éxito SSR (<code>/contacto/</code>):</strong> Provocar rechazo de servidor con <strong>Zod</strong> (<code>aria-invalid</code>) y luego envío válido (<span class="hi-emerald">HTTP 200</span>).</li>
+              <li><strong>4. Evidencia en DevTools:</strong> Consola con <span class="hi-emerald">0 errores</span>, entrega WebP y reporte <strong>4×100 Lighthouse</strong>.</li>
+            </ul>
+            <div class="card-takeaway">
+              ⏱️ <strong>Tiempo objetivo:</strong> 2 min 15 s mostrando el producto real antes de pasar al código.
+            </div>
+          </div>
+
+          <div class="info-card highlight-card">
+            <h3>🌐 Aplicación Activa en Producción</h3>
+            <div class="demo-center-wrap">
+              <div class="demo-box">
+                <span style="color: var(--text-secondary); font-size: clamp(1rem, 1.22vw, 1.15rem);">
+                  Despliegue oficial <strong>v1.0.0</strong> en Vercel Edge CDN + Serverless Node 22
+                </span>
+                <a href="https://portafolio-blog-seven.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-launch-demo">
+                  <span>🚀</span>
+                  <span>Abrir Portafolio en Producción</span>
+                  <span>↗</span>
+                </a>
+                <span class="demo-note">https://portafolio-blog-seven.vercel.app/</span>
+
+                <div class="demo-shortcuts">
+                  <a href="https://portafolio-blog-seven.vercel.app/blog/" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">📝 /blog/</a>
+                  <a href="https://portafolio-blog-seven.vercel.app/contacto/" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">✉️ /contacto/</a>
+                  <a href="https://portafolio-blog-seven.vercel.app/rss.xml" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">📡 /rss.xml</a>
+                  <a href="https://portafolio-blog-seven.vercel.app/robots.txt" target="_blank" rel="noopener noreferrer" class="btn-secondary-link">🤖 /robots.txt</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-takeaway">
+              💡 <strong>Plan B Offline:</strong> <code>pnpm preview</code> ejecuta el build local con <code>@astrojs/node</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: UI/UX, ACCESIBILIDAD Y ASSETS -->
+      <section class="slide">
+        <div class="slide-req">📋 Acto I · UI/UX &amp; Rendimiento | Requisitos R2 (Estilos/Font API), R5 (&lt;Image /&gt;) &amp; R7</div>
+        <h2 class="slide-title">🎨 Diseño Inclusivo, Contraste WCAG AA y Pipeline Sharp</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3>💡 Decisiones de Experiencia y Accesibilidad</h3>
+            <ul class="bullet-list">
+              <li><strong>Tailwind CSS v4 + Tokens:</strong> Variables en <code>:root</code> y <code>html.dark</code> integradas con <code>@theme</code> y <code>@custom-variant</code>.</li>
+              <li><strong>Astro Font API Local:</strong> Tipografía <em>Atkinson</em> servida con <code>fontProviders.local()</code> y <code>&lt;Font preload /&gt;</code> sin peticiones externas.</li>
+              <li><strong>Contraste WCAG 2.1 AA (<span class="hi-emerald">100/100</span>):</strong> Texto <span class="color-swatch" style="background:#141416"></span><code>#141416</code> sobre <span class="color-swatch" style="background:#ff526d"></span><code>#ff526d</code> elevando el ratio de <span class="hi-brand">3.14:1</span> a <span class="hi-emerald">5.86:1</span>.</li>
+              <li><strong>Imágenes <code>&lt;Image /&gt;</code> + Sharp:</strong> 35 assets convertidos a WebP con dimensiones explícitas (<span class="hi-emerald">CLS = 0</span>).</li>
+            </ul>
+            <div class="card-takeaway">
+              🖼️ <strong>Impacto Sharp:</strong> Avatares reducidos de <strong>23.9 KiB a solo 238 B</strong> (-99% de peso).
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>src/styles/global.css</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-global-css">
+                  <span>⛶</span> Ampliar código
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="kw">@import</span> <span class="str">"tailwindcss/theme.css"</span>;
+<span class="kw">@import</span> <span class="str">"tailwindcss/utilities.css"</span>;
+<span class="kw">@custom-variant</span> dark (&amp;:where(.dark, .dark *));
+
+<span class="kw">@theme</span> {
+  <span class="attr">--color-brand</span>: var(--color-brand);
+  <span class="attr">--color-text-inverse</span>: var(--color-text-inverse);
+  <span class="attr">--font-atkinson</span>: <span class="str">"Atkinson"</span>, system-ui, sans-serif;
+}
+
+<span class="cm">/* Modo Oscuro — Contraste WCAG 2.1 AA: 5.86:1 */</span>
+<span class="tag">html.dark</span> {
+  <span class="attr">--color-brand</span>: <span class="num">#ff526d</span>;
+  <span class="attr">--color-brand-hover</span>: <span class="num">#ff758c</span>;
+  <span class="attr">--color-text-inverse</span>: <span class="num">#141416</span>;
+  <span class="attr">--color-background</span>: <span class="num">#141416</span>;
+  <span class="attr">--color-surface</span>: <span class="num">#1e1e22</span>;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: ARQUITECTURA HÍBRIDA -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Ingeniería | Requisitos R1 (Arquitectura), R8 (SSR) &amp; R10 (Vercel)</div>
+        <h2 class="slide-title">🏛️ Arquitectura Híbrida (95% SSG + 5% SSR) y Adaptador Dual</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3 class="title-cyan">💡 Ingeniería Sin Vendor Lock-in</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>95% SSG (Vercel Edge CDN):</strong> 26 rutas estáticas pre-renderizadas (inicio, proyectos, sobre mí, 10 posts, 9 tags, <code>robots.txt</code> y <code>rss.xml</code>).</li>
+              <li><strong>5% SSR (Serverless Node 22):</strong> Únicamente <code>/contacto</code> y <code>_actions/contact</code> ejecutan cómputo bajo demanda.</li>
+              <li><strong>Adaptador Condicional Dual:</strong> Activa <code>@astrojs/vercel</code> en la nube y <code>@astrojs/node</code> en local para preservar <code>pnpm preview</code>.</li>
+              <li><strong>CSS Crítico Inline:</strong> <code>inlineStylesheets: "always"</code> elimina hojas externas bloqueantes del primer pintado.</li>
+            </ul>
+            <div class="card-takeaway takeaway-cyan">
+              ⚡ <strong>Build verificado:</strong> Compilación limpia en <strong>9.2 s</strong> (local) + Build Output API v3.
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>astro.config.mjs</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-astro-config">
+                  <span>⛶</span> Ampliar código
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="kw">const</span> prodUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+<span class="kw">const</span> siteUrl =
+  process.env.SITE_URL ||
+  (prodUrl
+    ? <span class="str">`https://${prodUrl}`</span>
+    : <span class="str">"https://portafolio-blog-seven.vercel.app"</span>);
+
+<span class="kw">export default</span> <span class="fn">defineConfig</span>({
+  site: siteUrl,
+  adapter: process.env.VERCEL
+    ? <span class="fn">vercel</span>()
+    : <span class="fn">node</span>({ mode: <span class="str">"standalone"</span> }),
+  integrations: [<span class="fn">mdx</span>(), <span class="fn">sitemap</span>(), <span class="fn">preact</span>()],
+  build: { inlineStylesheets: <span class="str">"always"</span> },
+  image: { service: <span class="fn">sharpImageService</span>() },
+  fonts: [{ provider: fontProviders.<span class="fn">local</span>(), name: <span class="str">"Atkinson"</span> }],
+  vite: { plugins: [<span class="fn">tailwindcss</span>()] },
+});</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: COMPONENTES, LAYOUTS Y VIEW TRANSITIONS -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Ingeniería | Requisitos R1 (Layout + ≥4 Componentes) &amp; R7 (View Transitions)</div>
+        <h2 class="slide-title">🧩 Composición Modular: Layouts, Props, Slots y Transiciones</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3 class="title-cyan">💡 Reutilización Real y Cero Parpadeos</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>2 Layouts Anidables:</strong> <code>BaseLayout.astro</code> (estructura global, SEO, tema y <code>&lt;slot /&gt;</code>) y <code>BlogPost.astro</code> (lectura editorial).</li>
+              <li><strong>16 Componentes Tipados:</strong> <code>ProjectCard</code>, <code>BlogCard</code>, <code>BlogCardItem</code>, <code>CredentialCard</code>, <code>Badge</code>, <code>Header</code>, <code>Navigation</code> y <code>ThemeToggle</code>.</li>
+              <li><strong>View Transitions sin FOUC:</strong> <code>&lt;ClientRouter /&gt;</code> coordina la navegación mientras <code>astro:after-swap</code> preserva <code>html.dark</code>.</li>
+              <li><strong>Accesibilidad Semántica:</strong> Landmarks HTML5 y enlaces de proyectos desambiguados con <code>aria-label</code> contextuales.</li>
+            </ul>
+            <div class="card-takeaway takeaway-cyan">
+              🧩 <strong>Supera la rúbrica (4x):</strong> 16 componentes modulares frente al mínimo de 4 exigido.
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>src/layouts/BaseLayout.astro</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-base-layout">
+                  <span>⛶</span> Ampliar código
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="cm">---</span>
+<span class="kw">import</span> { ClientRouter } <span class="kw">from</span> <span class="str">"astro:transitions"</span>;
+<span class="kw">interface</span> Props {
+  pageTitle?: string; description?: string; image?: ImageMetadata;
+}
+<span class="kw">const</span> { pageTitle = SITE_TITLE, description } = Astro.props;
+<span class="cm">---</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="str">"es"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;BaseHead</span> <span class="attr">title</span>={pageTitle} <span class="attr">description</span>={description} <span class="tag">/&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attr">is:inline</span><span class="tag">&gt;</span>
+      <span class="fn">applyTheme</span>(); <span class="cm">// Evita FOUC antes del pintado</span>
+      document.<span class="fn">addEventListener</span>(<span class="str">"astro:after-swap"</span>, applyTheme);
+    <span class="tag">&lt;/script&gt;</span>
+    <span class="tag">&lt;ClientRouter</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;&lt;Header /&gt;&lt;main&gt;&lt;slot /&gt;&lt;/main&gt;&lt;Footer /&gt;&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CONTENT COLLECTIONS Y RUTAS DINÁMICAS -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Ingeniería | Requisitos R3 (Colección Zod ≥5) &amp; R4 (getStaticPaths + Paginación)</div>
+        <h2 class="slide-title">📚 Content Collections con Zod y Rutas Dinámicas Paginadas</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3 class="title-cyan">💡 Contenido Tipado en Tiempo de Compilación</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>Content Layer API:</strong> <code>glob()</code> indexa <strong>10 artículos técnicos</strong> (9 <code>.md</code> + 1 <code>.mdx</code>) validando frontmatter y portadas con <strong>Zod</strong>.</li>
+              <li><strong>Rutas Dinámicas:</strong> <code>getStaticPaths()</code> genera cada artículo en <code>[...slug].astro</code> y páginas por tema en <code>tags/[tag].astro</code>.</li>
+              <li><strong>Paginación Estática:</strong> <code>[...page].astro</code> usa <code>paginate()</code> para servir <code>/blog/</code> y <code>/blog/2/</code> con navegación accesible.</li>
+              <li><strong>Cálculo Automático:</strong> Estima el tiempo de lectura (200 ppm) y serializa el catálogo completo hacia la isla de búsqueda.</li>
+            </ul>
+            <div class="card-takeaway takeaway-cyan">
+              📚 <strong>Doble del mínimo:</strong> 10 entradas validadas en compilación (mínimo requerido: 5).
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>src/content.config.ts</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-content-config">
+                  <span>⛶</span> content.config.ts
+                </button>
+                <button class="btn-expand-code" type="button" data-template="tpl-blog-page">
+                  <span>⛶</span> [...page].astro
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="kw">import</span> { defineCollection } <span class="kw">from</span> <span class="str">'astro:content'</span>;
+<span class="kw">import</span> { glob } <span class="kw">from</span> <span class="str">'astro/loaders'</span>;
+<span class="kw">import</span> { z } <span class="kw">from</span> <span class="str">'astro/zod'</span>;
+
+<span class="kw">const</span> blog = <span class="fn">defineCollection</span>({
+  loader: <span class="fn">glob</span>({
+    base: <span class="str">'./src/content/blog'</span>,
+    pattern: <span class="str">'**/*.{md,mdx}'</span>,
+  }),
+  schema: ({ image }) =&gt;
+    z.<span class="fn">object</span>({
+      title: z.<span class="fn">string</span>(),
+      description: z.<span class="fn">string</span>(),
+      pubDate: z.coerce.<span class="fn">date</span>(),
+      heroImage: z.<span class="fn">optional</span>(<span class="fn">image</span>()),
+      tags: z.<span class="fn">array</span>(z.<span class="fn">string</span>()).<span class="fn">default</span>([]),
+    }),
+});
+<span class="kw">export const</span> collections = { blog };</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ZERO-JS E ISLA PREACT -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Ingeniería | Requisito R6 (Isla Interactiva con client:*)</div>
+        <h2 class="slide-title">🏝️ Filosofía Zero-JS e Isla Interactiva con Preact (DRY)</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3 class="title-cyan">💡 Hidratación Selectiva sin Desperdicio</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>Hidratación Quirúrgica:</strong> Solo <code>BlogFilterIsland.tsx</code> usa <code>client:load</code> cargando el runtime ligero de <strong>Preact (~3 KB)</strong> en <code>/blog/</code>.</li>
+              <li><strong>Filtrado en Memoria:</strong> <code>useMemo</code> cruza etiqueta activa + búsqueda textual en <span class="hi-cyan">0 ms</span> sin peticiones de red.</li>
+              <li><strong>Slot Estático Híbrido:</strong> Recibe <code>&lt;Pagination /&gt;</code> como <code>children</code> y lo oculta automáticamente al buscar o filtrar.</li>
+              <li><strong>Arquitectura DRY:</strong> <code>BlogCardItem.tsx</code> unifica la tarjeta del blog para renderizarse 1:1 tanto en Astro como en Preact.</li>
+            </ul>
+            <div class="card-takeaway takeaway-cyan">
+              🏝️ <strong>Resultado Zero-JS:</strong> Inicio, Proyectos, Sobre mí y Posts cargan <strong>0 KB de Preact</strong>.
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>src/components/BlogFilterIsland.tsx</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-blog-filter">
+                  <span>⛶</span> Ampliar código
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="kw">const</span> filteredPosts = <span class="fn">useMemo</span>(() =&gt; {
+  <span class="kw">const</span> query = searchQuery.<span class="fn">trim</span>().<span class="fn">toLowerCase</span>();
+  <span class="kw">const</span> isFiltered = selectedTag !== <span class="str">"all"</span> || query.length &gt; <span class="num">0</span>;
+
+  <span class="kw">if</span> (!isFiltered &amp;&amp; initialPosts?.length) {
+    <span class="kw">return</span> posts.<span class="fn">filter</span>((p) =&gt; initialPosts.<span class="fn">includes</span>(p.id));
+  }
+  <span class="kw">return</span> posts.<span class="fn">filter</span>((post) =&gt; {
+    <span class="kw">const</span> byTag =
+      selectedTag === <span class="str">"all"</span> || post.tags.<span class="fn">includes</span>(selectedTag);
+    <span class="kw">if</span> (!byTag || !query) <span class="kw">return</span> byTag;
+    <span class="kw">return</span> post.title.<span class="fn">toLowerCase</span>().<span class="fn">includes</span>(query) ||
+           post.description.<span class="fn">toLowerCase</span>().<span class="fn">includes</span>(query);
+  });
+}, [posts, selectedTag, searchQuery]);
+
+<span class="cm">/* Tarjeta DRY + Paginación estática condicional */</span>
+{filteredPosts.<span class="fn">map</span>((p) =&gt; <span class="tag">&lt;BlogCardItem</span> <span class="attr">key</span>={p.id} <span class="attr">post</span>={p} <span class="tag">/&gt;</span>)}
+{selectedTag === <span class="str">"all"</span> &amp;&amp; !searchQuery.<span class="fn">trim</span>() &amp;&amp; children}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ASTRO ACTIONS + ZOD -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Ingeniería | Requisito R8 (Función de Servidor con Validación)</div>
+        <h2 class="slide-title">⚙️ Servidor Bajo Demanda: Astro Actions + Zod en Vercel</h2>
+        <div class="split-grid">
+          <div class="info-card">
+            <h3 class="title-cyan">💡 Validación Tipada de Extremo a Extremo</h3>
+            <ul class="bullet-list cyan-bullets">
+              <li><strong>SSR Exclusivo Opt-in:</strong> <code>prerender = false</code> en <code>contacto.astro</code> mantiene estático el 95% restante del proyecto.</li>
+              <li><strong>Contrato Zod (<code>contactSchema</code>):</strong> Valida <code>nombre</code>, <code>email</code> (<code>z.email()</code>), <code>asunto</code> y <code>mensaje</code> con reglas de longitud.</li>
+              <li><strong>Mejora Progresiva Nativa:</strong> <code>&lt;form action=&#123;actions.contact&#125;&gt;</code> opera incluso sin JS cliente y mapea errores con <code>isInputError()</code>.</li>
+              <li><strong>Ejecución Serverless Real:</strong> Desplegado y probado con <code>FormData</code> en vivo sobre Vercel Node 22 (<span class="hi-emerald">HTTP 200</span>).</li>
+            </ul>
+            <div class="card-takeaway takeaway-cyan">
+              🛡️ <strong>Defensa en profundidad:</strong> 5 pruebas unitarias en Vitest blindan <code>contactSchema</code>.
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>actions/index.ts · schemas/contact.ts</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-actions">
+                  <span>⛶</span> actions/index.ts
+                </button>
+                <button class="btn-expand-code" type="button" data-template="tpl-contact-schema">
+                  <span>⛶</span> schemas/contact.ts
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="cm">// src/actions/index.ts — Astro Action Serverless</span>
+<span class="kw">export const</span> server = {
+  contact: <span class="fn">defineAction</span>({
+    accept: <span class="str">'form'</span>,
+    input: contactSchema,
+    handler: <span class="kw">async</span> (input) =&gt; ({
+      success: <span class="kw">true</span>,
+      nombre: input.nombre,
+      message: <span class="str">'¡Gracias por contactarme! Te responderé pronto.'</span>,
+    }),
+  }),
+};
+
+<span class="cm">// src/pages/contacto.astro — Consumo SSR tipado</span>
+<span class="kw">export const</span> prerender = <span class="kw">false</span>;
+<span class="kw">const</span> result = Astro.<span class="fn">getActionResult</span>(actions.contact);
+<span class="kw">const</span> errors = <span class="fn">isInputError</span>(result?.error)
+  ? result.error.fields : {};</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: SEO, TESTING Y LIGHTHOUSE 4x100 -->
+      <section class="slide">
+        <div class="slide-req req-tech">⚙️ Acto II · Calidad | Requisitos R9 (SEO, Sitemap, Lighthouse ≥90) &amp; R10 (Build Limpio)</div>
+        <h2 class="slide-title">📊 SEO Técnico, Suite Vitest y Certificación 4×100</h2>
+        <div class="split-grid-50">
+          <div class="info-card emerald-card">
+            <h3 class="title-emerald">🏆 Lighthouse Real en Producción (Moto G Power · Slow 4G)</h3>
+
+            <div class="lh-grid">
+              <div class="lh-item">
+                <div class="lh-ring">100</div>
+                <span class="lh-label">Performance</span>
+              </div>
+              <div class="lh-item">
+                <div class="lh-ring">100</div>
+                <span class="lh-label">Accessibility</span>
+              </div>
+              <div class="lh-item">
+                <div class="lh-ring">100</div>
+                <span class="lh-label">Best Practices</span>
+              </div>
+              <div class="lh-item">
+                <div class="lh-ring">100</div>
+                <span class="lh-label">SEO</span>
+              </div>
+            </div>
+
+            <div class="vitals-strip">
+              <div class="vital-chip"><strong>1.4 s</strong><span>FCP</span></div>
+              <div class="vital-chip"><strong>1.4 s</strong><span>LCP</span></div>
+              <div class="vital-chip"><strong>20 ms</strong><span>TBT</span></div>
+              <div class="vital-chip"><strong>0</strong><span>CLS</span></div>
+            </div>
+
+            <ul class="bullet-list emerald-bullets compact-bullets">
+              <li><strong><code>astro check</code>:</strong> <span class="hi-emerald">0 errors · 0 warnings · 0 hints</span> en los 41 archivos del proyecto.</li>
+              <li><strong>Vitest 5:</strong> <span class="hi-emerald">4/4 suites · 11/11 tests</span> validando Zod, contraste WCAG, SEO y smoke.</li>
+              <li><strong>SEO Completo:</strong> Canonical, OpenGraph, Twitter Cards, <code>sitemap-index.xml</code>, <code>rss.xml</code> y <code>robots.txt.ts</code>.</li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <div class="code-header-left">
+                <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span>robots.txt.ts · seo.test.ts</span>
+              </div>
+              <div class="code-header-actions">
+                <button class="btn-expand-code" type="button" data-template="tpl-robots">
+                  <span>⛶</span> robots.txt.ts
+                </button>
+                <button class="btn-expand-code" type="button" data-template="tpl-seo-test">
+                  <span>⛶</span> seo.test.ts
+                </button>
+              </div>
+            </div>
+            <pre><code><span class="cm">// src/pages/robots.txt.ts — Fuente Única SEO</span>
+<span class="kw">import type</span> { APIRoute } <span class="kw">from</span> <span class="str">"astro"</span>;
+
+<span class="kw">export const</span> prerender = <span class="kw">true</span>;
+
+<span class="kw">export const</span> <span class="fn">GET</span>: APIRoute = ({ site }) =&gt; {
+  <span class="kw">const</span> sitemapURL = <span class="kw">new</span> <span class="fn">URL</span>(<span class="str">"sitemap-index.xml"</span>, site);
+  <span class="kw">const</span> body = [
+    <span class="str">"User-agent: *"</span>,
+    <span class="str">"Allow: /"</span>,
+    <span class="str">""</span>,
+    <span class="str">`Sitemap: ${sitemapURL.href}`</span>,
+  ].<span class="fn">join</span>(<span class="str">"\n"</span>);
+
+  <span class="kw">return new</span> <span class="fn">Response</span>(body, {
+    headers: { <span class="str">"Content-Type"</span>: <span class="str">"text/plain; charset=utf-8"</span> },
+  });
+};</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: MATRIZ 10/10 Y CIERRE -->
+      <section class="slide">
+        <div class="slide-req">📋 Acto II · Cierre Ejecutivo | Verificación Integral de Rúbrica (R1–R10)</div>
+        <h2 class="slide-title">✅ Matriz de Cumplimiento 10/10 y Cierre del Proyecto</h2>
+        <div class="split-grid-62">
+          <div class="info-card" style="padding: clamp(0.85rem, 1.6vh, 1.25rem) clamp(1rem, 1.5vw, 1.4rem);">
+            <table class="rubric-table">
+              <thead>
+                <tr>
+                  <th>Req.</th>
+                  <th>Requisito Mínimo Oficial</th>
+                  <th>Evidencia en el Repositorio</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>R1</strong></td><td>Layout base y ≥4 componentes (props/slots)</td><td><code>BaseLayout</code>, <code>BlogPost</code> + 16 componentes</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R2</strong></td><td>Tailwind/CSS scoped + fuente con Font API</td><td>Tailwind v4 + <em>Atkinson</em> (<code>fontProviders.local</code>)</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R3</strong></td><td>Colección Zod con ≥5 entradas</td><td><code>content.config.ts</code> con <strong>10 artículos</strong> (.md/.mdx)</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R4</strong></td><td>Rutas dinámicas y listado paginado</td><td><code>[...slug]</code>, <code>tags/[tag]</code> y <code>[...page]</code></td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R5</strong></td><td>Imágenes optimizadas <code>&lt;Image /&gt;</code></td><td>35 assets WebP/SVG con Sharp (<span class="hi-emerald">CLS = 0</span>)</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R6</strong></td><td>Isla interactiva con <code>client:*</code></td><td><code>BlogFilterIsland.tsx</code> (Preact <code>client:load</code>)</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R7</strong></td><td>View Transitions entre páginas</td><td><code>&lt;ClientRouter /&gt;</code> + <code>astro:after-swap</code></td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R8</strong></td><td>Función de servidor con validación</td><td><code>/contacto</code> SSR + <code>actions.contact</code> + Zod</td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R9</strong></td><td>SEO, sitemap y Lighthouse ≥ 90</td><td>OG/RSS/Sitemap + <span class="hi-emerald">4×100 Lighthouse</span></td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+                <tr><td><strong>R10</strong></td><td>Repositorio GitHub y URL pública</td><td><code>wigsdev/portafolio-blog</code> + Vercel <strong>v1.0.0</strong></td><td><span class="status-pill">✅ Cumplido</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-card highlight-card" style="justify-content: space-between; text-align: center;">
+            <h3 style="justify-content: center;">🚀 Gobernanza y Entrega Final</h3>
+            <ul class="bullet-list" style="text-align: left; font-size: clamp(1rem, 1.22vw, 1.15rem); gap: 0.7rem;">
+              <li><strong>Gestión Ágil:</strong> 5 Sprints · 20 Tareas trazadas con Issues y PRs (<code>--merge</code>).</li>
+              <li><strong>Versionado:</strong> SemVer <span class="hi-brand">0.1.0 ➔ 1.0.0</span> documentado en <code>CHANGELOG.md</code>.</li>
+              <li><strong>Cero Deuda Técnica:</strong> <span class="hi-emerald">0/0/0</span> en <code>astro check</code> y <span class="hi-emerald">11/11</span> tests.</li>
+            </ul>
+
+            <div class="demo-box" style="padding: 1.1rem; gap: 0.75rem;">
+              <a href="https://portafolio-blog-seven.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-launch-demo" style="width: 100%; font-size: clamp(0.98rem, 1.18vw, 1.12rem);">
+                <span>🌐</span><span>Visitar Sitio en Vivo</span><span>↗</span>
+              </a>
+              <a href="https://github.com/wigsdev/portafolio-blog" target="_blank" rel="noopener noreferrer" class="btn-secondary-link" style="width: 100%;">
+                <span>💻</span><span>Ver Repositorio GitHub</span>
+              </a>
+            </div>
+
+            <div class="closing-banner">
+              🎉 ¡Muchas Gracias por su Atención!
+              <p style="font-size: clamp(0.88rem, 1.04vw, 0.98rem); color: var(--text-secondary); font-weight: 400; margin-top: 0.3rem;">
+                Espacio abierto para preguntas del docente y revisión de código
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Pie de Navegación -->
+    <footer class="deck-footer">
+      <button id="btn-prev" class="nav-btn" type="button" disabled>← Anterior</button>
+      <div class="footer-center">
+        <div id="slide-counter" class="counter">Diapositiva 1 de 12</div>
+        <span class="shortcut-hint"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>F</kbd> pantalla completa · <kbd>Ctrl+P</kbd> PDF</span>
+      </div>
+      <button id="btn-next" class="nav-btn" type="button">Siguiente →</button>
+    </footer>
+  </div>
+
+  <!-- Modal Flotante para Visualizar Código Completo Real -->
+  <div id="code-modal" class="code-modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-filename">
+    <div class="code-modal-window">
+      <div class="code-modal-header">
+        <div class="code-modal-title-group">
+          <div class="code-dots">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          </div>
+          <span id="modal-filename" class="code-modal-filename">archivo.ts</span>
+          <span id="modal-badge" class="code-modal-badge">Código Real</span>
+        </div>
+        <button id="modal-close-btn" class="code-modal-close" type="button" aria-label="Cerrar modal">
+          Cerrar ✕
+        </button>
+      </div>
+      <div class="code-modal-body">
+        <div id="modal-code-content" class="editor-code-container"></div>
+      </div>
+      <div class="code-modal-footer">
+        <span>Presiona <kbd>Esc</kbd> o haz clic afuera para volver a la diapositiva</span>
+        <span id="modal-line-count">0 líneas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- PLANTILLAS DE CÓDIGO REAL VERBATIM DEL REPOSITORIO                     -->
+  <!-- ====================================================================== -->
+
+  <template id="tpl-global-css" data-filename="src/styles/global.css" data-badge="Tailwind v4 + WCAG AA">@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+
+/* Soporte de modo oscuro mediante clase html.dark */
+@custom-variant dark (&amp;:where(.dark, .dark *));
+
+/* Mapeo de tokens semánticos al tema de Tailwind v4 */
+@theme {
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-background: var(--color-background);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-neutral: var(--color-neutral);
+  --color-github: var(--color-github);
+  --color-github-hover-bg: var(--color-github-hover-bg);
+  --color-nav-link: var(--color-nav-link);
+  --font-atkinson: "Atkinson", system-ui, sans-serif;
+  --font-sans: "Atkinson", system-ui, sans-serif;
+}
+
+/* Tokens de color: modo claro */
+:root {
+  --color-brand: #d0354f;
+  --color-brand-hover: #aa3747;
+  --color-brand-dark: #412227;
+  --color-brand-soft: #fce7ec;
+  --color-text: #292429;
+  --color-text-muted: #6b5a5e;
+  --color-text-inverse: #ffffff;
+  --color-background: #faf8f8;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f3ecee;
+  --color-border: #e4dadd;
+  --color-neutral: #454545;
+  --color-github: #1f2328;
+  --color-github-hover-bg: #f3f4f6;
+  --color-nav-link: #262626;
+  --color-shadow-brand: rgb(65 34 39 / 12%);
+}
+
+/* Tokens de color: modo oscuro */
+html.dark {
+  --color-brand: #ff526d;
+  --color-brand-hover: #ff758c;
+  --color-brand-dark: #3a151e;
+  --color-brand-soft: rgba(255, 82, 109, 0.16);
+  --color-text: #f0edf0;
+  --color-text-muted: #d1d1d1;
+  --color-text-inverse: #141416;
+  --color-background: #141416;
+  --color-surface: #1e1e22;
+  --color-surface-muted: #27272c;
+  --color-border: #33333a;
+  --color-neutral: #d1d1d1;
+  --color-github: #e6edf3;
+  --color-github-hover-bg: #2d333b;
+  --color-nav-link: #888888;
+  --color-shadow-brand: rgba(0, 0, 0, 0.4);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: clip;
+  font-family: var(--font-atkinson, system-ui, sans-serif);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: background-color 200ms ease, color 200ms ease;
+}</template>
+
+  <template id="tpl-astro-config" data-filename="astro.config.mjs" data-badge="Configuración Híbrida Oficial">// @ts-check
+
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import { defineConfig, fontProviders, sharpImageService } from "astro/config";
+
+import preact from "@astrojs/preact";
+import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
+
+import tailwindcss from "@tailwindcss/vite";
+
+const siteUrl =
+  process.env.SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://portafolio-blog-seven.vercel.app");
+
+// https://astro.build/config
+export default defineConfig({
+  site: siteUrl,
+  adapter: process.env.VERCEL
+    ? vercel()
+    : node({
+        mode: "standalone",
+      }),
+  integrations: [mdx(), sitemap(), preact()],
+  build: {
+    inlineStylesheets: "always",
+  },
+  image: {
+    service: sharpImageService(),
+  },
+
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Atkinson",
+      cssVariable: "--font-atkinson",
+      fallbacks: ["sans-serif"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/atkinson-regular.woff"],
+            weight: 400,
+            style: "normal",
+            display: "swap",
+          },
+          {
+            src: ["./src/assets/fonts/atkinson-bold.woff"],
+            weight: 700,
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
+  ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});</template>
+
+  <template id="tpl-base-layout" data-filename="src/layouts/BaseLayout.astro" data-badge="Layout Base + View Transitions">---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseHead from "../components/BaseHead.astro";
+import { ClientRouter } from "astro:transitions";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import type { ImageMetadata } from "astro";
+import "../styles/global.css";
+
+interface Props {
+  pageTitle?: string;
+  description?: string;
+  image?: ImageMetadata;
+  mainClass?: string;
+  eyebrow?: string;
+  hideTitle?: boolean;
+}
+
+const {
+  pageTitle = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  image,
+  mainClass,
+  eyebrow,
+  hideTitle = false,
+} = Astro.props;
+---
+
+&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;BaseHead title={pageTitle} description={description} image={image} /&gt;
+    &lt;script is:inline&gt;
+      const applyTheme = () =&gt; {
+        const storedTheme =
+          typeof localStorage !== "undefined" &amp;&amp; localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const isDark = storedTheme === "dark" || (!storedTheme &amp;&amp; prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      };
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
+    &lt;/script&gt;
+    &lt;ClientRouter /&gt;
+  &lt;/head&gt;
+  &lt;body class="flex flex-col min-h-screen m-0 p-0 w-full overflow-x-clip font-atkinson leading-relaxed text-text bg-background transition-colors duration-200"&gt;
+    &lt;Header /&gt;
+    &lt;main
+      class:list={[
+        "flex-1 w-full",
+        mainClass === "has-sections"
+          ? "max-w-none p-0 m-0"
+          : "max-w-240 lg:max-w-6xl mx-auto py-8 px-4 md:px-8",
+        mainClass,
+      ]}
+    &gt;
+      {eyebrow &amp;&amp; (
+        &lt;span class="inline-block text-brand text-xs font-extrabold uppercase tracking-[0.08em] leading-tight mb-1"&gt;
+          {eyebrow}
+        &lt;/span&gt;
+      )}
+      {!hideTitle &amp;&amp; pageTitle &amp;&amp; (
+        &lt;h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight tracking-tight mt-0 mb-4"&gt;
+          {pageTitle}
+        &lt;/h1&gt;
+      )}
+      &lt;slot /&gt;
+    &lt;/main&gt;
+    &lt;Footer /&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</template>
+
+  <template id="tpl-content-config" data-filename="src/content.config.ts" data-badge="Content Layer + Zod">import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const blog = defineCollection({
+  // Load Markdown and MDX files in the `src/content/blog/` directory.
+  loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+  // Type-check frontmatter using a schema
+  schema: ({ image }) =&gt;
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      // Transform string to Date object
+      pubDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      heroImage: z.optional(image()),
+      tags: z.array(z.string()).default([]),
+    }),
+});
+
+export const collections = { blog };</template>
+
+  <template id="tpl-blog-page" data-filename="src/pages/blog/[...page].astro" data-badge="Paginación + Isla Dual">---
+import type { GetStaticPathsOptions, Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import Pagination from "../../components/Pagination.astro";
+import BlogFilterIsland, {
+  type PostItem,
+} from "../../components/BlogFilterIsland";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) =&gt; b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  return paginate(posts, { pageSize: 7 });
+}
+
+interface Props {
+  page: Page&lt;CollectionEntry&lt;"blog"&gt;&gt;;
+}
+
+const { page } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+const featuredPost = isFirstPage ? page.data[0] : null;
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) =&gt; b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const uniqueTags = [
+  ...new Set(allPosts.flatMap((p) =&gt; p.data.tags ?? [])),
+].sort();
+
+const postsParaIsla: PostItem[] = (
+  isFirstPage ? allPosts.filter((p) =&gt; p.id !== featuredPost?.id) : allPosts
+).map((post) =&gt; {
+  const words = post.body ? post.body.trim().split(/\s+/).length : 0;
+  const readingTime = Math.max(1, Math.ceil(words / 200));
+
+  return {
+    id: post.id,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate.toISOString(),
+    formattedDate: post.data.pubDate.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    tags: post.data.tags ?? [],
+    readingTime,
+    heroImage: post.data.heroImage?.src,
+  };
+});
+
+const postsEstaticos = isFirstPage ? page.data.slice(1) : page.data;
+---
+
+&lt;BaseLayout pageTitle="Blog" description="Artículos técnicos..." hideTitle={true}&gt;
+  {featuredPost &amp;&amp; &lt;BlogCard post={featuredPost} featured={true} /&gt;}
+
+  &lt;BlogFilterIsland
+    client:load
+    posts={postsParaIsla}
+    tags={uniqueTags}
+    initialPosts={postsEstaticos.map((p) =&gt; p.id)}
+  &gt;
+    &lt;Pagination page={page} /&gt;
+  &lt;/BlogFilterIsland&gt;
+&lt;/BaseLayout&gt;</template>
+
+  <template id="tpl-blog-filter" data-filename="src/components/BlogFilterIsland.tsx" data-badge="Isla Interactiva Preact">import { useState, useMemo, useRef, useEffect } from "preact/hooks";
+import type { ComponentChildren } from "preact";
+import BlogCardItem, { type PostItem } from "./BlogCardItem";
+
+export type { PostItem };
+
+interface Props {
+  posts: PostItem[];
+  tags: string[];
+  initialPosts?: string[];
+  children?: ComponentChildren;
+}
+
+export default function BlogFilterIsland({
+  posts,
+  tags,
+  initialPosts,
+  children,
+}: Props) {
+  const [selectedTag, setSelectedTag] = useState&lt;string&gt;("all");
+  const [searchQuery, setSearchQuery] = useState&lt;string&gt;("");
+  const [isSearchFocused, setIsSearchFocused] = useState&lt;boolean&gt;(false);
+  const [canScrollLeft, setCanScrollLeft] = useState&lt;boolean&gt;(false);
+  const [canScrollRight, setCanScrollRight] = useState&lt;boolean&gt;(false);
+  const scrollContainerRef = useRef&lt;HTMLDivElement&gt;(null);
+
+  const updateScrollButtons = () =&gt; {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const atStart = el.scrollLeft &lt;= 4;
+    const atEnd = el.scrollLeft + el.clientWidth &gt;= el.scrollWidth - 4;
+    setCanScrollLeft(!atStart);
+    setCanScrollRight(!atEnd &amp;&amp; el.scrollWidth &gt; el.clientWidth);
+  };
+
+  useEffect(() =&gt; {
+    updateScrollButtons();
+    const el = scrollContainerRef.current;
+    if (el) el.addEventListener("scroll", updateScrollButtons, { passive: true });
+    window.addEventListener("resize", updateScrollButtons);
+    return () =&gt; {
+      if (el) el.removeEventListener("scroll", updateScrollButtons);
+      window.removeEventListener("resize", updateScrollButtons);
+    };
+  }, [tags]);
+
+  const filteredPosts = useMemo(() =&gt; {
+    const query = searchQuery.trim().toLowerCase();
+    const isFiltered = selectedTag !== "all" || query.length &gt; 0;
+
+    if (!isFiltered &amp;&amp; initialPosts &amp;&amp; initialPosts.length &gt; 0) {
+      return posts.filter((p) =&gt; initialPosts.includes(p.id));
+    }
+    return posts.filter((post) =&gt; {
+      const matchesTag =
+        selectedTag === "all" || post.tags.includes(selectedTag);
+      if (!matchesTag) return false;
+      if (!query) return true;
+      const inTitle = post.title.toLowerCase().includes(query);
+      const inDesc = post.description.toLowerCase().includes(query);
+      return inTitle || inDesc;
+    });
+  }, [posts, selectedTag, searchQuery]);
+
+  return (
+    &lt;div class="w-full my-8"&gt;
+      {/* Barra de chips + buscador expansible */}
+      {/* Grilla Reactiva de Resultados (BlogCardItem unificado DRY) */}
+      {filteredPosts.length &gt; 0 ? (
+        &lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"&gt;
+          {filteredPosts.map((post) =&gt; (
+            &lt;BlogCardItem key={post.id} post={post} /&gt;
+          ))}
+        &lt;/div&gt;
+      ) : (
+        &lt;div class="text-center py-16 px-4 text-text-muted"&gt;
+          &lt;p&gt;No se encontraron artículos que coincidan con tu búsqueda.&lt;/p&gt;
+        &lt;/div&gt;
+      )}
+      {/* Paginación estática de Astro solo cuando no hay filtros activos */}
+      {selectedTag === "all" &amp;&amp; !searchQuery.trim() &amp;&amp; children}
+    &lt;/div&gt;
+  );
+}</template>
+
+  <template id="tpl-actions" data-filename="src/actions/index.ts" data-badge="Astro Actions Serverless">import { defineAction } from 'astro:actions';
+import { contactSchema } from '../schemas/contact';
+
+export const server = {
+  contact: defineAction({
+    accept: 'form',
+    input: contactSchema,
+    handler: async (input) =&gt; {
+      // En producción aquí se integraría el envío vía email (Resend, SendGrid) o webhook
+      return {
+        success: true,
+        nombre: input.nombre,
+        message: '¡Gracias por contactarme! He recibido tu mensaje y te responderé lo antes posible.',
+      };
+    },
+  }),
+};</template>
+
+  <template id="tpl-contact-schema" data-filename="src/schemas/contact.ts" data-badge="Esquema Zod Compartido">import { z, type infer as zInfer } from 'astro/zod';
+
+export const contactSchema = z.object({
+  nombre: z
+    .string({ message: 'El nombre es obligatorio' })
+    .trim()
+    .min(2, 'El nombre debe tener al menos 2 caracteres')
+    .max(100, 'El nombre no puede exceder 100 caracteres'),
+  email: z
+    .string({ error: 'El correo electrónico es obligatorio' })
+    .trim()
+    .pipe(z.email({ error: 'Ingresa un correo electrónico válido' })),
+  asunto: z
+    .string({ message: 'El asunto es obligatorio' })
+    .trim()
+    .min(3, 'El asunto debe tener al menos 3 caracteres')
+    .max(150, 'El asunto no puede exceder 150 caracteres'),
+  mensaje: z
+    .string({ message: 'El mensaje es obligatorio' })
+    .trim()
+    .min(10, 'El mensaje debe tener al menos 10 caracteres')
+    .max(2000, 'El mensaje no puede exceder 2000 caracteres'),
+});
+
+export type ContactFormData = zInfer&lt;typeof contactSchema&gt;;</template>
+
+  <template id="tpl-robots" data-filename="src/pages/robots.txt.ts" data-badge="Endpoint Dinámico Pre-renderizado">import type { APIRoute } from "astro";
+
+export const prerender = true;
+
+export const GET: APIRoute = ({ site }) =&gt; {
+  const sitemapURL = new URL("sitemap-index.xml", site);
+  const body = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapURL.href}\n`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+    },
+  });
+};</template>
+
+  <template id="tpl-seo-test" data-filename="tests/unit/seo.test.ts" data-badge="Prueba Unitaria Vitest">import { describe, it, expect } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
+
+describe("Auditoría SEO: Robots, Sitemap y Dominio Canónico", () =&gt; {
+  it("debe generar robots.txt dinámicamente desde Astro.site en src/pages/robots.txt.ts", () =&gt; {
+    const robotsEndpointPath = path.resolve(
+      process.cwd(),
+      "src/pages/robots.txt.ts",
+    );
+    expect(fs.existsSync(robotsEndpointPath)).toBe(true);
+
+    const content = fs.readFileSync(robotsEndpointPath, "utf-8");
+    expect(content).toContain("User-agent: *");
+    expect(content).toContain("Allow: /");
+    expect(content).toContain("sitemap-index.xml");
+  });
+
+  it("debe definir site canónico para Vercel en astro.config.mjs", () =&gt; {
+    const configPath = path.resolve(process.cwd(), "astro.config.mjs");
+    const configContent = fs.readFileSync(configPath, "utf-8");
+    expect(configContent).toContain("VERCEL_PROJECT_PRODUCTION_URL");
+    expect(configContent).toContain(".vercel.app");
+  });
+});</template>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slide-counter');
+    const reqBadge = document.getElementById('req-badge');
+    const actPill = document.getElementById('act-pill');
+    const progressFill = document.getElementById('progress-fill');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    const slideMeta = [
+      { act: 1, badge: "PORTADA · v1.0.0 · 4×100" },
+      { act: 1, badge: "EL DOLOR DEL USUARIO · R6 Y R9" },
+      { act: 1, badge: "PROPUESTA DE VALOR · 3 PILARES" },
+      { act: 1, badge: "DEMO EN VIVO INMEDIATA · R1–R10" },
+      { act: 1, badge: "UI/UX, WCAG AA Y SHARP · R2, R5, R7" },
+      { act: 2, badge: "ARQUITECTURA 95/5 Y VERCEL · R1, R8, R10" },
+      { act: 2, badge: "LAYOUTS, PROPS Y SLOTS · R1 Y R7" },
+      { act: 2, badge: "CONTENT LAYER Y ZOD · R3 Y R4" },
+      { act: 2, badge: "ZERO-JS E ISLA PREACT · R6" },
+      { act: 2, badge: "ASTRO ACTIONS + ZOD · R8" },
+      { act: 2, badge: "SEO, VITEST Y 4×100 · R9 Y R10" },
+      { act: 2, badge: "MATRIZ 10/10 Y CIERRE · R1–R10" }
+    ];
+
+    let currentSlide = 0;
+
+    function updateSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+
+      const meta = slideMeta[currentSlide] || { act: 1, badge: "PORTAFOLIO & BLOG" };
+      if (counter) counter.textContent = 'Diapositiva ' + (currentSlide + 1) + ' de ' + slides.length;
+      if (reqBadge) reqBadge.textContent = meta.badge;
+
+      if (actPill) {
+        actPill.textContent = meta.act === 1 ? 'ACTO I · PRODUCTO' : 'ACTO II · INGENIERÍA';
+        actPill.className = 'act-pill ' + (meta.act === 1 ? 'act-1' : 'act-2');
+      }
+
+      if (progressFill) {
+        const pct = ((currentSlide + 1) / slides.length) * 100;
+        progressFill.style.width = pct.toFixed(2) + '%';
+      }
+
+      if (btnPrev) {
+        btnPrev.disabled = currentSlide === 0;
+        btnPrev.textContent = '← Anterior';
+      }
+      if (btnNext) {
+        btnNext.textContent = currentSlide === slides.length - 1 ? 'Inicio ↺' : 'Siguiente →';
+      }
+    }
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        updateSlide(currentSlide > 0 ? currentSlide - 1 : 0);
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        updateSlide(currentSlide < slides.length - 1 ? currentSlide + 1 : 0);
+      });
+    }
+
+    // ── Resaltado Nativo One Dark Pro (CSS, Astro, TS, TSX, MJS) ──
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function highlightCode(raw, filename) {
+      const isCss = filename.endsWith('.css');
+      const isAstro = filename.endsWith('.astro');
+
+      if (isCss) {
+        const REG_CSS = /(\/\*[\s\S]*?\*\/)|(@[a-zA-Z\-]+)|(#(?:[0-9a-fA-F]{3,8})\b)|(var\(--[a-zA-Z0-9_\-]+\))|([a-zA-Z\-]+)(?=\s*:)|(\b\d+(?:\.\d+)?(?:px|rem|em|vh|vw|%|s|ms)?\b)/g;
+        let last = 0, out = '', m;
+        while ((m = REG_CSS.exec(raw)) !== null) {
+          out += escapeHtml(raw.slice(last, m.index));
+          const [match, cm, atRule, hex, vVar, prop, num] = m;
+          if (cm) out += '<span class="token comment">' + escapeHtml(cm) + '</span>';
+          else if (atRule) out += '<span class="token keyword">' + escapeHtml(atRule) + '</span>';
+          else if (hex) out += '<span class="color-swatch" style="background-color:' + hex + '"></span><span class="token number">' + hex + '</span>';
+          else if (vVar) out += '<span class="token function">' + escapeHtml(vVar) + '</span>';
+          else if (prop) out += '<span class="token property">' + prop + '</span>';
+          else if (num) out += '<span class="token number">' + escapeHtml(num) + '</span>';
+          else out += escapeHtml(match);
+          last = REG_CSS.lastIndex;
+        }
+        return out + escapeHtml(raw.slice(last));
+      }
+
+      if (isAstro) {
+        const parts = raw.split(/^---$/m);
+        if (parts.length >= 3) {
+          const frontmatter = highlightJsTs(parts[1]);
+          const templatePart = highlightMarkup(parts.slice(2).join('---'));
+          return '<span class="token comment">---</span>' + frontmatter + '<span class="token comment">---</span>' + templatePart;
+        }
+        return highlightMarkup(raw);
+      }
+
+      return highlightJsTs(raw);
+    }
+
+    function highlightMarkup(raw) {
+      const REG_HTML = new RegExp(
+        '(<' + '!--[\\s\\S]*?--' + '>)|' +
+        '(<\\/?[A-Za-z][A-Za-z0-9:-]*)|' +
+        '([a-zA-Z:@-]+(?==))|' +
+        '("[^"]*"|\'[^\']*\')',
+        'g'
+      );
+      let last = 0, out = '', m;
+      while ((m = REG_HTML.exec(raw)) !== null) {
+        out += escapeHtml(raw.slice(last, m.index));
+        const [match, cm, tag, attr, val] = m;
+        if (cm) out += '<span class="token comment">' + escapeHtml(cm) + '</span>';
+        else if (tag) out += '<span class="token tag">' + escapeHtml(tag) + '</span>';
+        else if (attr) out += '<span class="token attr-name">' + escapeHtml(attr) + '</span>';
+        else if (val) out += '<span class="token string">' + escapeHtml(val) + '</span>';
+        else out += escapeHtml(match);
+        last = REG_HTML.lastIndex;
+      }
+      return out + escapeHtml(raw.slice(last));
+    }
+
+    function highlightJsTs(raw) {
+      const REG_JS = /(\/\*[\s\S]*?\*\/|\/\/[^\n]*)|(`(?:\\.|[^`])*`|"(?:\\.|[^"])*"|'(?:\\.|[^'])*')|\b(true|false|null|undefined)\b|\b(\d+(?:\.\d+)?)\b|\b(async|await|const|let|var|export|import|from|default|function|return|if|else|new|interface|type|typeof|as|try|catch|finally|throw)\b|\b([a-zA-Z_$][a-zA-Z0-9_$]*)(?=\s*\()/g;
+      let last = 0, out = '', m;
+      while ((m = REG_JS.exec(raw)) !== null) {
+        out += escapeHtml(raw.slice(last, m.index));
+        const [match, cm, str, bool, num, kw, fn] = m;
+        if (cm) out += '<span class="token comment">' + escapeHtml(cm) + '</span>';
+        else if (str) out += '<span class="token string">' + escapeHtml(str) + '</span>';
+        else if (bool) out += '<span class="token boolean">' + bool + '</span>';
+        else if (num) out += '<span class="token number">' + num + '</span>';
+        else if (kw) out += '<span class="token keyword">' + kw + '</span>';
+        else if (fn) out += '<span class="token function">' + fn + '</span>';
+        else out += escapeHtml(match);
+        last = REG_JS.lastIndex;
+      }
+      return out + escapeHtml(raw.slice(last));
+    }
+
+    function renderCodeEditor(rawCode, filename) {
+      const decoded = rawCode
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+      const highlighted = highlightCode(decoded, filename);
+      const lines = highlighted.split('\n');
+      return lines.map((lineHtml, idx) => {
+        return '<div class="editor-line"><span class="line-num">' + (idx + 1) + '</span><span class="line-code">' + (lineHtml || ' ') + '</span></div>';
+      }).join('');
+    }
+
+    // ── Modal de Código Completo ──
+    const codeModal = document.getElementById('code-modal');
+    const modalFilename = document.getElementById('modal-filename');
+    const modalBadge = document.getElementById('modal-badge');
+    const modalCodeContent = document.getElementById('modal-code-content');
+    const modalLineCount = document.getElementById('modal-line-count');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    function openModal(templateId) {
+      const tpl = document.getElementById(templateId);
+      if (!tpl || !codeModal) return;
+
+      const filename = tpl.dataset.filename || 'archivo.ts';
+      const badge = tpl.dataset.badge || 'Código Real';
+      const rawCode = tpl.innerHTML.trim();
+
+      if (modalFilename) modalFilename.textContent = filename;
+      if (modalBadge) modalBadge.textContent = badge;
+
+      const lineTotal = rawCode.split('\n').length;
+      if (modalLineCount) modalLineCount.textContent = 'Archivo real: ' + lineTotal + ' líneas';
+
+      if (modalCodeContent) {
+        modalCodeContent.innerHTML = renderCodeEditor(rawCode, filename);
+      }
+
+      codeModal.classList.remove('hidden');
+      const bodyEl = codeModal.querySelector('.code-modal-body');
+      if (bodyEl) {
+        bodyEl.scrollTop = 0;
+        bodyEl.scrollLeft = 0;
+      }
+    }
+
+    function closeModal() {
+      if (codeModal) codeModal.classList.add('hidden');
+    }
+
+    document.querySelectorAll('.btn-expand-code').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tplId = btn.dataset.template;
+        if (tplId) openModal(tplId);
+      });
+    });
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (codeModal) {
+      codeModal.addEventListener('click', (e) => {
+        if (e.target === codeModal) closeModal();
+      });
+    }
+
+    // ── Navegación por Teclado ──
+    window.addEventListener('keydown', (e) => {
+      if (codeModal && !codeModal.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeModal();
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        if (btnNext) btnNext.click();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (btnPrev && !btnPrev.disabled) btnPrev.click();
+      } else if (e.key === 'Home') {
+        updateSlide(0);
+      } else if (e.key === 'End') {
+        updateSlide(slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+    });
+
+    // ── Impresión a PDF (Ctrl + P) ──
+    window.addEventListener('beforeprint', () => {
+      slides.forEach((slide) => {
+        slide.style.display = 'flex';
+        slide.style.opacity = '1';
+      });
+    });
+
+    window.addEventListener('afterprint', () => {
+      slides.forEach((slide) => {
+        slide.style.display = '';
+        slide.style.opacity = '';
+      });
+      updateSlide(currentSlide);
+    });
+
+    updateSlide(0);
+  </script>
+</body>
+
+</html>
