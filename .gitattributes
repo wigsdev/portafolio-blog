@@ -1,0 +1,3 @@
+# Excluir documentación, presentación y scripts auxiliares del cálculo de lenguajes de GitHub (Linguist)
+docs/** linguist-documentation
+scripts/** linguist-documentation
